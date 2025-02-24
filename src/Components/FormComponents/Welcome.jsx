@@ -57,11 +57,11 @@ export default function Welcome() {
             textAlign: "center",
             p: 2,
             borderRadius: "12px",
-            display:'flex',
-            justifyContent:'space-between',
-            flexDirection:'column',
+            display: "flex",
+            justifyContent: "space-between",
+            flexDirection: "column",
             bgcolor: "white",
-            mb: 18,
+            mb: 16,
             mx: "auto",
           }}
         >
@@ -71,13 +71,13 @@ export default function Welcome() {
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.3 }}
             >
               <Box
                 sx={{
                   backgroundColor: "#D8BFF2",
                   borderRadius: "28px",
-                  p: '16px',
+                  p: "16px",
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
@@ -86,7 +86,11 @@ export default function Welcome() {
                 <img
                   src={slides[currentIndex].img}
                   alt="Nutrition"
-                  style={{ width: "100%", height:'210px',borderRadius: "12px" }}
+                  style={{
+                    width: "100%",
+                    height: "210px",
+                    borderRadius: "12px",
+                  }}
                 />
               </Box>
 

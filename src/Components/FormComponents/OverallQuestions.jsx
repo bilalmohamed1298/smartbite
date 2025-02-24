@@ -121,7 +121,10 @@ const OverallQuestions = () => {
 
 
   return (
-    <Box>
+    <Box sx={{
+      position:'relative',
+      height:'100%'
+    }}>
           <MobileStepper
         variant="progress"
         steps={questions.length}
@@ -147,7 +150,7 @@ const OverallQuestions = () => {
           initial={{ x: direction * 50, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           exit={{ x: -direction * 50, opacity: 0 }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
           style={{
             flexGrow: 1,
             display: "flex",
@@ -209,9 +212,37 @@ const OverallQuestions = () => {
         </IconButton>
       )}
 
-      <Link to='/details'>
-      <Button>This is Button</Button>
-      </Link>
+      {
+        activeStep === questions.length -1?
+        <Link to='/details'
+        >
+                    <Button
+              size="large"
+              sx={{
+                borderRadius: "50px",
+                backgroundColor: "#A34BCE",
+                color: "white",
+                width: {xs:'70%',sm:'80%'},
+                height: 60,
+                fontWeight: "bold",
+                textTransform: "none",
+                fontSize: "18px",
+                "&:hover": {
+                  backgroundColor: "#A34BCE",
+
+                },
+                position: "absolute",
+                bottom: 20,
+                right: 20,
+              }}
+            >
+              Next
+            </Button>
+        </Link>
+        :''
+      }
+
+
     </Box>
   )
 }
