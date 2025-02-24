@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const slides = [
   {
-    img: "/pizza.jpg", 
+    img: "/pizza.jpg",
     text: "When it comes to nutrition, finding what works for you makes all the difference.",
   },
   {
@@ -32,11 +32,7 @@ export default function Welcome() {
   };
 
   return (
-    <Box
-      sx={{
-
-      }}
-    >
+    <Box sx={{}}>
       <Stack
         sx={{
           p: 5,
@@ -66,7 +62,6 @@ export default function Welcome() {
             mx: "auto",
           }}
         >
-
           <Box
             sx={{
               backgroundColor: "#FFEFEF",
@@ -85,14 +80,12 @@ export default function Welcome() {
             />
           </Box>
 
-
           <Typography
             variant="body1"
             sx={{ my: 5, color: "#333", fontWeight: 600, fontSize: "18px" }}
           >
             {slides[currentIndex].text}
           </Typography>
-
 
           {currentIndex !== 0 ? (
             <IconButton
@@ -154,12 +147,17 @@ export default function Welcome() {
             <Button
               size="large"
               sx={{
-                bgcolor: "#A34BCE",
+                borderRadius: "50px",
+                backgroundColor: "#A34BCE",
                 color: "white",
-                mt: 2,
-                width:'100%',
-                height:"70px",
-
+                width: "100%",
+                height: "60px",
+                fontWeight: "bold",
+                textTransform: "none",
+                fontSize:'18px',
+                "&:hover": {
+                  backgroundColor: "#A34BCE",
+                },
               }}
             >
               Next
