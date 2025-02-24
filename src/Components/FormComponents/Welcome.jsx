@@ -2,18 +2,19 @@ import { useState } from "react";
 import { Box, Typography, IconButton, Stack, Button } from "@mui/material";
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 
 const slides = [
   {
-    img: "/pizza.jpg",
+    img: "/purple-foods.jpg",
     text: "When it comes to nutrition, finding what works for you makes all the difference.",
   },
   {
-    img: "/pizza.jpg",
+    img: "/1G-WEGYqtUqpFoh6W6VJHRw.jpg",
     text: "Healthy eating is the foundation of a strong body.",
   },
   {
-    img: "/pizza.jpg",
+    img: "/build-a-healthy-nutrition-foundation-for-youth-athletes.jpg",
     text: "Stay active, eat well, and live your best life.",
   },
 ];
@@ -50,42 +51,70 @@ export default function Welcome() {
         </Typography>
         <Box
           sx={{
-            maxWidth: "330px",
+            maxWidth: "350px",
             height: "400px",
             cursor: "pointer",
             textAlign: "center",
             p: 2,
             borderRadius: "12px",
-            boxShadow: 3,
+            display:'flex',
+            justifyContent:'space-between',
+            flexDirection:'column',
             bgcolor: "white",
             mb: 18,
             mx: "auto",
           }}
         >
-          <Box
-            sx={{
-              backgroundColor: "#FFEFEF",
-              borderRadius: "12px",
-              p: 2,
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "200px",
-            }}
-          >
-            <img
-              src={slides[currentIndex].img}
-              alt="Nutrition"
-              style={{ width: "100%", borderRadius: 10 }}
-            />
-          </Box>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentIndex}
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.5 }}
+            >
+              <Box
+                sx={{
+                  backgroundColor: "#D8BFF2",
+                  borderRadius: "28px",
+                  p: '16px',
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <img
+                  src={slides[currentIndex].img}
+                  alt="Nutrition"
+                  style={{ width: "100%", height:'210px',borderRadius: "12px" }}
+                />
+              </Box>
 
-          <Typography
-            variant="body1"
-            sx={{ my: 5, color: "#333", fontWeight: 600, fontSize: "18px" }}
-          >
-            {slides[currentIndex].text}
-          </Typography>
+              <Typography
+                variant="body1"
+                sx={{ my: 5, color: "#333", fontWeight: 600, fontSize: "20px" }}
+              >
+                {slides[currentIndex].text}
+              </Typography>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Pagination Dots */}
+          <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
+            {slides.map((_, index) => (
+              <Box
+                key={index}
+                sx={{
+                  width: 12,
+                  height: 12,
+                  borderRadius: "50%",
+                  bgcolor: index === currentIndex ? "#555" : "#ccc",
+                  mx: 0.5,
+                  transition: "0.3s",
+                }}
+              />
+            ))}
+          </Box>
 
           {currentIndex !== 0 ? (
             <IconButton
@@ -124,24 +153,8 @@ export default function Welcome() {
           ) : (
             ""
           )}
-
-          {/* Pagination Dots */}
-          <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
-            {slides.map((_, index) => (
-              <Box
-                key={index}
-                sx={{
-                  width: 8,
-                  height: 8,
-                  borderRadius: "50%",
-                  bgcolor: index === currentIndex ? "#555" : "#ccc",
-                  mx: 0.5,
-                  transition: "0.3s",
-                }}
-              />
-            ))}
-          </Box>
         </Box>
+
         {currentIndex === slides.length - 1 ? (
           <Link to="/overall">
             <Button
@@ -154,7 +167,7 @@ export default function Welcome() {
                 height: "60px",
                 fontWeight: "bold",
                 textTransform: "none",
-                fontSize:'18px',
+                fontSize: "18px",
                 "&:hover": {
                   backgroundColor: "#A34BCE",
                 },
