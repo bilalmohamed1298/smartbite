@@ -22,9 +22,6 @@ export default function SignupForm() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        overflow: "hidden",
-        overflowX:"hidden",
-        overflowY:'auto'
       }}
     >
       <Routes>
