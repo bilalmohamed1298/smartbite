@@ -219,6 +219,7 @@ const OverallQuestions = () => {
         position="static"
         activeStep={activeStep}
         sx={{
+          bgcolor:'transparent',
           width: "190%",
           mb: 2,
           "& .MuiLinearProgress-root": {
