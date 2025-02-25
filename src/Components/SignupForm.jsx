@@ -13,7 +13,7 @@ export default function SignupForm() {
         width: { lg: "55%", sm: "90%",xs:'85%' },
         height: { xs: "780px", lg: "780px" },
         mx: "auto",
-        my: { xs: 3,sm:5, lg: 1 },
+        my: {xs:5, lg: 1 },
         p: 3,
         bgcolor: "white",
         boxShadow: 3,
@@ -23,6 +23,8 @@ export default function SignupForm() {
         flexDirection: "column",
         justifyContent: "space-between",
         overflow: "hidden",
+        overflowX:"hidden",
+        overflowY:'auto'
       }}
     >
       <Routes>
