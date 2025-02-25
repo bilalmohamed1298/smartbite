@@ -83,7 +83,7 @@ const Preferences = () => {
           }}
           gutterBottom
         >
-          Goal & Profile
+          Preferences
         </Typography>
         <hr
           style={{
@@ -187,7 +187,7 @@ const Preferences = () => {
 
         {visibleFields.includes("duration") && (
           <>
-            <Box sx={{ width: "80%", textAlign: "center", mt: 10, mx: "auto" }}>
+            <Box sx={{ width: "80%", textAlign: "center", mt: 7, mx: "auto" }}>
               <Typography
                 sx={{ fontSize: "18px", fontWeight: "" }}
                 gutterBottom

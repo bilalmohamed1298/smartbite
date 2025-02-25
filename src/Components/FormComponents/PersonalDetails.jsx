@@ -64,7 +64,7 @@ const PersonalDetails = () => {
             fontSize: "12px",
             bgcolor: "#A34BCE",
             color: "#fff",
-            width: "90px",
+            width: "100px",
             padding: "5px",
             borderRadius: "5px",
             textAlign: "center",
@@ -73,7 +73,7 @@ const PersonalDetails = () => {
           }}
           gutterBottom
         >
-          Goal & Profile
+          Personal Details
         </Typography>
         <hr
           style={{
