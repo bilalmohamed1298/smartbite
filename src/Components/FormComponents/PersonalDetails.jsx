@@ -140,7 +140,7 @@ const PersonalDetails = () => {
                                 py: 1,
                                 fontWeight: "600",
                                 border: "2px solid #A34BCE",
-                                width: { xs: "300px", lg: "300px" }
+                                width: { xs: "300px", lg: "300px" },
                               }}
                             >
                               {option}
@@ -159,7 +159,10 @@ const PersonalDetails = () => {
         <ThemeProvider theme={theme}>
           {visibleFields.includes("age") && (
             <>
-              <Typography sx={{ fontSize: "18px", mb: 2 }} gutterBottom>
+              <Typography
+                sx={{ fontSize: "18px", mb: { sm: 2, xs: 1 } }}
+                gutterBottom
+              >
                 How old are you?
               </Typography>
 
@@ -174,7 +177,7 @@ const PersonalDetails = () => {
                   borderRadius: "50px",
                   "& .MuiOutlinedInput-root": {
                     borderRadius: "50px",
-                    height: "60px",
+                    height: { xs: "50px", sm: "60px" },
                   },
                 }}
               />
@@ -183,7 +186,10 @@ const PersonalDetails = () => {
 
           {visibleFields.includes("height") && (
             <>
-              <Typography sx={{ fontSize: "18px", mb: 2 }} gutterBottom>
+              <Typography
+                sx={{ fontSize: "18px", mb: { sm: 2, xs: 1 } }}
+                gutterBottom
+              >
                 What is your height?
               </Typography>
               <TextField
@@ -197,7 +203,7 @@ const PersonalDetails = () => {
                   borderRadius: "50px",
                   "& .MuiOutlinedInput-root": {
                     borderRadius: "50px",
-                    height: "60px",
+                    height: { xs: "50px", sm: "60px" },
                   },
                 }}
                 InputProps={{
@@ -211,7 +217,10 @@ const PersonalDetails = () => {
 
           {visibleFields.includes("weight") && (
             <>
-              <Typography sx={{ fontSize: "18px", mb: 2 }} gutterBottom>
+              <Typography
+                sx={{ fontSize: "18px", mb: { sm: 2, xs: 1 } }}
+                gutterBottom
+              >
                 What is your current weight?
               </Typography>
               <TextField
@@ -225,7 +234,7 @@ const PersonalDetails = () => {
                   borderRadius: "50px",
                   "& .MuiOutlinedInput-root": {
                     borderRadius: "50px",
-                    height: "60px",
+                    height: { xs: "50px", sm: "60px" },
                   },
                 }}
                 InputProps={{

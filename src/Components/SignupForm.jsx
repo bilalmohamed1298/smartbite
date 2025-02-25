@@ -11,7 +11,7 @@ export default function SignupForm() {
     <Box
       sx={{
         width: { lg: "55%", sm: "90%",xs:'85%' },
-        height: { xs: "780px", sm: "780px" },
+        height: { xs: "730px", sm: "780px" },
         mx: "auto",
         my: {xs:4, lg: 1 },
         p: 3,
@@ -22,9 +22,6 @@ export default function SignupForm() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        overflow:'auto',
-        overflowX:"hidden",
-        overflowY:'auto'
       }}
     >
       <Routes>

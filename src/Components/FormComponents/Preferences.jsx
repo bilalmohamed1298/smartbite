@@ -169,7 +169,7 @@ const Preferences = () => {
         <ThemeProvider theme={theme}>
           {visibleFields.includes("idealWeight") && (
             <>
-              <Typography sx={{ fontSize: "18px",mb:2 }} gutterBottom>
+              <Typography sx={{ fontSize: "18px",mb: { sm: 2, xs: 1 } }} gutterBottom>
                 What would be your ideal weight?
               </Typography>
               <TextField
@@ -183,7 +183,7 @@ const Preferences = () => {
                   borderRadius: "50px",
                   "& .MuiOutlinedInput-root": {
                     borderRadius: "50px", 
-                    height:'60px'
+                    height: {xs:'50px',sm:"60px"},
                   },
                 }}
                 InputProps={{
