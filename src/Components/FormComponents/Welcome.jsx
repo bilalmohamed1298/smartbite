@@ -62,8 +62,9 @@ export default function Welcome() {
             justifyContent: "space-between",
             flexDirection: "column",
             bgcolor: "white",
-            mb: 16,
+            mb: {sm:16,xs:10},
             mx: "auto",
+            mt:{xs:5,sm:0}
           }}
         >
           <AnimatePresence mode="wait">
@@ -77,8 +78,8 @@ export default function Welcome() {
               <Box
                 sx={{
                   backgroundColor: "#D8BFF2",
-                  borderRadius: "28px",
-                  p: "16px",
+                  borderRadius: {sm:"28px",xs:'24px'},
+                  p: {sm:"16px",xs:'12px'},
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
@@ -89,7 +90,7 @@ export default function Welcome() {
                   alt="Nutrition"
                   style={{
                     width: "100%",
-                    height: "210px",
+                    height: {sm:"210px"},
                     borderRadius: "12px",
                   }}
                 />
@@ -97,7 +98,7 @@ export default function Welcome() {
 
               <Typography
                 variant="body1"
-                sx={{ my: 5, color: "#333", fontWeight: 600, fontSize: "20px" }}
+                sx={{ my: 5, color: "#333", fontWeight: 600, fontSize: {sm: "20px"} }}
               >
                 {slides[currentIndex].text}
               </Typography>
