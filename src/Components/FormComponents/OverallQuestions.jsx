@@ -309,7 +309,7 @@ const OverallQuestions = () => {
               borderRadius: "50px",
               backgroundColor: "#A34BCE",
               color: "white",
-              width: { xs: "70%", sm: "80%" },
+              width: { xs: "60%", sm: "80%" },
               height: 60,
               fontWeight: "bold",
               textTransform: "none",
