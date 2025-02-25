@@ -119,7 +119,7 @@ const Preferences = () => {
                     onChange={(e) => handleChange("goal", e.target.value)}
                     sx={{
                       display: "flex",
-                      flexDirection: "column",
+                      flexDirection: "row",
                       gap: 3,
                       ml: 1,
                       mt: 1,
@@ -127,6 +127,9 @@ const Preferences = () => {
                   >
                     {["Losing weight", "Gaining muscle"].map((option) => (
                       <FormControlLabel
+                        sx={{
+                          mx: "auto",
+                        }}
                         key={option}
                         value={option}
                         control={<Radio sx={{ display: "none" }} />}
@@ -148,8 +151,7 @@ const Preferences = () => {
                                 py: 1,
                                 fontWeight: "600",
                                 border: "2px solid #A34BCE",
-                                width: "400px",
-                                bgColor: "#F5F8FC",
+                                width: { xs: "400px", lg: "300px" },
                               }}
                             >
                               {option}
@@ -165,25 +167,35 @@ const Preferences = () => {
           </>
         )}
 
-        {visibleFields.includes("idealWeight") && (
-          <>
-            <Typography sx={{ fontSize: "18px" }} gutterBottom>
-              What would be your ideal weight?
-            </Typography>
-            <TextField
-              fullWidth
-              type="number"
-              value={preferences.idealWeight}
-              onChange={(e) => handleChange("idealWeight", e.target.value)}
-              sx={{ mb: 2 }}
-              InputProps={{
-                endAdornment: (
-                  <Typography sx={{ fontSize: "18px", ml: 1 }}>kg</Typography>
-                ),
-              }}
-            />
-          </>
-        )}
+        <ThemeProvider theme={theme}>
+          {visibleFields.includes("idealWeight") && (
+            <>
+              <Typography sx={{ fontSize: "18px",mb:2 }} gutterBottom>
+                What would be your ideal weight?
+              </Typography>
+              <TextField
+                fullWidth
+                type="number"
+                value={preferences.idealWeight}
+                onChange={(e) => handleChange("idealWeight", e.target.value)}
+                sx={{
+                  mb: 2,
+                  backgroundColor: "#FAFCFF",
+                  borderRadius: "50px",
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: "50px", 
+                    height:'60px'
+                  },
+                }}
+                InputProps={{
+                  endAdornment: (
+                    <Typography sx={{ fontSize: "18px", ml: 1 }}>kg</Typography>
+                  ),
+                }}
+              />
+            </>
+          )}
+        </ThemeProvider>
 
         {visibleFields.includes("duration") && (
           <>

@@ -109,14 +109,16 @@ const PersonalDetails = () => {
                     onChange={(e) => handleChange("gender", e.target.value)}
                     sx={{
                       display: "flex",
-                      flexDirection: "column",
+                      flexDirection: "row",
                       gap: 3,
-                      ml: 1,
                       mt: 1,
                     }}
                   >
                     {["Male", "Female"].map((option) => (
                       <FormControlLabel
+                        sx={{
+                          mx: "auto",
+                        }}
                         key={option}
                         value={option}
                         control={<Radio sx={{ display: "none" }} />}
@@ -138,7 +140,7 @@ const PersonalDetails = () => {
                                 py: 1,
                                 fontWeight: "600",
                                 border: "2px solid #A34BCE",
-                                width: "400px",
+                                width: { xs: "400px", lg: "300px" },
                               }}
                             >
                               {option}
@@ -154,60 +156,87 @@ const PersonalDetails = () => {
           </>
         )}
 
-        {visibleFields.includes("age") && (
-          <>
-            <Typography sx={{ fontSize: "18px" }} gutterBottom>
-              How old are you?
-            </Typography>
-            <TextField
-              fullWidth
-              type="number"
-              value={personalData.age}
-              onChange={(e) => handleChange("age", e.target.value)}
-              sx={{ mb: 2 }}
-            />
-          </>
-        )}
+        <ThemeProvider theme={theme}>
+          {visibleFields.includes("age") && (
+            <>
+              <Typography sx={{ fontSize: "18px", mb: 2 }} gutterBottom>
+                How old are you?
+              </Typography>
 
-        {visibleFields.includes("height") && (
-          <>
-            <Typography sx={{ fontSize: "18px" }} gutterBottom>
-              What is your height?
-            </Typography>
-            <TextField
-              fullWidth
-              type="number"
-              value={personalData.height}
-              onChange={(e) => handleChange("height", e.target.value)}
-              sx={{ mb: 2 }}
-              InputProps={{
-                endAdornment: (
-                  <Typography sx={{ fontSize: "18px", ml: 1 }}>cm</Typography>
-                ),
-              }}
-            />
-          </>
-        )}
+              <TextField
+                fullWidth
+                type="number"
+                value={personalData.age}
+                onChange={(e) => handleChange("age", e.target.value)}
+                sx={{
+                  mb: 2,
+                  backgroundColor: "#FAFCFF",
+                  borderRadius: "50px",
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: "50px",
+                    height: "60px",
+                  },
+                }}
+              />
+            </>
+          )}
 
-        {visibleFields.includes("weight") && (
-          <>
-            <Typography sx={{ fontSize: "18px" }} gutterBottom>
-              What is your current weight?
-            </Typography>
-            <TextField
-              fullWidth
-              type="number"
-              value={personalData.weight}
-              onChange={(e) => handleChange("weight", e.target.value)}
-              sx={{ mb: 2 }}
-              InputProps={{
-                endAdornment: (
-                  <Typography sx={{ fontSize: "18px", ml: 1 }}>kg</Typography>
-                ),
-              }}
-            />
-          </>
-        )}
+          {visibleFields.includes("height") && (
+            <>
+              <Typography sx={{ fontSize: "18px", mb: 2 }} gutterBottom>
+                What is your height?
+              </Typography>
+              <TextField
+                fullWidth
+                type="number"
+                value={personalData.height}
+                onChange={(e) => handleChange("height", e.target.value)}
+                sx={{
+                  mb: 2,
+                  backgroundColor: "#FAFCFF",
+                  borderRadius: "50px",
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: "50px",
+                    height: "60px",
+                  },
+                }}
+                InputProps={{
+                  endAdornment: (
+                    <Typography sx={{ fontSize: "18px", ml: 1 }}>cm</Typography>
+                  ),
+                }}
+              />
+            </>
+          )}
+
+          {visibleFields.includes("weight") && (
+            <>
+              <Typography sx={{ fontSize: "18px", mb: 2 }} gutterBottom>
+                What is your current weight?
+              </Typography>
+              <TextField
+                fullWidth
+                type="number"
+                value={personalData.weight}
+                onChange={(e) => handleChange("weight", e.target.value)}
+                sx={{
+                  mb: 2,
+                  backgroundColor: "#FAFCFF",
+                  borderRadius: "50px",
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: "50px",
+                    height: "60px",
+                  },
+                }}
+                InputProps={{
+                  endAdornment: (
+                    <Typography sx={{ fontSize: "18px", ml: 1 }}>kg</Typography>
+                  ),
+                }}
+              />
+            </>
+          )}
+        </ThemeProvider>
       </Box>
 
       <Link to="/overall">

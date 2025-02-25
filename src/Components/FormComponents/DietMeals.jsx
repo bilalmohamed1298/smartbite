@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const DietMeals = () => {
-  return (
-    <div>DietMeals</div>
-  )
-}
+  return <div>DietMeals</div>;
+};
 
-export default DietMeals
+export default DietMeals;
