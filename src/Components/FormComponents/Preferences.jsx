@@ -121,7 +121,6 @@ const Preferences = () => {
                       display: "flex",
                       flexDirection: "row",
                       gap: 3,
-                      ml: 1,
                       mt: 1,
                     }}
                   >
@@ -151,7 +150,7 @@ const Preferences = () => {
                                 py: 1,
                                 fontWeight: "600",
                                 border: "2px solid #A34BCE",
-                                width: { xs: "400px", lg: "300px" },
+                                width: { xs: "300px", lg: "300px" }
                               }}
                             >
                               {option}
@@ -199,9 +198,9 @@ const Preferences = () => {
 
         {visibleFields.includes("duration") && (
           <>
-            <Box sx={{ width: "80%", textAlign: "center", mt: 7, mx: "auto" }}>
+            <Box sx={{ width: "80%", textAlign: "center", mt: {sm:7,xs:3}, mx: "auto" }}>
               <Typography
-                sx={{ fontSize: "18px", fontWeight: "" }}
+                sx={{ fontSize: {sm:"18px",xs:'14px'}}}
                 gutterBottom
               >
                 Set Your Pace: Pick Your Days! 🚀🔥
@@ -256,7 +255,7 @@ const Preferences = () => {
               borderRadius: "50px",
               backgroundColor: "#A34BCE",
               color: "white",
-              width: { xs: "70%", sm: "80%" },
+              width: { xs: "60%", sm: "80%" },
               height: 60,
               fontWeight: "bold",
               textTransform: "none",

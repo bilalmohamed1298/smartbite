@@ -140,7 +140,7 @@ const PersonalDetails = () => {
                                 py: 1,
                                 fontWeight: "600",
                                 border: "2px solid #A34BCE",
-                                width: { xs: "400px", lg: "300px" },
+                                width: { xs: "300px", lg: "300px" }
                               }}
                             >
                               {option}
@@ -264,7 +264,7 @@ const PersonalDetails = () => {
               borderRadius: "50px",
               backgroundColor: "#A34BCE",
               color: "white",
-              width: { xs: "70%", sm: "80%" },
+              width: { xs: "60%", sm: "80%" },
               height: 60,
               fontWeight: "bold",
               textTransform: "none",

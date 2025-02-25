@@ -22,6 +22,7 @@ export default function SignupForm() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
+        overflow:'auto',
         overflowX:"hidden",
         overflowY:'auto'
       }}
