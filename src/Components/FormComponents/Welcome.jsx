@@ -59,12 +59,12 @@ export default function Welcome() {
             p: 2,
             borderRadius: "12px",
             display: "flex",
-            justifyContent: "space-between",
+            justifyContent: "center",
             flexDirection: "column",
             bgcolor: "white",
-            mb: {sm:16,xs:10},
+            mb: {sm:16,xs:5},
             mx: "auto",
-            mt:{xs:5,sm:0}
+            
           }}
         >
           <AnimatePresence mode="wait">
