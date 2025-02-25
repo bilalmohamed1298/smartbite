@@ -45,6 +45,7 @@ export default function Welcome() {
             fontSize: "30px",
             fontWeight: "600",
             textAlign: "center",
+            color: "#201325",
           }}
         >
           Welcome!

@@ -8,32 +8,42 @@ import {
   IconButton,
   Radio,
   RadioGroup,
+  Slider,
   Stack,
   TextField,
   ThemeProvider,
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import { KeyboardArrowLeft } from "@mui/icons-material";
+import {
+  DirectionsBike,
+  DirectionsRun,
+  KeyboardArrowLeft,
+  RocketLaunch,
+} from "@mui/icons-material";
 
-const PersonalDetails = () => {
-  const [personalData, setPersonalData] = useState({
-    gender: "",
-    age: "",
-    height: "",
-    weight: "",
+const Preferences = () => {
+  const [preferences, setPreferences] = useState({
+    goal: "",
+    idealWeight: "",
+    duration: 0,
   });
-  const [visibleFields, setVisibleFields] = useState(["gender"]);
+  const [visibleFields, setVisibleFields] = useState(["goal"]);
+  const [duration, setDuration] = useState(45);
+
+  const marks = [
+    { value: 90, label: <DirectionsRun fontSize="large" /> },
+    { value: 45, label: <DirectionsBike fontSize="large" /> },
+    { value: 30, label: <RocketLaunch fontSize="large" /> },
+  ];
 
   const handleChange = (field, value) => {
-    setPersonalData((prev) => ({ ...prev, [field]: value }));
+    setPreferences((prev) => ({ ...prev, [field]: value }));
 
-    if (field === "gender" && !visibleFields.includes("age")) {
-      setVisibleFields([...visibleFields, "age"]);
-    } else if (field === "age" && !visibleFields.includes("height")) {
-      setVisibleFields([...visibleFields, "height"]);
-    } else if (field === "height" && !visibleFields.includes("weight")) {
-      setVisibleFields([...visibleFields, "weight"]);
+    if (field === "goal" && !visibleFields.includes("idealWeight")) {
+      setVisibleFields([...visibleFields, "idealWeight"]);
+    } else if (field === "idealWeight" && !visibleFields.includes("duration")) {
+      setVisibleFields([...visibleFields, "duration"]);
     }
   };
 
@@ -45,7 +55,7 @@ const PersonalDetails = () => {
     },
   });
 
-  console.log(personalData);
+  console.log(preferences);
 
   return (
     <Box
@@ -85,11 +95,11 @@ const PersonalDetails = () => {
       </Box>
 
       <Box>
-        {visibleFields.includes("gender") && (
+        {visibleFields.includes("goal") && (
           <>
             <Stack
               sx={{
-                mb: 3,
+                mb: 7,
               }}
             >
               <Box
@@ -101,12 +111,12 @@ const PersonalDetails = () => {
                   sx={{ fontSize: "18px", textAlign: "center", my: 2 }}
                   gutterBottom
                 >
-                  What is your gender
+                  What is your goal
                 </Typography>
                 <FormControl component="fieldset" sx={{ mb: 2 }}>
                   <RadioGroup
-                    value={personalData.gender}
-                    onChange={(e) => handleChange("gender", e.target.value)}
+                    value={preferences.goal}
+                    onChange={(e) => handleChange("goal", e.target.value)}
                     sx={{
                       display: "flex",
                       flexDirection: "column",
@@ -115,7 +125,7 @@ const PersonalDetails = () => {
                       mt: 1,
                     }}
                   >
-                    {["Male", "Female"].map((option) => (
+                    {["Losing weight", "Gaining muscle"].map((option) => (
                       <FormControlLabel
                         key={option}
                         value={option}
@@ -126,11 +136,11 @@ const PersonalDetails = () => {
                               color="primary"
                               size="large"
                               variant={
-                                personalData.gender === option
+                                preferences.goal === option
                                   ? "contained"
                                   : "outlined"
                               }
-                              onClick={() => handleChange("gender", option)}
+                              onClick={() => handleChange("goal", option)}
                               sx={{
                                 borderRadius: "50px",
                                 textTransform: "none",
@@ -139,6 +149,7 @@ const PersonalDetails = () => {
                                 fontWeight: "600",
                                 border: "2px solid #A34BCE",
                                 width: "400px",
+                                bgColor: "#F5F8FC",
                               }}
                             >
                               {option}
@@ -154,51 +165,16 @@ const PersonalDetails = () => {
           </>
         )}
 
-        {visibleFields.includes("age") && (
+        {visibleFields.includes("idealWeight") && (
           <>
             <Typography sx={{ fontSize: "18px" }} gutterBottom>
-              How old are you?
+              What would be your ideal weight?
             </Typography>
             <TextField
               fullWidth
               type="number"
-              value={personalData.age}
-              onChange={(e) => handleChange("age", e.target.value)}
-              sx={{ mb: 2 }}
-            />
-          </>
-        )}
-
-        {visibleFields.includes("height") && (
-          <>
-            <Typography sx={{ fontSize: "18px" }} gutterBottom>
-              What is your height?
-            </Typography>
-            <TextField
-              fullWidth
-              type="number"
-              value={personalData.height}
-              onChange={(e) => handleChange("height", e.target.value)}
-              sx={{ mb: 2 }}
-              InputProps={{
-                endAdornment: (
-                  <Typography sx={{ fontSize: "18px", ml: 1 }}>cm</Typography>
-                ),
-              }}
-            />
-          </>
-        )}
-
-        {visibleFields.includes("weight") && (
-          <>
-            <Typography sx={{ fontSize: "18px" }} gutterBottom>
-              What is your current weight?
-            </Typography>
-            <TextField
-              fullWidth
-              type="number"
-              value={personalData.weight}
-              onChange={(e) => handleChange("weight", e.target.value)}
+              value={preferences.idealWeight}
+              onChange={(e) => handleChange("idealWeight", e.target.value)}
               sx={{ mb: 2 }}
               InputProps={{
                 endAdornment: (
@@ -208,9 +184,42 @@ const PersonalDetails = () => {
             />
           </>
         )}
+
+        {visibleFields.includes("duration") && (
+          <>
+            <Box sx={{ width: "80%", textAlign: "center", mt: 10, mx: "auto" }}>
+              <Typography
+                sx={{ fontSize: "18px", fontWeight: "" }}
+                gutterBottom
+              >
+                Set Your Pace: Pick Your Days! 🚀🔥
+              </Typography>
+              <Typography variant="body2" mt={1}>
+                Selected Duration: <strong>{duration} days</strong>
+              </Typography>
+              <Slider
+                value={duration}
+                min={30}
+                max={90}
+                step={null}
+                marks={marks}
+                onChange={(e, newValue) => {
+                  setDuration(newValue);
+                  handleChange("duration", e.target.value);
+                }}
+                sx={{
+                  ".MuiSlider-markLabel": { mt: 2 },
+                  "& .MuiSlider-thumb": { bgcolor: "#A34BCE" },
+                  "& .MuiSlider-track": { bgcolor: "#A34BCE" },
+                  "& .MuiSlider-rail": { opacity: 0.5, color: "#D8BFF2" },
+                }}
+              />
+            </Box>
+          </>
+        )}
       </Box>
 
-      <Link to="/overall">
+      <Link to="/details">
         <IconButton
           size="large"
           sx={{
@@ -227,8 +236,8 @@ const PersonalDetails = () => {
         </IconButton>
       </Link>
 
-      {visibleFields.includes("weight") && personalData.weight && (
-        <Link to="/preferences">
+      {visibleFields.includes("duration") && preferences.duration && (
+        <Link to="/Preferences">
           <Button
             size="large"
             sx={{
@@ -256,4 +265,4 @@ const PersonalDetails = () => {
   );
 };
 
-export default PersonalDetails;
+export default Preferences;
