@@ -18,7 +18,7 @@ const DietMeals = () => {
         Your Profile
       </Typography>
       <Box>
-        <Stack direction={"row"} sx={{ flexWrap: "wrap", gap: {xs:1,md:2}, mb: 5 }}>
+        <Stack direction={"row"} sx={{ flexWrap: "wrap", gap: {xs:1,md:2}, mb: {xs:3,sm:5} }}>
           <Box
             sx={{
               boxShadow: 2,
@@ -44,14 +44,14 @@ const DietMeals = () => {
             >
               {" "}
               {userDetails.age}{" "}
-              <span style={{ fontSize: "14px", marginLeft: "1px" }}>years</span>
+              <span style={{ fontSize: "14px", marginLeft: "5px" }}>years</span>
             </Typography>
           </Box>
           <Box
             sx={{
               boxShadow: 2,
               p: 1,
-              width: {xs:'14%'},
+              width: {xs:'14%',sm:'15%'},
               height: "10%",
               borderRadius: 3,
               display: "flex",
@@ -79,7 +79,7 @@ const DietMeals = () => {
             sx={{
               boxShadow: 2,
               p: 1,
-              width: {xs:'14%'},
+              width: {xs:'14%',sm:'15%'},
               height: "10%",
               borderRadius: 3,
               display: "flex",
@@ -107,7 +107,7 @@ const DietMeals = () => {
             sx={{
               boxShadow: 2,
               p: 1,
-              width: {xs:'14%'},
+              width: {xs:'14%',sm:'15%'},
               height: "10%",
               borderRadius: 3,
               display: "flex",
@@ -135,7 +135,7 @@ const DietMeals = () => {
             sx={{
               boxShadow: 2,
               p: 1,
-              width: {xs:'14%'},
+              width: {xs:'14%',sm:'15%'},
               height: "10%",
               borderRadius: 3,
               display: "flex",
@@ -156,7 +156,7 @@ const DietMeals = () => {
             >
               {" "}
               {userDetails.duration}{" "}
-              <span style={{ fontSize: "14px", marginLeft: "5px" }}>days</span>
+              <span style={{ fontSize: "14px", marginLeft: "1px" }}>days</span>
             </Typography>
           </Box>
         </Stack>
@@ -204,7 +204,7 @@ const DietMeals = () => {
         direction={"row"}
         flexWrap={"wrap"}
         justifyContent={{ xs: "center", md: "start" }}
-        sx={{ mt: { xs: 3, sm: 3 }, gap: { xs: 3, md: 3 }, mx: 5 }}
+        sx={{ mt: { xs: 3, sm: 3 }, gap: { xs: 2, md: 5 }, mx: 4 }}
       >
         <Link
           to="/meal-details"
@@ -215,7 +215,7 @@ const DietMeals = () => {
               width: { xs: "250px", sm: "260px" },
               height: { xs: "100px", sm: "120px" },
               borderRadius: 5,
-              background: "#fdfbfe",
+              background: "#f9f4fb",
               boxShadow: 1,
               paddingBottom: 5,
               '&:hover':{scale:'1.1'},
@@ -251,7 +251,7 @@ const DietMeals = () => {
             width: { xs: "250px", sm: "260px" },
             height: { xs: "100px", sm: "120px" },
             borderRadius: 5,
-            background: "#fdfbfe",
+            background: "#f9f4fb",
             boxShadow: 1,
             paddingBottom: 5,
           }}
@@ -283,7 +283,7 @@ const DietMeals = () => {
             width: { xs: "250px", sm: "260px" },
             height: { xs: "100px", sm: "120px" },
             borderRadius: 5,
-            background: "#fdfbfe",
+            background: "#f9f4fb",
             boxShadow: 1,
             paddingBottom: 5,
           }}
