@@ -90,7 +90,6 @@ export default function Welcome() {
                   alt="Nutrition"
                   style={{
                     width: "100%",
-                    height: {sm:"210px"},
                     borderRadius: "12px",
                   }}
                 />

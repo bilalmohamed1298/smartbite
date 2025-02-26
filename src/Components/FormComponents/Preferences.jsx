@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -21,15 +21,21 @@ import {
   KeyboardArrowLeft,
   RocketLaunch,
 } from "@mui/icons-material";
+import { MealsContext } from "../../Utils/MealsContext";
 
 const Preferences = () => {
+  const {setUserDetails} = useContext(MealsContext)
   const [preferences, setPreferences] = useState({
     goal: "",
-    idealWeight: "",
+    idealWeight: null,
     duration: 0,
   });
   const [visibleFields, setVisibleFields] = useState(["goal"]);
   const [duration, setDuration] = useState(45);
+
+    useEffect(()=>{
+      setUserDetails((prev)=>({...prev,...preferences}))
+    },[preferences])
 
   const marks = [
     { value: 90, label: <DirectionsRun fontSize="large" /> },
@@ -55,7 +61,6 @@ const Preferences = () => {
     },
   });
 
-  console.log(preferences);
 
   return (
     <Box
@@ -144,7 +149,7 @@ const Preferences = () => {
                               }
                               onClick={() => handleChange("goal", option)}
                               sx={{
-                                borderRadius: "50px",
+                                borderRadius: 5,
                                 textTransform: "none",
                                 px: 3,
                                 py: 1,
@@ -182,7 +187,7 @@ const Preferences = () => {
                   backgroundColor: "#FAFCFF",
                   borderRadius: "50px",
                   "& .MuiOutlinedInput-root": {
-                    borderRadius: "50px", 
+                    borderRadius: 5, 
                     height: {xs:'50px',sm:"60px"},
                   },
                 }}
@@ -248,7 +253,7 @@ const Preferences = () => {
       </Link>
 
       {visibleFields.includes("duration") && preferences.duration && (
-        <Link to="/Preferences">
+        <Link to="/diet-meals">
           <Button
             size="large"
             sx={{

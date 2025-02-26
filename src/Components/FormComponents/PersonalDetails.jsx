@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -15,15 +15,21 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { KeyboardArrowLeft } from "@mui/icons-material";
+import { MealsContext } from "../../Utils/MealsContext";
 
 const PersonalDetails = () => {
+  const {setUserDetails} = useContext(MealsContext)
   const [personalData, setPersonalData] = useState({
     gender: "",
-    age: "",
-    height: "",
-    weight: "",
+    age: null,
+    height: null,
+    weight: null,
   });
   const [visibleFields, setVisibleFields] = useState(["gender"]);
+  
+  useEffect(()=>{
+    setUserDetails((prev)=>({...prev,...personalData}))
+  },[personalData])
 
   const handleChange = (field, value) => {
     setPersonalData((prev) => ({ ...prev, [field]: value }));
@@ -45,7 +51,6 @@ const PersonalDetails = () => {
     },
   });
 
-  console.log(personalData);
 
   return (
     <Box
@@ -134,7 +139,7 @@ const PersonalDetails = () => {
                               }
                               onClick={() => handleChange("gender", option)}
                               sx={{
-                                borderRadius: "50px",
+                                borderRadius: 5,
                                 textTransform: "none",
                                 px: 3,
                                 py: 1,
@@ -176,7 +181,7 @@ const PersonalDetails = () => {
                   backgroundColor: "#FAFCFF",
                   borderRadius: "50px",
                   "& .MuiOutlinedInput-root": {
-                    borderRadius: "50px",
+                    borderRadius: 5,
                     height: { xs: "50px", sm: "60px" },
                   },
                 }}
@@ -202,7 +207,7 @@ const PersonalDetails = () => {
                   backgroundColor: "#FAFCFF",
                   borderRadius: "50px",
                   "& .MuiOutlinedInput-root": {
-                    borderRadius: "50px",
+                    borderRadius: 5,
                     height: { xs: "50px", sm: "60px" },
                   },
                 }}
@@ -233,7 +238,7 @@ const PersonalDetails = () => {
                   backgroundColor: "#FAFCFF",
                   borderRadius: "50px",
                   "& .MuiOutlinedInput-root": {
-                    borderRadius: "50px",
+                    borderRadius: 5,
                     height: { xs: "50px", sm: "60px" },
                   },
                 }}
