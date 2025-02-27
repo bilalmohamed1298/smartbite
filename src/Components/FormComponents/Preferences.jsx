@@ -145,7 +145,7 @@ const Preferences = () => {
                                 }
                                 onClick={() => handleChange("goal", option)}
                                 sx={{
-                                  borderRadius: 5,
+                                  borderRadius: 2,
                                   textTransform: "none",
                                   px: 3,
                                   py: 1,
@@ -216,7 +216,7 @@ const Preferences = () => {
                   sx={{ fontSize: { sm: "18px", xs: "14px" } }}
                   gutterBottom
                 >
-                  Set Your Pace: Pick Your Days! 🚀🔥
+                  Set Your Pace: Pick Your Days! 🚀
                 </Typography>
                 <Typography variant="body2" mt={1}>
                   Selected Duration: <strong>{duration} days</strong>

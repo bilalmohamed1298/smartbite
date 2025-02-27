@@ -1,7 +1,8 @@
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import { useContext } from "react";
 import { MealsContext } from "../../Utils/MealsContext";
 import { Link } from "react-router-dom";
+import { CameraAlt } from "@mui/icons-material";
 
 const DietMeals = () => {
   const { dailyMeals, userDetails } = useContext(MealsContext);
@@ -306,6 +307,16 @@ const DietMeals = () => {
       ) : (
         "No API"
       )}
+
+      <Link to="/food-analyzer" style={{ textDecoration: "none" }}>
+        <Button
+        sx={{
+          borderRadius:5,
+          justifyContent:'center'
+        }}
+        variant="contained" startIcon={<CameraAlt sx={{ml:1,p:1}} />}>
+        </Button>
+      </Link>
     </Box>
   );
 };

@@ -135,7 +135,7 @@ const PersonalDetails = () => {
                                 }
                                 onClick={() => handleChange("gender", option)}
                                 sx={{
-                                  borderRadius: 5,
+                                  borderRadius: 2,
                                   textTransform: "none",
                                   px: 3,
                                   py: 1,
