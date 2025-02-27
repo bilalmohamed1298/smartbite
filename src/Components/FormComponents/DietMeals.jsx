@@ -235,88 +235,93 @@ const DietMeals = () => {
       >
         Today's Meals
       </Typography>
-      {dailyMeals.length > 0 ? (
-        <Stack
-          direction={"row"}
-          flexWrap={"wrap"}
-          justifyContent={{ xs: "center", md: "space-evenly" }}
-          sx={{ mt: { xs: 5, sm: 5 }, gap: { xs: 3, md: 3 } }}
-        >
-          {dailyMeals.map((meal, index) => (
-            <Link
-              key={index}
-              to={`/meal-details/${meal.id}`}
-              style={{ textDecoration: "none", color: "inherit" }}
+        <Box>
+          {dailyMeals.length > 0 ? (
+            <Stack
+              direction={"row"}
+              flexWrap={"wrap"}
+              justifyContent={{ xs: "center", md: "space-evenly" }}
+              sx={{ mt: { xs: 5, sm: 5 }, gap: { xs: 3, md: 3 } }}
             >
+              {dailyMeals.map((meal, index) => (
+                <Link
+                  key={index}
+                  to={`/meal-details/${meal.id}`}
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <Box
+                    sx={{
+                      position: "relative",
+                      width: "300px",
+                      height: "180px",
+                      borderRadius: "15px",
+                      overflow: "hidden",
+                      boxShadow: 2,
+                      "&:hover": { scale: 1.1 },
+                      transition: "0.3s ease-in-out",
+                    }}
+                  >
+                    <img
+                      src={`https://spoonacular.com/recipeImages/${meal.image}`}
+                      alt="Meal"
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                      }}
+                    />
+
+                    <Box
+                      sx={{
+                        position: "absolute",
+                        bottom: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "100%",
+                        background:
+                          "linear-gradient(to top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.18))",
+                      }}
+                    />
+
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        position: "absolute",
+                        bottom: 10,
+                        left: 10,
+                        color: "white",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {meal.title}
+                    </Typography>
+                  </Box>
+                </Link>
+              ))}
               <Box
                 sx={{
-                  position: "relative",
-                  width: "300px",
+                  width:'300px',
                   height: "180px",
-                  borderRadius: "15px",
-                  overflow: "hidden",
-                  boxShadow: 2,
-                  "&:hover": { scale: 1.1 },
-                  transition: "0.3s ease-in-out",
+                  borderRadius: "10px",
+                  display:{xs:'none',sm:'block'}
                 }}
-              >
-                <img
-                  src={`https://spoonacular.com/recipeImages/${meal.image}`}
-                  alt="Meal"
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                  }}
-                />
-
-                <Box
-                  sx={{
-                    position: "absolute",
-                    bottom: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "100%",
-                    background:
-                      "linear-gradient(to top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.18))",
-                  }}
-                />
-
-                <Typography
-                  variant="body1"
-                  sx={{
-                    position: "absolute",
-                    bottom: 10,
-                    left: 10,
-                    color: "white",
-                    fontWeight: "bold",
-                  }}
-                >
-                  {meal.title}
-                </Typography>
-              </Box>
-            </Link>
-          ))}
-          <Box
-            sx={{
-              width: "300px",
-              height: "180px",
-              borderRadius: "10px",
-            }}
-          ></Box>
-        </Stack>
-      ) : (
-        "No API"
-      )}
-
-      <Link to="/food-analyzer" style={{ textDecoration: "none" }}>
-        <Button
-        sx={{
-          borderRadius:5,
-          justifyContent:'center'
-        }}
-        variant="contained" startIcon={<CameraAlt sx={{ml:1,p:1}} />}>
-        </Button>
-      </Link>
+              ></Box>
+            </Stack>
+          ) : (
+            "No API"
+          )}
+        </Box>
+        <Box sx={{mt:8,ml:1}}>
+          <Link to="/food-analyzer" style={{ textDecoration: "none" }}>
+            <Button
+              sx={{
+                borderRadius: 5,
+                justifyContent: "center",
+              }}
+              variant="contained"
+              startIcon={<CameraAlt sx={{ ml: 1, p: 1 }} />}
+            ></Button>
+          </Link>
+        </Box>
     </Box>
   );
 };

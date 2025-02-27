@@ -28,7 +28,6 @@ const questions = [
       "Lactose intolerant",
       "Nut allergy",
       "Other",
-      "None",
     ],
   },
   {
@@ -46,10 +45,6 @@ const questions = [
   {
     question: "How much water do you drink daily?",
     options: ["Less than 1L", "1-2L", "2-3L", "More than 3L"],
-  },
-  {
-    question: "Do you consume alcohol?",
-    options: ["Never", "Rarely", "Sometimes", "Frequently"],
   },
   { question: "Do you smoke?", options: ["Yes", "No", "Trying to quit"] },
   {

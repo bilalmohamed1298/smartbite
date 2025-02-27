@@ -1,33 +1,39 @@
 import React, { useState, useRef, useEffect } from "react";
-import Webcam from "react-webcam";
 import * as tf from "@tensorflow/tfjs";
 import * as mobilenet from "@tensorflow-models/mobilenet";
 import {
+  Box,
   Button,
   Card,
   CardContent,
   CircularProgress,
+  Stack,
   Typography,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const FoodAnalyzer = () => {
   const webcamRef = useRef(null);
   const [image, setImage] = useState(null);
   const [analysis, setAnalysis] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [model, setModel] = useState(null);
+  const [dailyMeals, setdailyMeals] = useState(null);
+  const [ingredients, setIngredients] = useState(null);
 
   useEffect(() => {
-    const loadBackend = async () => {
+    const loadModel = async () => {
       await tf.setBackend("webgl");
       await tf.ready();
-      console.log("TensorFlow.js backend set to WebGL");
+      const loadedModel = await mobilenet.load({ version: 2, alpha: 1.0 });
+      setModel(loadedModel);
+      console.log("Model Loaded Successfully");
     };
-    loadBackend();
+    loadModel();
   }, []);
 
   const capture = () => {
     const imageSrc = webcamRef.current.getScreenshot();
-    console.log("Captured image:", imageSrc);
     setImage(imageSrc);
     setAnalysis(null);
   };
@@ -37,7 +43,6 @@ const FoodAnalyzer = () => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        console.log("Uploaded image:", reader.result);
         setImage(reader.result);
         setAnalysis(null);
       };
@@ -45,34 +50,51 @@ const FoodAnalyzer = () => {
     }
   };
 
+  const preprocessImage = async (imageSrc) => {
+    const img = new Image();
+    img.src = imageSrc;
+    await new Promise((resolve) => (img.onload = resolve));
+
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = 640;
+    canvas.height = 480;
+    ctx.drawImage(img, 0, 0, 640, 480);
+    ctx.filter = "contrast(1.2) brightness(1.1)";
+    ctx.drawImage(img, 0, 0, 640, 480);
+    return canvas.toDataURL("image/png");
+  };
+
   const analyzeImage = async () => {
-    if (!image) return;
+    if (!image || !model) return;
     setLoading(true);
     setAnalysis(null);
-    console.log("Starting analysis...");
-    try {
-      const img = new Image();
-      img.src = image;
-      img.crossOrigin = "anonymous";
+    const enhancedImage = await preprocessImage(image);
+    const img = new Image();
+    img.src = enhancedImage;
+    img.crossOrigin = "anonymous";
 
-      img.onload = async () => {
-        console.log("Image loaded, loading MobileNet model...");
-        const model = await mobilenet.load();
-        console.log("Model loaded, classifying image...");
-        const predictions = await model.classify(img);
-        console.log("Predictions:", predictions);
+    img.onload = async () => {
+      const predictions = await model.classify(img);
+      console.log("Predictions:", predictions);
 
-        if (!predictions.length) {
-          setAnalysis("Food could not be accurately identified.");
-          setLoading(false);
-          return;
-        }
+      if (!predictions.length) {
+        setAnalysis("Food could not be accurately identified.");
+        setLoading(false);
+        return;
+      }
 
-        const detectedFood = predictions[0]?.className.split(",")[0];
-        console.log("Detected food:", detectedFood);
+      const detectedIngredients = predictions
+        .map((pred) => pred.className)
+        .filter(Boolean)
+        .join(",");
 
+      const detectedFood = predictions[1]?.className.split(",")[0];
+      console.log("Detected food:", detectedFood);
+
+      try {
         const response = await fetch(
-          `https://api.spoonacular.com/food/ingredients/search?query=${detectedFood}&apiKey=7d5e750167ac4dc0b0f4032102e970de`
+          `https://api.spoonacular.com/recipes/complexSearch?query=${detectedFood}&apiKey=16d84c3222204c619a34ad6b943db6a9`
         );
         if (!response.ok) throw new Error("Failed to fetch nutrition data");
 
@@ -83,18 +105,15 @@ const FoodAnalyzer = () => {
           setAnalysis("No nutritional data found for this food.");
         } else {
           setAnalysis(nutritionData.results[0]);
+          setdailyMeals(nutritionData.results);
+          setIngredients(detectedIngredients);
         }
-      };
-      img.onerror = () => {
-        console.error("Error loading image");
-        setAnalysis("Error loading image. Try another one.");
-        setLoading(false);
-      };
-    } catch (error) {
-      console.error("Error analyzing image:", error);
-      setAnalysis("An error occurred during analysis. Check console logs.");
-    }
-    setLoading(false);
+      } catch (error) {
+        console.error("Error fetching nutrition data:", error);
+        setAnalysis("An error occurred while fetching nutrition data.");
+      }
+      setLoading(false);
+    };
   };
 
   return (
@@ -108,13 +127,13 @@ const FoodAnalyzer = () => {
       }}
     >
       {!image ? (
-        <Webcam
-          ref={webcamRef}
-          screenshotFormat="image/png"
-          videoConstraints={{ facingMode: "environment" }}
+        <img
+          src={"/analyzer.jpg"}
+          alt="Captured food"
           style={{
             borderRadius: "8px",
             boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+            width: "400px",
           }}
         />
       ) : (
@@ -124,7 +143,7 @@ const FoodAnalyzer = () => {
           style={{
             borderRadius: "8px",
             boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
-            width: "256px",
+            width: "400px",
           }}
         />
       )}
@@ -159,20 +178,82 @@ const FoodAnalyzer = () => {
         )}
       </div>
       {analysis && (
-        <Card style={{ width: "320px", padding: "16px" }}>
+        <Card style={{ width: "100%", padding: "16px" }}>
           <CardContent>
-            <Typography variant="h6">Analysis Results</Typography>
+            <Typography variant="h6">Meals with similar ingredients</Typography>
             {typeof analysis === "string" ? (
               <Typography>{analysis}</Typography>
             ) : (
               <div>
-                <Typography>
-                  <strong>Ingredient Name:</strong> {analysis.name}
-                </Typography>
-                <Typography>
-                  <strong>Calories:</strong>{" "}
-                  {analysis.calories || "Not Available"}
-                </Typography>
+                {dailyMeals.length > 0 ? (
+                  <Stack
+                    direction={"row"}
+                    flexWrap={"wrap"}
+                    justifyContent={{ xs: "center", md: "center" }}
+                    sx={{
+                      mt: { xs: 5, sm: 5 },
+                      gap: { xs: 3, md: 3 },
+                      flexGrow: 1,
+                    }}
+                  >
+                    {dailyMeals.map((meal, index) => (
+                      <Link
+                        key={index}
+                        to={`/meal-details/${meal.id}`}
+                        style={{ textDecoration: "none", color: "inherit" }}
+                      >
+                        <Box
+                          sx={{
+                            position: "relative",
+                            width: "250px",
+                            height: "180px",
+                            borderRadius: "15px",
+                            overflow: "hidden",
+                            boxShadow: 2,
+                            "&:hover": { scale: 1.1 },
+                            transition: "0.3s ease-in-out",
+                          }}
+                        >
+                          <img
+                            src={`${meal.image}`}
+                            alt="Meal"
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                            }}
+                          />
+
+                          <Box
+                            sx={{
+                              position: "absolute",
+                              bottom: 0,
+                              left: 0,
+                              width: "100%",
+                              height: "100%",
+                              background:
+                                "linear-gradient(to top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.18))",
+                            }}
+                          />
+
+                          <Typography
+                            variant="body1"
+                            sx={{
+                              position: "absolute",
+                              bottom: 10,
+                              left: 10,
+                              color: "white",
+                              fontWeight: "bold",
+                            }}
+                          >
+                            {meal.title}
+                          </Typography>
+                        </Box>
+                      </Link>
+                    ))}
+                  </Stack>
+                ) : (
+                  ""
+                )}
               </div>
             )}
           </CardContent>
