@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 const DietMeals = () => {
   const { dailyMeals, userDetails } = useContext(MealsContext);
   console.log(userDetails);
+  console.log(dailyMeals);
   return (
     <Box>
       <Typography
@@ -18,20 +19,30 @@ const DietMeals = () => {
         Your Profile
       </Typography>
       <Box>
-        <Stack direction={"row"} sx={{ flexWrap: "wrap", gap: {xs:1,md:2}, mb: {xs:3,sm:5} }}>
+        <Stack
+          direction={"row"}
+          sx={{ flexWrap: "wrap", gap: { xs: 1, md: 2 }, mb: { xs: 3, sm: 5 } }}
+        >
           <Box
             sx={{
               boxShadow: 2,
               p: 1,
-              width: {xs:'14%',sm:'15%'},
-              height: "10%",
+              height: "auto",
               borderRadius: 3,
               display: "flex",
               flexDirection: "column",
-              justifyContent: "space-around",
+              flexGrow:1,
+              background:'#fbf6fe'
             }}
           >
-            <Typography sx={{ fontSize: { xs: "13px", sm: "16px" }, ml: {xs:0,sm:1},mb:'5px',textAlign:{xs:'center',sm:'start'} }}>
+            <Typography
+              sx={{
+                fontSize: { xs: "13px", sm: "16px" },
+                ml: { xs: 0, sm: 1 },
+                mb: "5px",
+                textAlign: { xs: "center", sm: "start" },
+              }}
+            >
               Age
             </Typography>
             <Typography
@@ -51,15 +62,22 @@ const DietMeals = () => {
             sx={{
               boxShadow: 2,
               p: 1,
-              width: {xs:'14%',sm:'15%'},
-              height: "10%",
+              height: "auto",
               borderRadius: 3,
               display: "flex",
               flexDirection: "column",
-              justifyContent: "space-around",
+              flexGrow:1,
+              background:'#fbf6fe'
             }}
           >
-            <Typography sx={{ fontSize: { xs: "13px", sm: "16px" }, ml: {xs:0,sm:1},mb:'5px',textAlign:{xs:'center',sm:'start'} }}>
+            <Typography
+              sx={{
+                fontSize: { xs: "13px", sm: "16px" },
+                ml: { xs: 0, sm: 1 },
+                mb: "5px",
+                textAlign: { xs: "center", sm: "start" },
+              }}
+            >
               Height
             </Typography>
             <Typography
@@ -79,15 +97,22 @@ const DietMeals = () => {
             sx={{
               boxShadow: 2,
               p: 1,
-              width: {xs:'14%',sm:'15%'},
-              height: "10%",
+              height: "auto",
               borderRadius: 3,
               display: "flex",
               flexDirection: "column",
-              justifyContent: "space-around",
+              flexGrow:1,
+              background:'#fbf6fe'
             }}
           >
-            <Typography sx={{ fontSize: { xs: "13px", sm: "16px" }, ml: {xs:0,sm:1},mb:'5px',textAlign:{xs:'center',sm:'start'} }}>
+            <Typography
+              sx={{
+                fontSize: { xs: "13px", sm: "16px" },
+                ml: { xs: 0, sm: 1 },
+                mb: "5px",
+                textAlign: { xs: "center", sm: "start" },
+              }}
+            >
               Weight
             </Typography>
             <Typography
@@ -107,15 +132,22 @@ const DietMeals = () => {
             sx={{
               boxShadow: 2,
               p: 1,
-              width: {xs:'14%',sm:'15%'},
-              height: "10%",
+              height: "auto",
               borderRadius: 3,
               display: "flex",
               flexDirection: "column",
-              justifyContent: "space-around",
+              flexGrow:1,
+              background:'#fbf6fe'
             }}
           >
-            <Typography sx={{ fontSize: { xs: "13px", sm: "16px" }, ml: {xs:0,sm:1},mb:'5px',textAlign:{xs:'center',sm:'start'} }}>
+            <Typography
+              sx={{
+                fontSize: { xs: "13px", sm: "16px" },
+                ml: { xs: 0, sm: 1 },
+                mb: "5px",
+                textAlign: { xs: "center", sm: "start" },
+              }}
+            >
               Goal
             </Typography>
             <Typography
@@ -135,15 +167,22 @@ const DietMeals = () => {
             sx={{
               boxShadow: 2,
               p: 1,
-              width: {xs:'14%',sm:'15%'},
-              height: "10%",
+              height: "auto",
               borderRadius: 3,
               display: "flex",
               flexDirection: "column",
-              justifyContent: "space-around",
+              flexGrow:1,
+              background:'#fbf6fe'
             }}
           >
-            <Typography sx={{ fontSize: { xs: "13px", sm: "16px" }, ml: {xs:0,sm:1},mb:'5px',textAlign:{xs:'center',sm:'start'} }}>
+            <Typography
+              sx={{
+                fontSize: { xs: "13px", sm: "16px" },
+                ml: { xs: 0, sm: 1 },
+                mb: "5px",
+                textAlign: { xs: "center", sm: "start" },
+              }}
+            >
               Duration
             </Typography>
             <Typography
@@ -160,12 +199,12 @@ const DietMeals = () => {
             </Typography>
           </Box>
         </Stack>
-        <Typography sx={{ mb: 3, display:{xs:'none',md:'block'} }}>
+        <Typography sx={{ mb: 3, display: { xs: "none", md: "block" } }}>
           {userDetails.goal === "Losing weight" ? (
             <Typography>
               Let us help you achieve your goal by losing
               <span style={{ color: "#A34BCE", fontWeight: "600" }}>
-                {""} {userDetails.weight - userDetails.idealWeight} Kgs
+                {""} {userDetails.weight - userDetails.idealWeight} kg
               </span>{" "}
               within{" "}
               <span style={{ color: "#A34BCE", fontWeight: "600" }}>
@@ -200,117 +239,78 @@ const DietMeals = () => {
       >
         Today's Meals
       </Typography>
-      <Stack
-        direction={"row"}
-        flexWrap={"wrap"}
-        justifyContent={{ xs: "center", md: "start" }}
-        sx={{ mt: { xs: 3, sm: 3 }, gap: { xs: 2, md: 5 }, mx: 4 }}
-      >
-        <Link
-          to="/meal-details"
-          style={{ textDecoration: "none", color: "inherit" }}
+      {dailyMeals.length > 0 ? (
+        <Stack
+          direction={"row"}
+          flexWrap={"wrap"}
+          justifyContent={{ xs: "center", md: "space-evenly" }}
+          sx={{ mt: { xs: 3, sm: 5 }, gap: { xs: 3, md: 3 } }}
         >
-          <Box
-            sx={{
-              width: { xs: "250px", sm: "260px" },
-              height: { xs: "100px", sm: "120px" },
-              borderRadius: 5,
-              background: "#f9f4fb",
-              boxShadow: 1,
-              paddingBottom: 5,
-              '&:hover':{scale:'1.1'},
-              transition:'0.3s ease-in-out'
-            }}
-          >
-            <Box
-              sx={{
-                height: { xs: "100px", sm: "110px" },
-              }}
+          {dailyMeals.map((meal, index) => (
+            <Link
+              key={index}
+              to={`/meal-details/${meal.id}`}
+              style={{ textDecoration: "none", color: "inherit" }}
             >
-              <img
-                src="/meal.jpg"
-                alt=""
-                style={{
-                  borderRadius: "20px 20px 0px 0px",
-                  width: "100%",
-                  height: "100%",
+              <Box
+                sx={{
+                  position: "relative",
+                  width: "300px",
+                  height: "180px",
+                  borderRadius: "15px",
+                  overflow: "hidden",
+                  boxShadow: 2,
+                  "&:hover": { scale: 1.1 },
+                  transition: "0.3s ease-in-out",
                 }}
-              />
-            </Box>
+              >
+                <img
+                  src={`https://spoonacular.com/recipeImages/${meal.image}`}
+                  alt="Meal"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                  }}
+                />
 
-            <Typography
-              sx={{ ml: 2, mt: 1, fontSize: { xs: "16px", sm: "18px" } }}
-            >
-              Meal Name
-            </Typography>
-          </Box>
-        </Link>
+                <Box
+                  sx={{
+                    position: "absolute",
+                    bottom: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    background:
+                      "linear-gradient(to top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.18))",
+                  }}
+                />
 
-        <Box
-          sx={{
-            width: { xs: "250px", sm: "260px" },
-            height: { xs: "100px", sm: "120px" },
-            borderRadius: 5,
-            background: "#f9f4fb",
-            boxShadow: 1,
-            paddingBottom: 5,
-          }}
-        >
+                <Typography
+                  variant="body1"
+                  sx={{
+                    position: "absolute",
+                    bottom: 10,
+                    left: 10,
+                    color: "white",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {meal.title}
+                </Typography>
+              </Box>
+            </Link>
+          ))}
           <Box
             sx={{
-              height: { xs: "100px", sm: "110px" },
+              width: "300px",
+              height: "180px",
+              borderRadius: "10px",
             }}
-          >
-            <img
-              src="/meal.jpg"
-              alt=""
-              style={{
-                borderRadius: "20px 20px 0px 0px",
-                width: "100%",
-                height: "100%",
-              }}
-            />
-          </Box>
-
-          <Typography
-            sx={{ ml: 2, mt: 1, fontSize: { xs: "16px", sm: "18px" } }}
-          >
-            Meal Name
-          </Typography>
-        </Box>
-        <Box
-          sx={{
-            width: { xs: "250px", sm: "260px" },
-            height: { xs: "100px", sm: "120px" },
-            borderRadius: 5,
-            background: "#f9f4fb",
-            boxShadow: 1,
-            paddingBottom: 5,
-          }}
-        >
-          <Box
-            sx={{
-              height: { xs: "100px", sm: "110px" },
-            }}
-          >
-            <img
-              src="/meal.jpg"
-              alt=""
-              style={{
-                borderRadius: "20px 20px 0px 0px",
-                width: "100%",
-                height: "100%",
-              }}
-            />
-          </Box>
-
-          <Typography
-            sx={{ ml: 2, mt: 1, fontSize: { xs: "16px", sm: "18px" } }}
-          >
-            Meal Name
-          </Typography>
-        </Box>
-      </Stack>
+          ></Box>
+        </Stack>
+      ) : (
+        "No API"
+      )}
     </Box>
   );
 };

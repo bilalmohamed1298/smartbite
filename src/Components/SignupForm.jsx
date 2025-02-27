@@ -12,7 +12,7 @@ export default function SignupForm() {
     <Box
       sx={{
         width: { lg: "55%", sm: "90%",xs:'85%' },
-        height: { xs: "100vh", sm: "780px" },
+        height: { xs: "780px", sm: "780px" },
         mx: "auto",
         my: {xs:4, lg: 1 },
         p: 3,
@@ -23,8 +23,7 @@ export default function SignupForm() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        overflow:'auto',
-        overflowX:'auto',
+        overflowX:'hidden',
         overflowY:'auto'
       }}
     >
@@ -34,7 +33,7 @@ export default function SignupForm() {
         <Route path="/details" element={<PersonalDetails />} />
         <Route path="/preferences" element={<Preferences />} />
         <Route path="/diet-meals" element={<DietMeals />} />
-        <Route path="/meal-details" element={<MealDetails />} />
+        <Route path="/meal-details/:id" element={<MealDetails />} />
       </Routes>
     </Box>
   );

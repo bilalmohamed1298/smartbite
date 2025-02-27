@@ -9,13 +9,19 @@ export function MealsContextProvider({ children }) {
   });
   const [BMR, setBMR] = useState(0);
   const [TDEE, setTDEE] = useState(0);
-  const [mealsCalories, setMealsCalories] = useState(0);
-  const [dailyMeals,setDaliyMeals] = useState([]) 
+  const [mealsCalories, setMealsCalories] = useState(2000);
+  const [dailyMeals, setDaliyMeals] = useState([]);
 
-  const getAPI = async ()=>{
-    let meals = await axios.get('https://api.spoonacular.com/mealplanner/generate?apiKey=7d5e750167ac4dc0b0f4032102e970de&timeFrame=day&targetCalories=2000');
-    setDaliyMeals(meals.data.meals)
-  }
+  ////////////////////// API ////////////////////////////////////////
+
+  const getAPI = async () => {
+    let meals = await axios.get(
+      "https://api.spoonacular.com/mealplanner/generate?apiKey=3048258d95aa4dcf83888057ab6830be&timeFrame=day&targetCalories=2000"
+    );
+    setDaliyMeals(meals.data.meals);
+  };
+
+  //////////////////////////////////////////////////////////////////
 
   const CalculateTDEE = () => {
     if (userDetails.gender === "Male") {
@@ -64,15 +70,17 @@ export function MealsContextProvider({ children }) {
     console.log(TDEE);
   }, [userDetails]);
 
-  useEffect(() => {
-    CalculateMealsCalories();
-  }, [userDetails, TDEE]);
+  // useEffect(() => {
+  //   CalculateMealsCalories();
+  // }, [userDetails, TDEE]);
 
   useEffect(() => {
-    getAPI()
-    console.log(dailyMeals)
-  }, [mealsCalories]);
+    getAPI();
+  }, []);
 
+  useEffect(() => {
+    console.log(dailyMeals);
+  }, []);
 
 
   return (
