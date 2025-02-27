@@ -21,6 +21,7 @@ const FoodAnalyzer = () => {
   const [model, setModel] = useState(null);
   const [dailyMeals, setdailyMeals] = useState(null);
   const [ingredients, setIngredients] = useState(null);
+  const [showWebcam, setShowWebcam] = useState(false);
 
   useEffect(() => {
     const loadModel = async () => {
@@ -37,6 +38,7 @@ const FoodAnalyzer = () => {
     const imageSrc = webcamRef.current.getScreenshot();
     setImage(imageSrc);
     setAnalysis(null);
+    setShowWebcam(false);
   };
 
   const handleFileUpload = (event) => {
@@ -128,17 +130,26 @@ const FoodAnalyzer = () => {
       }}
     >
       {!image ? (
-        <img
-          src={"/analyzer.jpg"}
-          alt="Captured food"
-          style={{
-            borderRadius: "8px",
-            boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
-            width: "100%",
-            height: "250px",
-            objectFit: "cover",
-          }}
-        />
+        showWebcam ? (
+          <Webcam
+            ref={webcamRef}
+            screenshotFormat="image/png"
+            videoConstraints={{ facingMode: "environment" }}
+            style={{ width: "100%", height: "250px", borderRadius: "8px" }}
+          />
+        ) : (
+          <img
+            src={"/analyzer.jpg"}
+            alt="Captured food"
+            style={{
+              borderRadius: "8px",
+              boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+              width: "100%",
+              height: "250px",
+              objectFit: "cover",
+            }}
+          />
+        )
       ) : (
         <img
           src={image}
@@ -152,17 +163,18 @@ const FoodAnalyzer = () => {
           }}
         />
       )}
-      <div style={{ display: "flex", gap: "8px"}}>
+      <div style={{ display: "flex", gap: "8px" }}>
         {!image ? (
           <>
-            <Button variant="contained" onClick={capture}>
+            <Button
+              variant="contained"
+              onClick={() => {
+                capture;
+                setShowWebcam(true);
+              }}
+            >
               Capture Image
             </Button>
-            <Webcam
-              ref={webcamRef}
-              screenshotFormat="image/png"
-              style={{ width: "36px", height: "14px", borderRadius: "8px" }}
-            />
             <input
               type="file"
               accept="image/*"
