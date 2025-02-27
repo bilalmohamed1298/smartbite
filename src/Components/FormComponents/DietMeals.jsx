@@ -1,4 +1,4 @@
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, Stack, Typography } from "@mui/material";
 import { useContext } from "react";
 import { MealsContext } from "../../Utils/MealsContext";
 import { Link } from "react-router-dom";
@@ -252,7 +252,7 @@ const DietMeals = () => {
                   <Box
                     sx={{
                       position: "relative",
-                      width: "300px",
+                      width: "290px",
                       height: "180px",
                       borderRadius: "15px",
                       overflow: "hidden",
@@ -299,7 +299,7 @@ const DietMeals = () => {
               ))}
               <Box
                 sx={{
-                  width:'300px',
+                  width:'290px',
                   height: "180px",
                   borderRadius: "10px",
                   display:{xs:'none',sm:'block'}
@@ -307,10 +307,12 @@ const DietMeals = () => {
               ></Box>
             </Stack>
           ) : (
-            "No API"
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "450px" }}>
+            <CircularProgress />
+          </div>
           )}
         </Box>
-        <Box sx={{mt:8,ml:1}}>
+        <Box sx={{mt:5,ml:1}}>
           <Link to="/food-analyzer" style={{ textDecoration: "none" }}>
             <Button
               sx={{

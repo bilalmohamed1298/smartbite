@@ -94,7 +94,7 @@ const FoodAnalyzer = () => {
 
       try {
         const response = await fetch(
-          `https://api.spoonacular.com/recipes/complexSearch?query=${detectedFood}&apiKey=16d84c3222204c619a34ad6b943db6a9`
+          `https://api.spoonacular.com/recipes/complexSearch?query=${detectedFood}&apiKey=e1960c2436914b008fd31c03c84e51b4`
         );
         if (!response.ok) throw new Error("Failed to fetch nutrition data");
 
@@ -133,7 +133,9 @@ const FoodAnalyzer = () => {
           style={{
             borderRadius: "8px",
             boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
-            width: "400px",
+            width: "100%",
+            height:'250px',
+            objectFit:'cover'
           }}
         />
       ) : (
@@ -143,7 +145,9 @@ const FoodAnalyzer = () => {
           style={{
             borderRadius: "8px",
             boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
-            width: "400px",
+            width: "100%",
+            height:'250px',
+            objectFit:'cover'
           }}
         />
       )}
@@ -180,7 +184,7 @@ const FoodAnalyzer = () => {
       {analysis && (
         <Card style={{ width: "100%", padding: "16px" }}>
           <CardContent>
-            <Typography variant="h6">Meals with similar ingredients</Typography>
+            <Typography variant="h6">Results</Typography>
             {typeof analysis === "string" ? (
               <Typography>{analysis}</Typography>
             ) : (

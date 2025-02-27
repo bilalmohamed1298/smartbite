@@ -109,7 +109,7 @@ const Preferences = () => {
                   }}
                 >
                   <Typography
-                    sx={{ fontSize: "18px", textAlign: "center", my: 2 }}
+                    sx={{ fontSize: "18px", textAlign: "center", mt: 2 }}
                     gutterBottom
                   >
                     What is your goal

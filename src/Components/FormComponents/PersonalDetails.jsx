@@ -254,7 +254,7 @@ const PersonalDetails = () => {
         </Box>
       </Box>
 
-      <Box sx={{my:2}}>
+      <Box>
         <Link to="/overall">
           <IconButton
             size="large"
