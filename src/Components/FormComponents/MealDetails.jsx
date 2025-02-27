@@ -1,4 +1,11 @@
-import { Box, Button, createTheme, Stack, ThemeProvider, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  createTheme,
+  Stack,
+  ThemeProvider,
+  Typography,
+} from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -10,10 +17,10 @@ const MealDetails = () => {
 
   const getMealDetails = async () => {
     let details = await axios.get(
-      `https://api.spoonacular.com/recipes/${id}/information?apiKey=3048258d95aa4dcf83888057ab6830be`
+      `https://api.spoonacular.com/recipes/${id}/information?apiKey=8120a1495bbb4d05a3373ea228c0bf72`
     );
     let widget = await axios.get(
-      `https://api.spoonacular.com/recipes/${id}/nutritionWidget.json?apiKey=3048258d95aa4dcf83888057ab6830be`
+      `https://api.spoonacular.com/recipes/${id}/nutritionWidget.json?apiKey=8120a1495bbb4d05a3373ea228c0bf72`
     );
     setMealDetails(details.data);
     setNutritionWidget(widget.data);
@@ -28,7 +35,6 @@ const MealDetails = () => {
   ///////////////////////// Show More Toggle ////////////////////////////
 
   const TruncatedHTML = ({ text, limit }) => {
-
     const truncated =
       text.split(" ").length > limit
         ? text.split(" ").slice(0, limit).join(" ") + "..."
@@ -36,29 +42,37 @@ const MealDetails = () => {
 
     return (
       <Box>
-        <Typography sx={{
-          fontFamily:'arial',
-          fontSize:'14px'
-        }}>
-        <p
-          style={{
-            margin: "5px 0px 5px 0px",
-            color: "black",
-            textDecoration: "none",
-          }}
-          dangerouslySetInnerHTML={{ __html: truncated }}
-        />
-        </Typography>
-        <ThemeProvider theme={theme}>
-        <Button
-          variant="outlined"
-          size="small"
+        <Typography
           sx={{
-            mt:1
+            fontFamily: "arial",
+            fontSize: "14px",
           }}
         >
-          <a target='_blank' href={MealDetails.sourceUrl} style={{textDecoration:'none',color:'#A34BCE'}}>More Info</a>
-        </Button>
+          <p
+            style={{
+              margin: "5px 0px 5px 0px",
+              color: "black",
+              textDecoration: "none",
+            }}
+            dangerouslySetInnerHTML={{ __html: truncated }}
+          />
+        </Typography>
+        <ThemeProvider theme={theme}>
+          <Button
+            variant="outlined"
+            size="small"
+            sx={{
+              mt: 1,
+            }}
+          >
+            <a
+              target="_blank"
+              href={MealDetails.sourceUrl}
+              style={{ textDecoration: "none", color: "#A34BCE" }}
+            >
+              More Info
+            </a>
+          </Button>
         </ThemeProvider>
       </Box>
     );
@@ -67,13 +81,13 @@ const MealDetails = () => {
   //////////////////////////////////////////////////////////////////////
 
   const theme = createTheme({
-      palette: {
-        primary: {
-          main: "#A34BCE",
-          color:'#fff'
-        },
+    palette: {
+      primary: {
+        main: "#A34BCE",
+        color: "#fff",
       },
-    });
+    },
+  });
 
   return (
     <Box>
@@ -124,7 +138,7 @@ const MealDetails = () => {
             </Typography>
           </Box>
           <Stack direction={"row"} sx={{ gap: 1, flexWrap: "wrap", m: 1 }}>
-            {nutritionWidget.ingredients.map((ingredient, index) => (
+            {nutritionWidget.ingredients.map((ingredient, index) => index < 7?(
               <Box
                 key={index}
                 sx={{
@@ -132,7 +146,7 @@ const MealDetails = () => {
                   color: "#fff",
                   p: "5px",
                   borderRadius: 2,
-                  flexGrow:{xs:1,sm:0}
+                  flexGrow: { xs: 1, sm: 0 },
                 }}
               >
                 <Typography
@@ -142,10 +156,10 @@ const MealDetails = () => {
                   {ingredient.name}
                 </Typography>
               </Box>
-            ))}
+            ):'')}
           </Stack>
           <Stack sx={{}}>
-            <Typography variant="h5" sx={{ mt: 2,mb:1 }}>
+            <Typography variant="h5" sx={{ mt: 2, mb: 1 }}>
               Summary
             </Typography>
             <TruncatedHTML text={MealDetails.summary} limit={60} />

@@ -31,8 +31,8 @@ const DietMeals = () => {
               borderRadius: 3,
               display: "flex",
               flexDirection: "column",
-              flexGrow:1,
-              background:'#fbf6fe'
+              flexGrow: 1,
+              background: "#fbf6fe",
             }}
           >
             <Typography
@@ -53,8 +53,7 @@ const DietMeals = () => {
                 color: "#A34BCE",
               }}
             >
-              {" "}
-              {userDetails.age}{" "}
+              {userDetails.age}
               <span style={{ fontSize: "14px", marginLeft: "5px" }}>years</span>
             </Typography>
           </Box>
@@ -66,8 +65,8 @@ const DietMeals = () => {
               borderRadius: 3,
               display: "flex",
               flexDirection: "column",
-              flexGrow:1,
-              background:'#fbf6fe'
+              flexGrow: 1,
+              background: "#fbf6fe",
             }}
           >
             <Typography
@@ -88,8 +87,7 @@ const DietMeals = () => {
                 color: "#A34BCE",
               }}
             >
-              {" "}
-              {userDetails.height}{" "}
+              {userDetails.height}
               <span style={{ fontSize: "14px", marginLeft: "5px" }}>cm</span>
             </Typography>
           </Box>
@@ -101,8 +99,8 @@ const DietMeals = () => {
               borderRadius: 3,
               display: "flex",
               flexDirection: "column",
-              flexGrow:1,
-              background:'#fbf6fe'
+              flexGrow: 1,
+              background: "#fbf6fe",
             }}
           >
             <Typography
@@ -123,8 +121,7 @@ const DietMeals = () => {
                 color: "#A34BCE",
               }}
             >
-              {" "}
-              {userDetails.weight}{" "}
+              {userDetails.weight}
               <span style={{ fontSize: "14px", marginLeft: "5px" }}>kg</span>
             </Typography>
           </Box>
@@ -136,8 +133,8 @@ const DietMeals = () => {
               borderRadius: 3,
               display: "flex",
               flexDirection: "column",
-              flexGrow:1,
-              background:'#fbf6fe'
+              flexGrow: 1,
+              background: "#fbf6fe",
             }}
           >
             <Typography
@@ -158,8 +155,7 @@ const DietMeals = () => {
                 color: "#A34BCE",
               }}
             >
-              {" "}
-              {userDetails.idealWeight}{" "}
+              {userDetails.idealWeight}
               <span style={{ fontSize: "14px", marginLeft: "5px" }}>kg</span>
             </Typography>
           </Box>
@@ -171,8 +167,8 @@ const DietMeals = () => {
               borderRadius: 3,
               display: "flex",
               flexDirection: "column",
-              flexGrow:1,
-              background:'#fbf6fe'
+              flexGrow: 1,
+              background: "#fbf6fe",
             }}
           >
             <Typography
@@ -193,18 +189,17 @@ const DietMeals = () => {
                 color: "#A34BCE",
               }}
             >
-              {" "}
-              {userDetails.duration}{" "}
+              {userDetails.duration}
               <span style={{ fontSize: "14px", marginLeft: "1px" }}>days</span>
             </Typography>
           </Box>
         </Stack>
-        <Typography sx={{ mb: 3, display: { xs: "none", md: "block" } }}>
+        <Typography sx={{ mb: 3, display: { xs: "block", md: "block" } }}>
           {userDetails.goal === "Losing weight" ? (
-            <Typography>
+            <Typography sx={{ fontSize: { xs: "14px", sm: "16px" } }}>
               Let us help you achieve your goal by losing
               <span style={{ color: "#A34BCE", fontWeight: "600" }}>
-                {""} {userDetails.weight - userDetails.idealWeight} kg
+                {""} {userDetails.weight - userDetails.idealWeight}kg
               </span>{" "}
               within{" "}
               <span style={{ color: "#A34BCE", fontWeight: "600" }}>
@@ -216,7 +211,7 @@ const DietMeals = () => {
             <Typography>
               Let us help you achieve your goal by gaining
               <span style={{ color: "#A34BCE", fontWeight: "600" }}>
-                {""} {userDetails.idealWeight - userDetails.weight} Kgs
+                {""} {userDetails.idealWeight - userDetails.weight}kg
               </span>{" "}
               within{" "}
               <span style={{ color: "#A34BCE", fontWeight: "600" }}>
@@ -244,7 +239,7 @@ const DietMeals = () => {
           direction={"row"}
           flexWrap={"wrap"}
           justifyContent={{ xs: "center", md: "space-evenly" }}
-          sx={{ mt: { xs: 3, sm: 5 }, gap: { xs: 3, md: 3 } }}
+          sx={{ mt: { xs: 5, sm: 5 }, gap: { xs: 3, md: 3 } }}
         >
           {dailyMeals.map((meal, index) => (
             <Link

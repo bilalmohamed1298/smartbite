@@ -10,6 +10,7 @@ import {
   ListItemText,
   Checkbox,
   Button,
+  Stack,
 } from "@mui/material";
 import { KeyboardArrowLeft } from "@mui/icons-material";
 import { motion, AnimatePresence } from "framer-motion";
@@ -192,143 +193,142 @@ const OverallQuestions = () => {
   };
 
   return (
-    <Box
+    <Stack
       sx={{
-        position: "relative",
+        justifyContent:'space-between',
         height: "100%",
       }}
     >
-      <Typography
-        sx={{
-          fontSize: "12px",
-          bgcolor: "#A34BCE",
-          color: "#fff",
-          width: "60px",
-          padding: "5px",
-          borderRadius: "5px",
-          textAlign: "center",
-          fontWeight: "600",
-        }}
-        gutterBottom
-      >
-        Activity
-      </Typography>
-      <MobileStepper
-        variant="progress"
-        steps={questions.length}
-        position="static"
-        activeStep={activeStep}
-        sx={{
-          bgcolor:'transparent',
-          width: "190%",
-          mb: 2,
-          "& .MuiLinearProgress-root": {
-            bgcolor: "#D8BFF2",
-          },
-          "& .MuiLinearProgress-bar": {
-            bgcolor: "#A34BCE",
-          },
-        }}
-        backButton={<></>}
-        nextButton={<></>}
-      />
-
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={activeStep}
-          initial={{ x: direction * 50, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          exit={{ x: -direction * 50, opacity: 0 }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
-          style={{
-            flexGrow: 1,
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "start",
-            paddingTop: "5%",
-          }}
-        >
-          <Typography variant="h6" gutterBottom>
-            {questions[activeStep].question}
-          </Typography>
-
-          <List>
-            {questions[activeStep].options.map((option, index) => (
-              <ListItem key={index} disablePadding>
-                <ListItemButton
-                  onClick={() => handleNext(option)}
-                  sx={{
-                    borderRadius: 2,
-                    my: 1,
-                    bgcolor:
-                      selectedOptions[activeStep] === option
-                        ? "#f5e6ff"
-                        : "#F5F8FC",
-                    ":hover": { bgcolor: "#F9F3FE" },
-                  }}
-                >
-                  <Checkbox
-                    checked={selectedOptions[activeStep] === option}
-                    sx={{
-                      "&.Mui-checked": {
-                        color: "#A34BCE",
-                      },
-                    }}
-                  />
-                  <ListItemText primary={option} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-        </motion.div>
-      </AnimatePresence>
-
-      {activeStep > 0 && (
-        <IconButton
-          onClick={handleBack}
-          size="large"
+      <Box>
+        <Typography
           sx={{
-            position: "absolute",
-            bottom: 20,
-            left: 20,
-            bgcolor: "#E7EDf5",
-            "&:hover": { bgcolor: "#DEE4EB" },
-            width: 65,
-            height: 60,
+            fontSize: "12px",
+            bgcolor: "#A34BCE",
+            color: "#fff",
+            width: "60px",
+            padding: "5px",
+            borderRadius: "5px",
+            textAlign: "center",
+            fontWeight: "600",
           }}
+          gutterBottom
         >
-          <KeyboardArrowLeft />
-        </IconButton>
-      )}
+          Activity
+        </Typography>
+        <MobileStepper
+          variant="progress"
+          steps={questions.length}
+          position="static"
+          activeStep={activeStep}
+          sx={{
+            bgcolor: "transparent",
+            width: "190%",
+            mb: 2,
+            "& .MuiLinearProgress-root": {
+              bgcolor: "#D8BFF2",
+            },
+            "& .MuiLinearProgress-bar": {
+              bgcolor: "#A34BCE",
+            },
+          }}
+          backButton={<></>}
+          nextButton={<></>}
+        />
 
-      {activeStep === questions.length - 1 && selectedOptions[activeStep] ? (
-        <Link to="/details">
-          <Button
-            size="large"
-            sx={{
-              borderRadius: "50px",
-              backgroundColor: "#A34BCE",
-              color: "white",
-              width: { xs: "60%", sm: "80%" },
-              height: 60,
-              fontWeight: "bold",
-              textTransform: "none",
-              fontSize: "18px",
-              "&:hover": {
-                backgroundColor: "#A34BCE",
-              },
-              position: "absolute",
-              bottom: 20,
-              right: 20,
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeStep}
+            initial={{ x: direction * 50, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: -direction * 50, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            style={{
+              flexGrow: 1,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "start",
+              paddingTop: "5%",
             }}
           >
-            Next
-          </Button>
-        </Link>
-      ) : (
-        ""
-      )}
-    </Box>
+            <Typography variant="h6" gutterBottom>
+              {questions[activeStep].question}
+            </Typography>
+
+            <List>
+              {questions[activeStep].options.map((option, index) => (
+                <ListItem key={index} disablePadding>
+                  <ListItemButton
+                    onClick={() => handleNext(option)}
+                    sx={{
+                      borderRadius: 2,
+                      my: 1,
+                      bgcolor:
+                        selectedOptions[activeStep] === option
+                          ? "#f5e6ff"
+                          : "#F5F8FC",
+                      ":hover": { bgcolor: "#F9F3FE" },
+                    }}
+                  >
+                    <Checkbox
+                      checked={selectedOptions[activeStep] === option}
+                      sx={{
+                        "&.Mui-checked": {
+                          color: "#A34BCE",
+                        },
+                      }}
+                    />
+                    <ListItemText primary={option} />
+                  </ListItemButton>
+                </ListItem>
+              ))}
+            </List>
+          </motion.div>
+        </AnimatePresence>
+      </Box>
+
+      <Box>
+        {activeStep > 0 && (
+          <IconButton
+            onClick={handleBack}
+            size="large"
+            sx={{
+              bgcolor: "#E7EDf5",
+              "&:hover": { bgcolor: "#DEE4EB" },
+              width: 65,
+              height: 60,
+            }}
+          >
+            <KeyboardArrowLeft />
+          </IconButton>
+        )}
+
+        {activeStep === questions.length - 1 && selectedOptions[activeStep] ? (
+          <Link to="/details">
+            <Button
+              size="large"
+              sx={{
+                borderRadius: "50px",
+                backgroundColor: "#A34BCE",
+                color: "white",
+                width: { xs: "66%", sm: "80%" },
+                height: 60,
+                fontWeight: "bold",
+                textTransform: "none",
+                fontSize: "18px",
+                ml:3,
+                "&:hover": {
+                  backgroundColor: "#A34BCE",
+                },
+              }}
+            >
+              Next
+            </Button>
+          </Link>
+        ) : (
+          ""
+        )}
+      </Box>
+    </Stack>
   );
 };
 

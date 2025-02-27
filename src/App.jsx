@@ -8,7 +8,7 @@ export default function App() {
   return (
     <MealsContextProvider>
       <BrowserRouter >
-        <Container sx={{maxHeight:'100vh'}}>
+        <Container>
           <Logo />
           <SignupForm />
         </Container>

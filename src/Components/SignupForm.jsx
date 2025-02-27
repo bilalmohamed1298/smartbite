@@ -10,22 +10,23 @@ import MealDetails from "./FormComponents/MealDetails";
 export default function SignupForm() {
   return (
     <Box
-      sx={{
-        width: { lg: "55%", sm: "90%",xs:'85%' },
-        height: { xs: "780px", sm: "780px" },
-        mx: "auto",
-        my: {xs:4, lg: 1 },
-        p: 3,
-        bgcolor: "white",
-        boxShadow: 3,
-        borderRadius: 3,
-        position: "relative",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        overflowX:'hidden',
-        overflowY:'auto'
-      }}
+    sx={{
+      width: { lg: "55%", sm: "90%", xs: "85%" },
+      maxHeight: { xs: "100vh"}, 
+      height: {xs:"630px",sm:'780px'}, 
+      mx: "auto",
+      my: { xs: 5, lg: 1 },
+      p: 3,
+      bgcolor: "white",
+      boxShadow: 3,
+      borderRadius: 3,
+      position: "relative",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      overflowX: "hidden",
+      overflowY: "auto"
+    }}
     >
       <Routes>
         <Route path="/" element={<Welcome />} />

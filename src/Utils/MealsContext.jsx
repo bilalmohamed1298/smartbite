@@ -16,7 +16,7 @@ export function MealsContextProvider({ children }) {
 
   const getAPI = async () => {
     let meals = await axios.get(
-      "https://api.spoonacular.com/mealplanner/generate?apiKey=3048258d95aa4dcf83888057ab6830be&timeFrame=day&targetCalories=2000"
+      "https://api.spoonacular.com/mealplanner/generate?apiKey=8120a1495bbb4d05a3373ea228c0bf72&timeFrame=day&targetCalories=2000"
     );
     setDaliyMeals(meals.data.meals);
   };

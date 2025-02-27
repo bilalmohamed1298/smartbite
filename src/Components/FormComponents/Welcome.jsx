@@ -41,7 +41,7 @@ export default function Welcome() {
       >
         <Typography
           sx={{
-            mb: 10,
+            mb: {xs:5,sm:10},
             fontSize: "30px",
             fontWeight: "600",
             textAlign: "center",
@@ -62,9 +62,8 @@ export default function Welcome() {
             justifyContent: "center",
             flexDirection: "column",
             bgcolor: "white",
-            mb: {sm:16,xs:5},
+            mb: { sm: 16, xs: 5 },
             mx: "auto",
-            
           }}
         >
           <AnimatePresence mode="wait">
@@ -78,8 +77,8 @@ export default function Welcome() {
               <Box
                 sx={{
                   backgroundColor: "#D8BFF2",
-                  borderRadius: {sm:"28px",xs:'24px'},
-                  p: {sm:"16px",xs:'12px'},
+                  borderRadius: { sm: "28px", xs: "24px" },
+                  p: { sm: "16px", xs: "12px" },
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
@@ -97,7 +96,12 @@ export default function Welcome() {
 
               <Typography
                 variant="body1"
-                sx={{ my: 5, color: "#333", fontWeight: 600, fontSize: {sm: "20px"} }}
+                sx={{
+                  my: 5,
+                  color: "#333",
+                  fontWeight: 600,
+                  fontSize: { sm: "20px" },
+                }}
               >
                 {slides[currentIndex].text}
               </Typography>
