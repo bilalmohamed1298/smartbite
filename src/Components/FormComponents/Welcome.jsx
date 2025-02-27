@@ -6,15 +6,15 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const slides = [
   {
-    img: "/purple-foods.jpg",
+    img: "/welcome-1.webp",
     text: "When it comes to nutrition, finding what works for you makes all the difference.",
   },
   {
-    img: "/1G-WEGYqtUqpFoh6W6VJHRw.jpg",
+    img: "/welcome-2.webp",
     text: "Healthy eating is the foundation of a strong body.",
   },
   {
-    img: "/build-a-healthy-nutrition-foundation-for-youth-athletes.jpg",
+    img: "/welcome-3.webp",
     text: "Stay active, eat well, and live your best life.",
   },
 ];

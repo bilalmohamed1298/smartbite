@@ -46,6 +46,9 @@ const MealDetails = () => {
           sx={{
             fontFamily: "arial",
             fontSize: "14px",
+            textOverflow: "ellipsis", 
+            whiteSpace: "wrap",
+            width: "100%" 
           }}
         >
           <p
@@ -70,7 +73,7 @@ const MealDetails = () => {
               href={MealDetails.sourceUrl}
               style={{ textDecoration: "none", color: "#A34BCE" }}
             >
-              More Info
+              More Information
             </a>
           </Button>
         </ThemeProvider>

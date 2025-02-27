@@ -139,7 +139,7 @@ const FoodAnalyzer = () => {
           />
         ) : (
           <img
-            src={"/analyzer.jpg"}
+            src={"/analyzer.webp"}
             alt="Captured food"
             style={{
               borderRadius: "8px",
