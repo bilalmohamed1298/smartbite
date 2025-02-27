@@ -152,7 +152,7 @@ const FoodAnalyzer = () => {
           }}
         />
       )}
-      <div style={{ display: "flex", gap: "8px" }}>
+      <div style={{ display: "flex", gap: "8px"}}>
         {!image ? (
           <>
             <Button variant="contained" onClick={capture}>
