@@ -189,7 +189,7 @@ const FoodAnalyzer = () => {
                   <Stack
                     direction={"row"}
                     flexWrap={"wrap"}
-                    justifyContent={{ xs: "center", md: "center" }}
+                    justifyContent={{ xs: "center", md: "start" }}
                     sx={{
                       mt: { xs: 5, sm: 5 },
                       gap: { xs: 3, md: 3 },
