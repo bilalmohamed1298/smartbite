@@ -9,19 +9,23 @@ export function MealsContextProvider({ children }) {
   });
   const [BMR, setBMR] = useState(0);
   const [TDEE, setTDEE] = useState(0);
-  const [mealsCalories, setMealsCalories] = useState(2000);
+  const [mealsCalories, setMealsCalories] = useState(1400);
   const [dailyMeals, setDaliyMeals] = useState([]);
 
-  ////////////////////// API ////////////////////////////////////////
+
+
+
+
+  ////////////////////// API //////////////////////////////
 
   const getAPI = async () => {
     let meals = await axios.get(
-      "https://api.spoonacular.com/mealplanner/generate?apiKey=e1960c2436914b008fd31c03c84e51b4&timeFrame=day&targetCalories=2000"
+      `https://api.spoonacular.com/mealplanner/generate?apiKey=e1960c2436914b008fd31c03c84e51b4&timeFrame=day&targetCalories=${1400}`
     );
     setDaliyMeals(meals.data.meals);
   };
 
-  //////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
 
   const CalculateTDEE = () => {
     if (userDetails.gender === "Male") {
@@ -63,24 +67,14 @@ export function MealsContextProvider({ children }) {
     }
   };
 
-  useEffect(() => {
-    CalculateTDEE();
-    console.log(userDetails);
-    console.log(BMR);
-    console.log(TDEE);
-  }, [userDetails]);
 
-  // useEffect(() => {
-  //   CalculateMealsCalories();
-  // }, [userDetails, TDEE]);
+  useEffect(() => {
+    CalculateMealsCalories();
+  }, [userDetails, TDEE]);
 
   useEffect(() => {
     getAPI();
-  }, []);
-
-  useEffect(() => {
-    console.log(dailyMeals);
-  }, []);
+  },[]);
 
 
   return (
@@ -89,6 +83,7 @@ export function MealsContextProvider({ children }) {
         userDetails,
         dailyMeals,
         setUserDetails,
+        mealsCalories,
       }}
     >
       {children}

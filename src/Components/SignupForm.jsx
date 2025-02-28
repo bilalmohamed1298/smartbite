@@ -14,7 +14,7 @@ export default function SignupForm() {
     sx={{
       width: { lg: "55%", sm: "90%", xs: "85%" },
       maxHeight: { xs: "100vh"}, 
-      height: {xs:"630px",sm:'780px'}, 
+      height: {xs:"650px",sm:'780px'}, 
       mx: "auto",
       my: { xs: 5, lg: 1 },
       p: 3,
@@ -25,8 +25,8 @@ export default function SignupForm() {
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-between",
-      overflowX: "hidden",
-      overflowY: "auto"
+      overflowX: {xs:"hidden"},
+      overflowY: {xs:'auto',sm:'auto'}
     }}
     >
       <Routes>

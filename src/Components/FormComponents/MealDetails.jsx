@@ -32,7 +32,7 @@ const MealDetails = () => {
     getMealDetails();
   }, [id]);
 
-  ///////////////////////// Show More Toggle ////////////////////////////
+  ///////////////////////// Summary ////////////////////////////
 
   const TruncatedHTML = ({ text, limit }) => {
     const truncated =

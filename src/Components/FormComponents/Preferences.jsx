@@ -24,18 +24,29 @@ import {
 import { MealsContext } from "../../Utils/MealsContext";
 
 const Preferences = () => {
-  const { setUserDetails } = useContext(MealsContext);
+  const { userDetails,setUserDetails } = useContext(MealsContext);
   const [preferences, setPreferences] = useState({
     goal: "",
     idealWeight: null,
-    duration: 0,
+    duration: null,
   });
   const [visibleFields, setVisibleFields] = useState(["goal"]);
   const [duration, setDuration] = useState(45);
+  const [submit, setSubmit] = useState(false)
+
 
   useEffect(() => {
     setUserDetails((prev) => ({ ...prev, ...preferences }));
   }, [preferences]);
+
+  useEffect(() => {
+    if (submit) {
+      localStorage.setItem('userDetails',JSON.stringify(userDetails))
+      console.log(preferences)
+    }
+  }, [submit]);
+
+
 
   const marks = [
     { value: 90, label: <DirectionsRun fontSize="large" /> },
@@ -262,6 +273,7 @@ const Preferences = () => {
         {visibleFields.includes("duration") && preferences.duration && (
           <Link to="/diet-meals">
             <Button
+            onClick={()=>{setSubmit(true)}}
               size="large"
               sx={{
                 borderRadius: "50px",

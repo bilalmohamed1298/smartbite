@@ -33,7 +33,7 @@ export default function Welcome() {
   };
 
   return (
-    <Box sx={{}}>
+    <Box>
       <Stack
         sx={{
           p: 5,
@@ -136,9 +136,10 @@ export default function Welcome() {
                 bgcolor: "white",
                 boxShadow: 2,
                 "&:hover": { bgcolor: "#f5f5f5" },
+                
               }}
             >
-              <ArrowBackIos />
+              <ArrowBackIos sx={{}} />
             </IconButton>
           ) : (
             ""

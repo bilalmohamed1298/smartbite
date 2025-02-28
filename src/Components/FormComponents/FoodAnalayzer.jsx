@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import Webcam from "react-webcam";
 import * as tf from "@tensorflow/tfjs";
 import * as mobilenet from "@tensorflow-models/mobilenet";
@@ -12,6 +12,8 @@ import {
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
+import { MealsContext } from "../../Utils/MealsContext";
+import axios from "axios";
 
 const FoodAnalyzer = () => {
   const webcamRef = useRef(null);
@@ -22,6 +24,8 @@ const FoodAnalyzer = () => {
   const [dailyMeals, setdailyMeals] = useState(null);
   const [ingredients, setIngredients] = useState(null);
   const [showWebcam, setShowWebcam] = useState(false);
+  
+
 
   useEffect(() => {
     const loadModel = async () => {
@@ -41,17 +45,6 @@ const FoodAnalyzer = () => {
     setShowWebcam(false);
   };
 
-  const handleFileUpload = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImage(reader.result);
-        setAnalysis(null);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
 
   const preprocessImage = async (imageSrc) => {
     const img = new Image();
@@ -119,6 +112,69 @@ const FoodAnalyzer = () => {
     };
   };
 
+
+
+//////////////////////////// Image Analyzer //////////////////////////////
+
+  ////////////////////////////////////////////////////////
+
+  const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImage(reader.result);
+        setAnalysis(null);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+
+  const [postReponse, setpostReponse] = useState()
+
+  const postAPI = async (imageFile) => {
+    let response = await axios.post(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyAnKgAF69LPmgVVKxfu3tBKXEvtcrF3Ka4`,
+      {
+        contents: [
+          {
+            parts: [
+              {
+                text: "Calculate Calories and Nutrition Values in This Photo in json",
+              },
+              {
+                inline_data: {
+                  mime_type: "image/jpeg",
+                  data: imageFile
+                },
+              },
+            ],
+          },
+        ],
+      }
+    );
+
+    setpostReponse(response)
+  };
+
+  useEffect(() => {
+    postAPI(image)
+    console.log(image)
+  }, [image])
+
+  useEffect(() => {
+    console.log(postReponse)
+
+  }, [postReponse])
+  
+
+  //////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////
+
+
+
   return (
     <div
       style={{
@@ -179,10 +235,10 @@ const FoodAnalyzer = () => {
               type="file"
               accept="image/*"
               style={{ display: "none" }}
-              id="upload-file"
+              id={"image-file"}
               onChange={handleFileUpload}
             />
-            <label htmlFor="upload-file">
+            <label htmlFor="image-file">
               <Button variant="outlined" component="span">
                 Upload Image
               </Button>
