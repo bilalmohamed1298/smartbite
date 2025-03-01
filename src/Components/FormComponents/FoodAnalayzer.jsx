@@ -24,8 +24,6 @@ const FoodAnalyzer = () => {
   const [dailyMeals, setdailyMeals] = useState(null);
   const [ingredients, setIngredients] = useState(null);
   const [showWebcam, setShowWebcam] = useState(false);
-  
-
 
   useEffect(() => {
     const loadModel = async () => {
@@ -44,7 +42,6 @@ const FoodAnalyzer = () => {
     setAnalysis(null);
     setShowWebcam(false);
   };
-
 
   const preprocessImage = async (imageSrc) => {
     const img = new Image();
@@ -112,9 +109,7 @@ const FoodAnalyzer = () => {
     };
   };
 
-
-
-//////////////////////////// Image Analyzer //////////////////////////////
+  //////////////////////////// Image Analyzer //////////////////////////////
 
   ////////////////////////////////////////////////////////
 
@@ -123,15 +118,14 @@ const FoodAnalyzer = () => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImage(reader.result);
+        setImage(reader.result.split(",")[1]);
         setAnalysis(null);
       };
       reader.readAsDataURL(file);
     }
   };
 
-
-  const [postReponse, setpostReponse] = useState()
+  const [postReponse, setpostReponse] = useState();
 
   const postAPI = async (imageFile) => {
     let response = await axios.post(
@@ -141,12 +135,49 @@ const FoodAnalyzer = () => {
           {
             parts: [
               {
-                text: "Calculate Calories and Nutrition Values in This Photo in json",
+                text: `Calculate Calories and Nutrition Values in This Photo in json
+                
+                like this: {
+  "dish": "Tofu Scramble with Roasted Potatoes",
+  "estimated_calories": {
+    "total": 600, 
+    "breakdown": {
+      "tofu_scramble": 300,
+      "roasted_potatoes": 300
+    }
+  },
+  "nutrition": {s
+    "protein": {
+      "grams": 30,
+      "source": "tofu, potatoes"
+    },
+    "carbohydrates": {
+      "grams": 50,
+      "source": "potatoes"
+    },
+    "fat": {
+      "grams": 20,
+      "source": "tofu, potatoes"
+    }, 
+    "fiber": {
+      "grams": 10,
+      "source": "potatoes"
+    },
+    "vitamins": {
+      "vitamin_c": "present in potatoes and possibly vegetables in scramble",
+      "vitamin_k": "present in potatoes"
+    },
+    "minerals": {
+      "potassium": "present in potatoes",
+      "iron": "present in potatoes"
+    }
+  }
+                `,
               },
               {
                 inline_data: {
                   mime_type: "image/jpeg",
-                  data: imageFile
+                  data: imageFile,
                 },
               },
             ],
@@ -155,25 +186,20 @@ const FoodAnalyzer = () => {
       }
     );
 
-    setpostReponse(response)
+    setpostReponse(response.data.candidates[0].content.parts[0].text);
   };
 
   useEffect(() => {
-    postAPI(image)
-    console.log(image)
-  }, [image])
+    postAPI(image);
+  }, [image]);
 
   useEffect(() => {
-    console.log(postReponse)
-
-  }, [postReponse])
-  
+    console.log(postReponse);
+  }, [postReponse]);
 
   //////////////////////////////////////////////////////////////////
 
-/////////////////////////////////////////////////////////////////////////
-
-
+  /////////////////////////////////////////////////////////////////////////
 
   return (
     <div
