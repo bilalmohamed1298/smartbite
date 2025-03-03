@@ -377,7 +377,7 @@ const FoodAnalyzer = () => {
                   }}
                 >
                   <Typography variant="h6" color="#A34BCE">
-                    Carbohydrates
+                    Carbs
                   </Typography>
                   <Typography sx={{ mb: 1, fontWeight:'500'}}>
                     {analyzedInfo?.nutrition?.carbohydrates?.grams || 0}g
@@ -405,7 +405,7 @@ const FoodAnalyzer = () => {
           
         </Box>
       ) : ( 
-        <Typography variant="body2" color="#A34BCE" sx={{opacity:0.8}}>
+        <Typography variant="body2" color="#A34BCE" sx={{opacity:0.8,textAlign:'center'}}>
           Upload an image to get the nutrition information
         </Typography>
       )

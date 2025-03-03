@@ -18,10 +18,10 @@ const MealDetails = () => {
 
   const getMealDetails = async () => {
     let details = await axios.get(
-      `https://api.spoonacular.com/recipes/${id}/information?apiKey=8120a1495bbb4d05a3373ea228c0bf72`
+      `https://api.spoonacular.com/recipes/${id}/information?apiKey=7d5e750167ac4dc0b0f4032102e970de`
     );
     let widget = await axios.get(
-      `https://api.spoonacular.com/recipes/${id}/nutritionWidget.json?apiKey=8120a1495bbb4d05a3373ea228c0bf72`
+      `https://api.spoonacular.com/recipes/${id}/nutritionWidget.json?apiKey=7d5e750167ac4dc0b0f4032102e970de`
     );
     setMealDetails(details.data);
     setNutritionWidget(widget.data);

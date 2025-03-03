@@ -8,10 +8,11 @@ import {
 } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { MealsContext } from "../../Utils/MealsContext";
-import { Link } from "react-router-dom";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import { CameraAlt } from "@mui/icons-material";
 import axios from "axios";
 import FoodAnalyzer from "./FoodAnalayzer";
+import MealDetails from "./MealDetails";
 
 const DietMeals = () => {
   const { dailyMeals, userDetails, mealsCalories } = useContext(MealsContext);
@@ -19,7 +20,8 @@ const DietMeals = () => {
   const [dailyWidgets2, setDailyWidgets2] = useState({});
   const [dailyWidgets3, setDailyWidgets3] = useState({});
   let localUserDetails = JSON.parse(localStorage.getItem("userDetails"));
-  const [open, setOpen] = useState(false);
+  const [open1, setOpen1] = useState(false);
+  const [open2, setOpen2] = useState(false);
 
   ////////////////////////// Nutrition Widgets APIs //////////////////////////
 
@@ -65,7 +67,7 @@ const DietMeals = () => {
 
   ////////////////////////////////////////////////////////////////////////////
   return (
-    <Box sx={{position: 'relative'}}>
+    <Box sx={{ position: "relative" }}>
       <Typography
         sx={{
           fontWeight: "600",
@@ -445,8 +447,9 @@ const DietMeals = () => {
             {dailyMeals.map((meal, index) => (
               <Link
                 key={index}
-                to={`/meal-details/${meal.id}`}
+                to={`/diet-meals/${meal.id}`}
                 style={{ textDecoration: "none", color: "inherit" }}
+                onClick={() => setOpen2(true)}
               >
                 <Box
                   sx={{
@@ -519,10 +522,18 @@ const DietMeals = () => {
           </div>
         )}
       </Box>
-      <Box sx={{ mt: 5, ml: 1, position: "absolute", right: {xs:-20,sm:10}, bottom: 0 }}>
-        <Link to='/food-analyzer' style={{ textDecoration: "none" }}>
+      <Box
+        sx={{
+          mt: 5,
+          ml: 1,
+          position: "absolute",
+          right: { xs: -20, sm: 10 },
+          bottom: 0,
+        }}
+      >
+        <Link style={{ textDecoration: "none" }}>
           <Button
-            onClick={() => setOpen(true)}
+            onClick={() => setOpen1(true)}
             sx={{
               borderRadius: 10,
               justifyContent: "center",
@@ -534,10 +545,54 @@ const DietMeals = () => {
         </Link>
       </Box>
 
-      <div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <Modal
-          open={open}
-          onClose={() => setOpen(false)}
+          open={open1}
+          onClose={() => setOpen1(false)}
+          aria-labelledby="modal-title"
+          aria-describedby="modal-description"
+          sx={{ overflow: "scroll", mt: 1, borderRadius: 2 }}
+        >
+          <Box
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: { xs: "75%", sm: 400 },
+              bgcolor: "background.paper",
+              boxShadow: 24,
+              p: 3,
+              borderRadius: 5,
+              height: "70%",
+              overflowX: "hidden",
+              overflowY: "auto",
+            }}
+          >
+            <Typography id="modal-title" variant="h6" component="h2" mb={1}>
+              Food Analyzer
+            </Typography>
+
+            <FoodAnalyzer />
+          </Box>
+        </Modal>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Modal
+          open={open2}
+          onClose={() => setOpen2(false)}
           aria-labelledby="modal-title"
           aria-describedby="modal-description"
         >
@@ -547,26 +602,21 @@ const DietMeals = () => {
               top: "50%",
               left: "50%",
               transform: "translate(-50%, -50%)",
-              width: 400,
+              width: { xs: "75%", sm: 400 },
               bgcolor: "background.paper",
               boxShadow: 24,
-              p: 4,
-              borderRadius: 2,
+              p: 3,
+              borderRadius: 5,
+              height: "70%",
+              overflowX: "hidden",
+              overflowY: "auto",
             }}
           >
-            <Typography id="modal-title" variant="h6" component="h2">
-              Modal Content
+            <Typography id="modal-title" variant="h6" component="h2" mb={2}>
+              Meal Details
             </Typography>
 
-            <FoodAnalyzer />
-
-            <Button
-              variant="outlined"
-              onClick={() => setOpen(false)}
-              sx={{ mt: 2 }}
-            >
-              Close
-            </Button>
+            <MealDetails />
           </Box>
         </Modal>
       </div>
