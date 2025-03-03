@@ -118,7 +118,15 @@ const FoodAnalyzer = () => {
       console.error("Error: input is not a string", text);
       return "";
     }
-    return JSON.parse(text.replace(/^```json\s*|\s*```$/g, ""));
+    let CleanAPI = text.replace(/^```json\s*|```$/g, "").trim();
+    CleanAPI = CleanAPI.replace(/[^\x20-\x7E]+$/g, "").trim();
+    console.log("CleanAPI:", CleanAPI);
+
+    try {
+      return JSON.parse(CleanAPI);
+    } catch (error) {
+      console.error("Error: Invalid JSON format", error);
+      return null;}
   }
 
   useEffect(() => {
@@ -130,7 +138,6 @@ const FoodAnalyzer = () => {
   useEffect(() => {
     if (postResponse) {
       console.log(postResponse);
-      console.log(cleanJSONFormat(postResponse));
       setAnalyzedInfo(cleanJSONFormat(postResponse));
     }
   }, [postResponse]);
