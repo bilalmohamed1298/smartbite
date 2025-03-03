@@ -526,8 +526,8 @@ const DietMeals = () => {
         sx={{
           mt: 5,
           ml: 1,
-          position: "absolute",
-          right: { xs: -10, sm: 10 },
+          position: "sticky",
+          left: 0,
           bottom: 0,
         }}
       >
@@ -544,6 +544,7 @@ const DietMeals = () => {
           ></Button>
         </Link>
       </Box>
+
 
       <div
         style={{
@@ -565,7 +566,7 @@ const DietMeals = () => {
               top: "50%",
               left: "50%",
               transform: "translate(-50%, -50%)",
-              width: { xs: "70%", sm: 500 },
+              width: { xs: "75%", sm: 500 },
               bgcolor: "background.paper",
               boxShadow: 24,
               p: 2,
@@ -603,7 +604,7 @@ const DietMeals = () => {
               top: "50%",
               left: "50%",
               transform: "translate(-50%, -50%)",
-              width: { xs: "70%", sm: 500 },
+              width: { xs: "75%", sm: 500 },
               bgcolor: "background.paper",
               boxShadow: 24,
               p: 3,
