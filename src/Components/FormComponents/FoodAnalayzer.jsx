@@ -1,11 +1,10 @@
-import React, { useState, useRef, useEffect, useContext } from "react";
+import { useState, useRef, useEffect } from "react";
 import Webcam from "react-webcam";
 import * as tf from "@tensorflow/tfjs";
 import * as mobilenet from "@tensorflow-models/mobilenet";
 import {
   Box,
   Button,
-  CircularProgress,
   Paper,
   Typography,
   Grid,
@@ -33,9 +32,11 @@ const FoodAnalyzer = () => {
   }, []);
 
   const capture = () => {
-    const imageSrc = webcamRef.current.getScreenshot();
-    setImage(imageSrc);
-    setShowWebcam(false);
+    if (webcamRef.current) {
+      const imageSrc = webcamRef.current.getScreenshot();
+      setImage(imageSrc);
+      setShowWebcam(false);
+    }
   };
 
   ////////////////////////////// Post Image to API //////////////////////////
