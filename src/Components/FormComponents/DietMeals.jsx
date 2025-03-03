@@ -27,13 +27,13 @@ const DietMeals = () => {
 
   const getDailyWidgets = async () => {
     let dw1 = await axios.get(
-      `https://api.spoonacular.com/recipes/${dailyMeals[0].id}/nutritionWidget.json?apiKey=16d84c3222204c619a34ad6b943db6a9`
+      `https://api.spoonacular.com/recipes/${dailyMeals[0].id}/nutritionWidget.json?apiKey=e1960c2436914b008fd31c03c84e51b4`
     );
     let dw2 = await axios.get(
-      `https://api.spoonacular.com/recipes/${dailyMeals[1].id}/nutritionWidget.json?apiKey=16d84c3222204c619a34ad6b943db6a9`
+      `https://api.spoonacular.com/recipes/${dailyMeals[1].id}/nutritionWidget.json?apiKey=e1960c2436914b008fd31c03c84e51b4`
     );
     let dw3 = await axios.get(
-      `https://api.spoonacular.com/recipes/${dailyMeals[2].id}/nutritionWidget.json?apiKey=16d84c3222204c619a34ad6b943db6a9`
+      `https://api.spoonacular.com/recipes/${dailyMeals[2].id}/nutritionWidget.json?apiKey=e1960c2436914b008fd31c03c84e51b4`
     );
 
     setDailyWidgets1(dw1.data);
@@ -557,7 +557,7 @@ const DietMeals = () => {
           onClose={() => setOpen1(false)}
           aria-labelledby="modal-title"
           aria-describedby="modal-description"
-          sx={{ overflow: "scroll", mt: 1, borderRadius: 2 }}
+          sx={{ overflow: "scroll", mt: 3, borderRadius: 2 }}
         >
           <Box
             sx={{
@@ -565,10 +565,10 @@ const DietMeals = () => {
               top: "50%",
               left: "50%",
               transform: "translate(-50%, -50%)",
-              width: { xs: "75%", sm: 400 },
+              width: { xs: "70%", sm: 500 },
               bgcolor: "background.paper",
               boxShadow: 24,
-              p: 3,
+              p: 2,
               borderRadius: 5,
               height: "70%",
               overflowX: "hidden",
@@ -595,6 +595,7 @@ const DietMeals = () => {
           onClose={() => setOpen2(false)}
           aria-labelledby="modal-title"
           aria-describedby="modal-description"
+          sx={{ overflow: "scroll", mt: 3, borderRadius: 2 }}
         >
           <Box
             sx={{
@@ -602,7 +603,7 @@ const DietMeals = () => {
               top: "50%",
               left: "50%",
               transform: "translate(-50%, -50%)",
-              width: { xs: "75%", sm: 400 },
+              width: { xs: "70%", sm: 500 },
               bgcolor: "background.paper",
               boxShadow: 24,
               p: 3,

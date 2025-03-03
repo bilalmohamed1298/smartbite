@@ -18,10 +18,10 @@ const MealDetails = () => {
 
   const getMealDetails = async () => {
     let details = await axios.get(
-      `https://api.spoonacular.com/recipes/${id}/information?apiKey=7d5e750167ac4dc0b0f4032102e970de`
+      `https://api.spoonacular.com/recipes/${id}/information?apiKey=e1960c2436914b008fd31c03c84e51b4`
     );
     let widget = await axios.get(
-      `https://api.spoonacular.com/recipes/${id}/nutritionWidget.json?apiKey=7d5e750167ac4dc0b0f4032102e970de`
+      `https://api.spoonacular.com/recipes/${id}/nutritionWidget.json?apiKey=e1960c2436914b008fd31c03c84e51b4`
     );
     setMealDetails(details.data);
     setNutritionWidget(widget.data);
@@ -67,6 +67,7 @@ const MealDetails = () => {
             size="small"
             sx={{
               mt: 1,
+              width:{xs:"100%",},
             }}
           >
             <a
@@ -443,7 +444,7 @@ const MealDetails = () => {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    height: "750px",
+                    height: "550px",
                   }}
                 >
                   <CircularProgress />

@@ -2,14 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import Webcam from "react-webcam";
 import * as tf from "@tensorflow/tfjs";
 import * as mobilenet from "@tensorflow-models/mobilenet";
-import {
-  Box,
-  Button,
-  Paper,
-  Typography,
-  Grid,
-  Stack,
-} from "@mui/material";
+import { Box, Button, Paper, Typography, Grid, Stack, CircularProgress } from "@mui/material";
 import { CameraAlt } from "@mui/icons-material";
 import axios from "axios";
 
@@ -118,21 +111,33 @@ const FoodAnalyzer = () => {
       console.error("Error: input is not a string", text);
       return "";
     }
-    let CleanAPI = text.replace(/^```json\s*|```$/g, "").trim();
-    CleanAPI = CleanAPI.replace(/[^\x20-\x7E]+$/g, "").trim();
+
+    let CleanAPI = text.replace(/^```json\s*|```[\s\n]*$/g, "").trim();
+
+    let firstCurly = CleanAPI.indexOf("{");
+    let lastCurly = CleanAPI.lastIndexOf("}");
+
+    if (firstCurly === -1 || lastCurly === -1) {
+      console.error("Error: JSON structure not found");
+      return null;
+    }
+
+    CleanAPI = CleanAPI.slice(firstCurly, lastCurly + 1);
     console.log("CleanAPI:", CleanAPI);
 
     try {
       return JSON.parse(CleanAPI);
     } catch (error) {
       console.error("Error: Invalid JSON format", error);
-      return null;}
+      return null;
+    }
   }
 
   useEffect(() => {
     if (image) {
       postAPI(image.split(",")[1]);
     }
+    console.log("Image:", image);
   }, [image]);
 
   useEffect(() => {
@@ -205,10 +210,7 @@ const FoodAnalyzer = () => {
               </Stack>
             ) : (
               <>
-                <Button
-                  variant="contained"
-                  onClick={() => setShowWebcam(true)}
-                >
+                <Button variant="contained" onClick={() => setShowWebcam(true)}>
                   Capture Image
                 </Button>
                 <input
@@ -232,9 +234,10 @@ const FoodAnalyzer = () => {
           </Button>
         )}
       </div>
-      {image && Object.keys(analyzedInfo).length > 0 ? (
+      {image ?(
+         analyzedInfo.dish ? (
         <Box sx={{ width: "100%", padding: 2 }}>
-          <Grid container spacing={2} alignItems={"stretch"}>
+          <Grid container spacing={3} alignItems={"stretch"}>
             <Grid item xs={12} sm={12}>
               <Paper
                 sx={{
@@ -259,6 +262,7 @@ const FoodAnalyzer = () => {
                   padding: 2,
                   borderRadius: 3,
                   backgroundColor: "#fbf6fe",
+                  height: "90%",
                 }}
               >
                 <Typography variant="h6" color="#A34BCE">
@@ -298,6 +302,7 @@ const FoodAnalyzer = () => {
                   padding: 2,
                   borderRadius: 3,
                   backgroundColor: "#fbf6fe",
+                  height: "90%",
                 }}
               >
                 <Typography variant="h6" color="#A34BCE">
@@ -318,6 +323,7 @@ const FoodAnalyzer = () => {
                   padding: 2,
                   borderRadius: 3,
                   backgroundColor: "#fbf6fe",
+                  mt: 1,
                 }}
               >
                 <Typography variant="h6" color="#A34BCE">
@@ -335,6 +341,7 @@ const FoodAnalyzer = () => {
                   padding: 2,
                   borderRadius: 3,
                   backgroundColor: "#fbf6fe",
+                  mt: 1,
                 }}
               >
                 <Typography variant="h6" color="#A34BCE">
@@ -352,6 +359,7 @@ const FoodAnalyzer = () => {
                   padding: 2,
                   borderRadius: 3,
                   backgroundColor: "#fbf6fe",
+                  mt: 1,
                 }}
               >
                 <Typography variant="h6" color="#A34BCE">
@@ -365,8 +373,21 @@ const FoodAnalyzer = () => {
           </Grid>
         </Box>
       ) : (
-        ""
-      )}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "250px",
+          }}
+        >
+          <CircularProgress />
+          <Typography variant="body1" color="#A34BCE" mt={2}>
+            Analyzing... Please wait
+          </Typography>
+        </div>
+      )):''}
     </div>
   );
 };
