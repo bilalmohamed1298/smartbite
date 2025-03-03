@@ -27,15 +27,17 @@ const DietMeals = () => {
 
   const getDailyWidgets = async () => {
     let dw1 = await axios.get(
-      `https://api.spoonacular.com/recipes/${dailyMeals[0].id}/nutritionWidget.json?apiKey=e1960c2436914b008fd31c03c84e51b4`
+      `https://api.spoonacular.com/recipes/${dailyMeals[0].id}/nutritionWidget.json?apiKey=de5cb3fca4e6414283cf5fe92bf7f950`
     );
     let dw2 = await axios.get(
-      `https://api.spoonacular.com/recipes/${dailyMeals[1].id}/nutritionWidget.json?apiKey=e1960c2436914b008fd31c03c84e51b4`
+      `https://api.spoonacular.com/recipes/${dailyMeals[1].id}/nutritionWidget.json?apiKey=de5cb3fca4e6414283cf5fe92bf7f950`
     );
     let dw3 = await axios.get(
-      `https://api.spoonacular.com/recipes/${dailyMeals[2].id}/nutritionWidget.json?apiKey=e1960c2436914b008fd31c03c84e51b4`
+      `https://api.spoonacular.com/recipes/${dailyMeals[2].id}/nutritionWidget.json?apiKey=de5cb3fca4e6414283cf5fe92bf7f950`
     );
-
+    localStorage.setItem("DailyWidgets1", JSON.stringify(dw1.data));
+    localStorage.setItem("DailyWidgets2", JSON.stringify(dw2.data));
+    localStorage.setItem("DailyWidgets3", JSON.stringify(dw3.data)); 
     setDailyWidgets1(dw1.data);
     setDailyWidgets2(dw2.data);
     setDailyWidgets3(dw3.data);
@@ -62,7 +64,14 @@ const DietMeals = () => {
     (dailyWidgets3.protein ? parseFloat(dailyWidgets3.protein) : 0);
 
   useEffect(() => {
+    let localDW1 = localStorage.getItem("DailyWidgets1");
+    let localDW2 = localStorage.getItem("DailyWidgets2");
+    let localDW3 = localStorage.getItem("DailyWidgets3");
+    if (localDW1&&localDW2&&localDW3) {
+      setDailyWidgets1(JSON.parse(localDW1));
+    }else{
     getDailyWidgets();
+    }
   }, [dailyMeals]);
 
   ////////////////////////////////////////////////////////////////////////////
@@ -447,9 +456,8 @@ const DietMeals = () => {
             {dailyMeals.map((meal, index) => (
               <Link
                 key={index}
-                to={`/diet-meals/${meal.id}`}
+                to={`/meal-details/${meal.id}`}
                 style={{ textDecoration: "none", color: "inherit" }}
-                onClick={() => setOpen2(true)}
               >
                 <Box
                   sx={{
@@ -524,11 +532,11 @@ const DietMeals = () => {
       </Box>
       <Box
         sx={{
-          mt: 5,
-          ml: 1,
+          
           position: "sticky",
-          left: 0,
-          bottom: 0,
+          left: 1000,
+          bottom: 10,
+          width:'70px',
         }}
       >
         <Link style={{ textDecoration: "none" }}>
@@ -591,36 +599,6 @@ const DietMeals = () => {
           alignItems: "center",
         }}
       >
-        <Modal
-          open={open2}
-          onClose={() => setOpen2(false)}
-          aria-labelledby="modal-title"
-          aria-describedby="modal-description"
-          sx={{ overflow: "scroll", mt: 3, borderRadius: 2 }}
-        >
-          <Box
-            sx={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: { xs: "75%", sm: 500 },
-              bgcolor: "background.paper",
-              boxShadow: 24,
-              p: 3,
-              borderRadius: 5,
-              height: "70%",
-              overflowX: "hidden",
-              overflowY: "auto",
-            }}
-          >
-            <Typography id="modal-title" variant="h6" component="h2" mb={2}>
-              Meal Details
-            </Typography>
-
-            <MealDetails />
-          </Box>
-        </Modal>
       </div>
     </Box>
   );

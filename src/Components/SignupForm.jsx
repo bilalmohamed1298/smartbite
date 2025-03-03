@@ -35,8 +35,8 @@ export default function SignupForm() {
         <Route path="/details" element={<PersonalDetails />} />
         <Route path="/preferences" element={<Preferences />} />
         <Route path="/diet-meals" element={<DietMeals />} />
-        <Route path="/diet-meals/:id" element={<DietMeals />} />
-        <Route path="/diet-meals/:id" element={<MealDetails />} />
+        <Route path="/diet-meals/" element={<DietMeals />} />
+        <Route path="/meal-details/:id" element={<MealDetails />} />
         <Route path="/food-analyzer" element={<FoodAnalyzer />} />
       </Routes>
     </Box>

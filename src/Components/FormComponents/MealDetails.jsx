@@ -23,6 +23,9 @@ const MealDetails = () => {
     let widget = await axios.get(
       `https://api.spoonacular.com/recipes/${id}/nutritionWidget.json?apiKey=e1960c2436914b008fd31c03c84e51b4`
     );
+
+    localStorage.setItem('MealDetails', JSON.stringify(details.data));
+    localStorage.setItem('NutritionWidget', JSON.stringify(widget.data));
     setMealDetails(details.data);
     setNutritionWidget(widget.data);
     
@@ -30,7 +33,14 @@ const MealDetails = () => {
   };
 
   useEffect(() => {
+    let LocalMealDetails = localStorage.getItem('MealDetails');
+    let LocalNutritionWidget = localStorage.getItem('NutritionWidget');
+    if(LocalMealDetails&&LocalNutritionWidget){
+      setMealDetails(LocalMealDetails);
+      setNutritionWidget(LocalNutritionWidget);
+    }else{
     getMealDetails();
+    }
   }, [id]);
 
   ///////////////////////// Summary ////////////////////////////
@@ -143,7 +153,7 @@ const MealDetails = () => {
             </Typography>
           </Box>
           <Stack direction={"row"} sx={{ gap: 1, flexWrap: "wrap", m: 1 }}>
-            {nutritionWidget.ingredients.map((ingredient, index) => index < 7?(
+            {nutritionWidget?.ingredients?.map((ingredient, index) => index < 7?(
               <Box
                 key={index}
                 sx={{

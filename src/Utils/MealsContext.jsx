@@ -19,9 +19,9 @@ export function MealsContextProvider({ children }) {
 
   const getAPI = async () => {
     let meals = await axios.get(
-      `https://api.spoonacular.com/mealplanner/generate?apiKey=e1960c2436914b008fd31c03c84e51b4&timeFrame=day&targetCalories=${mealsCalories}`
+      `https://api.spoonacular.com/mealplanner/generate?apiKey=de5cb3fca4e6414283cf5fe92bf7f950&timeFrame=day&targetCalories=${mealsCalories}`
     );
-    localStorage.setItem("LocalMealsCalories", JSON.stringify(meals.data.meals));
+    localStorage.setItem("LocalMeals", JSON.stringify(meals.data.meals));
     setDaliyMeals(meals.data.meals);
   };
 
@@ -81,18 +81,18 @@ export function MealsContextProvider({ children }) {
   }, [userDetails.duration,TDEE]);
 
   useEffect(() => { 
-    localStorage.setItem('MealsCalories', mealsCalories)
+localStorage.setItem('MealsCalories', mealsCalories)
   }, [mealsCalories]);
 
   useEffect(() => {
-    let localMealsCalories = JSON.parse(localStorage.getItem("LocalMealsCalories"));
-    if (localMealsCalories && !mealsChange) {
-      setDaliyMeals(localMealsCalories);
+    let localMeals = JSON.parse(localStorage.getItem("LocalMeals"));
+    if (localMeals&&localUserDetails) {
+      setDaliyMeals(localMeals);
     } else {
       getAPI();
     }
 
-  }, [mealsCalories,mealsChange]);
+  }, [mealsCalories,userDetails]);
 
   return (
     <MealsContext.Provider
