@@ -90,6 +90,7 @@ export default function Welcome() {
                   style={{
                     width: "100%",
                     borderRadius: "12px",
+                    objectFit: "cover",
                   }}
                 />
               </Box>
