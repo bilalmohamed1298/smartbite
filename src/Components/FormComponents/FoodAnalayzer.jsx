@@ -38,10 +38,6 @@ const FoodAnalyzer = () => {
     setShowWebcam(false);
   };
 
-
-
-
-
   ////////////////////////////// Post Image to API //////////////////////////
 
   const handleFileUpload = (event) => {
@@ -189,21 +185,21 @@ const FoodAnalyzer = () => {
           <>
             {showWebcam ? (
               <Stack gap={2}>
-              <Button
-                variant="contained"
-                onClick={() => capture}
-                startIcon={<CameraAlt />}
-                sx={{ pr: "5px" }}
-              ></Button>
-              <Button variant="outlined" onClick={() => setShowWebcam(false)}>
-              Try another option
-            </Button>
-            </Stack>
+                <Button
+                  variant="contained"
+                  onClick={capture}
+                  startIcon={<CameraAlt />}
+                  sx={{ pr: "5px" }}
+                ></Button>
+                <Button variant="outlined" onClick={() => setShowWebcam(false)}>
+                  Try another option
+                </Button>
+              </Stack>
             ) : (
               <>
                 <Button
                   variant="contained"
-                  onClick={() => (capture, setShowWebcam(true))}
+                  onClick={() => setShowWebcam(true)}
                 >
                   Capture Image
                 </Button>
