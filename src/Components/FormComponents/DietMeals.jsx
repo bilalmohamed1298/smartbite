@@ -25,13 +25,13 @@ const DietMeals = () => {
 
   const getDailyWidgets = async () => {
     let dw1 = await axios.get(
-      `https://api.spoonacular.com/recipes/${dailyMeals[0].id}/nutritionWidget.json?apiKey=e1960c2436914b008fd31c03c84e51b4`
+      `https://api.spoonacular.com/recipes/${dailyMeals[0].id}/nutritionWidget.json?apiKey=16d84c3222204c619a34ad6b943db6a9`
     );
     let dw2 = await axios.get(
-      `https://api.spoonacular.com/recipes/${dailyMeals[1].id}/nutritionWidget.json?apiKey=e1960c2436914b008fd31c03c84e51b4`
+      `https://api.spoonacular.com/recipes/${dailyMeals[1].id}/nutritionWidget.json?apiKey=16d84c3222204c619a34ad6b943db6a9`
     );
     let dw3 = await axios.get(
-      `https://api.spoonacular.com/recipes/${dailyMeals[2].id}/nutritionWidget.json?apiKey=e1960c2436914b008fd31c03c84e51b4`
+      `https://api.spoonacular.com/recipes/${dailyMeals[2].id}/nutritionWidget.json?apiKey=16d84c3222204c619a34ad6b943db6a9`
     );
 
     setDailyWidgets1(dw1.data);
@@ -40,35 +40,32 @@ const DietMeals = () => {
   };
 
   const dailyCalories =
-    parseFloat(dailyWidgets1.calories) +
-    parseFloat(dailyWidgets2.calories) +
-    parseFloat(dailyWidgets3.calories);
+    (dailyWidgets1.calories ? parseFloat(dailyWidgets1.calories) : 0) +
+    (dailyWidgets2.calories ? parseFloat(dailyWidgets2.calories) : 0) +
+    (dailyWidgets3.calories ? parseFloat(dailyWidgets3.calories) : 0);
+
   const dailyCarbs =
-    parseFloat(dailyWidgets1.carbs) +
-    parseFloat(dailyWidgets2.carbs) +
-    parseFloat(dailyWidgets3.calories);
+    (dailyWidgets1.carbs ? parseFloat(dailyWidgets1.carbs) : 0) +
+    (dailyWidgets2.carbs ? parseFloat(dailyWidgets2.carbs) : 0) +
+    (dailyWidgets3.carbs ? parseFloat(dailyWidgets3.carbs) : 0);
+
   const dailyFat =
-    parseFloat(dailyWidgets1.fat) +
-    parseFloat(dailyWidgets2.fat) +
-    parseFloat(dailyWidgets3.fat);
+    (dailyWidgets1.fat ? parseFloat(dailyWidgets1.fat) : 0) +
+    (dailyWidgets2.fat ? parseFloat(dailyWidgets2.fat) : 0) +
+    (dailyWidgets3.fat ? parseFloat(dailyWidgets3.fat) : 0);
+
   const dailyProtein =
-    parseFloat(dailyWidgets1.protein) +
-    parseFloat(dailyWidgets2.protein) +
-    parseFloat(dailyWidgets3.protein);
+    (dailyWidgets1.protein ? parseFloat(dailyWidgets1.protein) : 0) +
+    (dailyWidgets2.protein ? parseFloat(dailyWidgets2.protein) : 0) +
+    (dailyWidgets3.protein ? parseFloat(dailyWidgets3.protein) : 0);
 
   useEffect(() => {
     getDailyWidgets();
   }, [dailyMeals]);
 
-  useEffect(() => {
-    console.log(dailyWidgets1);
-    console.log(dailyWidgets2);
-    console.log(dailyWidgets3);
-  }, [dailyWidgets1]);
-
   ////////////////////////////////////////////////////////////////////////////
   return (
-    <Box>
+    <Box sx={{position: 'relative'}}>
       <Typography
         sx={{
           fontWeight: "600",
@@ -298,7 +295,7 @@ const DietMeals = () => {
       <Stack
         direction={"row"}
         sx={{
-          mt: 3,
+          mt: 2,
           flexWrap: "wrap",
           gap: 2,
           justifyContent: { xs: "center", sm: "start" },
@@ -313,10 +310,10 @@ const DietMeals = () => {
             textAlign: "center",
             borderRadius: 10,
             background: "#fff",
-            border:'1px solid #A34BCE'
+            border: "1px solid #A34BCE",
+            width: "100px",
           }}
         >
-
           <Typography
             variant="h6"
             sx={{
@@ -325,7 +322,7 @@ const DietMeals = () => {
               color: "#A34BCE",
             }}
           >
-            {dailyCalories}
+            {dailyCalories.toFixed(0)}
           </Typography>
           <Typography
             sx={{
@@ -346,10 +343,10 @@ const DietMeals = () => {
             textAlign: "center",
             borderRadius: 10,
             background: "#fff",
-            border:'1px solid #A34BCE'
+            border: "1px solid #A34BCE",
+            width: "100px",
           }}
         >
-
           <Typography
             variant="h6"
             sx={{
@@ -358,7 +355,7 @@ const DietMeals = () => {
               color: "#A34BCE",
             }}
           >
-            {dailyCarbs}
+            {dailyCarbs.toFixed(0)}
           </Typography>
           <Typography
             sx={{
@@ -379,10 +376,10 @@ const DietMeals = () => {
             textAlign: "center",
             borderRadius: 10,
             background: "#fff",
-            border:'1px solid #A34BCE'
+            border: "1px solid #A34BCE",
+            width: "100px",
           }}
         >
-
           <Typography
             variant="h6"
             sx={{
@@ -391,7 +388,7 @@ const DietMeals = () => {
               color: "#A34BCE",
             }}
           >
-            {dailyFat}
+            {dailyFat.toFixed(0)}
           </Typography>
           <Typography
             sx={{
@@ -412,10 +409,10 @@ const DietMeals = () => {
             textAlign: "center",
             borderRadius: 10,
             background: "#fff",
-            border:'1px solid #A34BCE'
+            border: "1px solid #A34BCE",
+            width: "100px",
           }}
         >
-
           <Typography
             variant="h6"
             sx={{
@@ -424,7 +421,7 @@ const DietMeals = () => {
               color: "#A34BCE",
             }}
           >
-            {dailyProtein}
+            {dailyProtein.toFixed(0)}
           </Typography>
           <Typography
             sx={{
@@ -443,7 +440,7 @@ const DietMeals = () => {
             direction={"row"}
             flexWrap={"wrap"}
             justifyContent={{ xs: "center", md: "space-evenly" }}
-            sx={{ mt: { xs: 5, sm: 5 }, gap: { xs: 3, md: 3 } }}
+            sx={{ mt: { xs: 3, sm: 4 }, gap: { xs: 3, md: 3 } }}
           >
             {dailyMeals.map((meal, index) => (
               <Link
@@ -522,62 +519,57 @@ const DietMeals = () => {
           </div>
         )}
       </Box>
-      <Box sx={{ mt: 5, ml: 1 }}>
-        <Link to="/food-analyzer" style={{ textDecoration: "none" }}>
+      <Box sx={{ mt: 5, ml: 1, position: "absolute", right: {xs:-20,sm:10}, bottom: 0 }}>
+        <Link to='/food-analyzer' style={{ textDecoration: "none" }}>
           <Button
+            onClick={() => setOpen(true)}
             sx={{
-              borderRadius: 5,
+              borderRadius: 10,
               justifyContent: "center",
+              p: "16px 5px",
             }}
             variant="contained"
-            startIcon={<CameraAlt sx={{ ml: 1, p: 1 }} />}
+            startIcon={<CameraAlt sx={{ ml: "8px" }} />}
           ></Button>
         </Link>
       </Box>
 
-       <div>
-
-      <Button variant="contained" onClick={() => setOpen(true)}>
-        Open Modal
-      </Button>
-
-
-      <Modal
-        open={open}
-        onClose={() => setOpen(false)}
-        aria-labelledby="modal-title"
-        aria-describedby="modal-description"
-      >
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: 400,
-            bgcolor: "background.paper",
-            boxShadow: 24,
-            p: 4,
-            borderRadius: 2,
-          }}
+      <div>
+        <Modal
+          open={open}
+          onClose={() => setOpen(false)}
+          aria-labelledby="modal-title"
+          aria-describedby="modal-description"
         >
-          <Typography id="modal-title" variant="h6" component="h2">
-            Modal Content
-          </Typography>
-
-
-          <FoodAnalyzer />
-
-          <Button
-            variant="outlined"
-            onClick={() => setOpen(false)}
-            sx={{ mt: 2 }}
+          <Box
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: 400,
+              bgcolor: "background.paper",
+              boxShadow: 24,
+              p: 4,
+              borderRadius: 2,
+            }}
           >
-            Close
-          </Button>
-        </Box>
-      </Modal>
-    </div>
+            <Typography id="modal-title" variant="h6" component="h2">
+              Modal Content
+            </Typography>
+
+            <FoodAnalyzer />
+
+            <Button
+              variant="outlined"
+              onClick={() => setOpen(false)}
+              sx={{ mt: 2 }}
+            >
+              Close
+            </Button>
+          </Box>
+        </Modal>
+      </div>
     </Box>
   );
 };

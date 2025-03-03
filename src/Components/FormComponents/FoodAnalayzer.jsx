@@ -5,14 +5,12 @@ import * as mobilenet from "@tensorflow-models/mobilenet";
 import {
   Box,
   Button,
-  Card,
-  CardContent,
   CircularProgress,
-  Stack,
+  Paper,
   Typography,
+  Grid,
+  Stack,
 } from "@mui/material";
-import { Link } from "react-router-dom";
-import { MealsContext } from "../../Utils/MealsContext";
 import axios from "axios";
 
 const FoodAnalyzer = () => {
@@ -21,9 +19,11 @@ const FoodAnalyzer = () => {
   const [analysis, setAnalysis] = useState(null);
   const [loading, setLoading] = useState(false);
   const [model, setModel] = useState(null);
-  const [dailyMeals, setdailyMeals] = useState(null);
+  const [dailyMeals, setDailyMeals] = useState(null);
   const [ingredients, setIngredients] = useState(null);
   const [showWebcam, setShowWebcam] = useState(false);
+  const [analyzedInfo, setAnalyzedInfo] = useState({});
+  const [postResponse, setPostResponse] = useState();
 
   useEffect(() => {
     const loadModel = async () => {
@@ -31,7 +31,6 @@ const FoodAnalyzer = () => {
       await tf.ready();
       const loadedModel = await mobilenet.load({ version: 2, alpha: 1.0 });
       setModel(loadedModel);
-      console.log("Model Loaded Successfully");
     };
     loadModel();
   }, []);
@@ -69,7 +68,6 @@ const FoodAnalyzer = () => {
 
     img.onload = async () => {
       const predictions = await model.classify(img);
-      console.log("Predictions:", predictions);
 
       if (!predictions.length) {
         setAnalysis("Food could not be accurately identified.");
@@ -82,23 +80,21 @@ const FoodAnalyzer = () => {
         .filter(Boolean)
         .join(",");
 
-      const detectedFood = predictions[1]?.className.split(",")[0];
-      console.log("Detected food:", detectedFood);
+      const detectedFood = predictions[0]?.className.split(",")[0];
 
       try {
         const response = await fetch(
-          `https://api.spoonacular.com/recipes/complexSearch?query=${detectedFood}&apiKey=e1960c2436914b008fd31c03c84e51b4`
+          `https://api.spoonacular.com/recipes/complexSearch?query=${detectedFood}&apiKey=16d84c3222204c619a34ad6b943db6a9`
         );
         if (!response.ok) throw new Error("Failed to fetch nutrition data");
 
         const nutritionData = await response.json();
-        console.log("Spoonacular API Response:", nutritionData);
 
         if (!nutritionData.results.length) {
           setAnalysis("No nutritional data found for this food.");
         } else {
           setAnalysis(nutritionData.results[0]);
-          setdailyMeals(nutritionData.results);
+          setDailyMeals(nutritionData.results);
           setIngredients(detectedIngredients);
         }
       } catch (error) {
@@ -109,23 +105,17 @@ const FoodAnalyzer = () => {
     };
   };
 
-  //////////////////////////// Image Analyzer //////////////////////////////
-
-  ////////////////////////////////////////////////////////
-
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImage(reader.result.split(",")[1]);
+        setImage(reader.result);
         setAnalysis(null);
       };
       reader.readAsDataURL(file);
     }
   };
-
-  const [postReponse, setpostReponse] = useState();
 
   const postAPI = async (imageFile) => {
     let response = await axios.post(
@@ -136,42 +126,41 @@ const FoodAnalyzer = () => {
             parts: [
               {
                 text: `Calculate Calories and Nutrition Values in This Photo in json
-                
-                like this: {
-  "dish": "Tofu Scramble with Roasted Potatoes",
-  "estimated_calories": {
-    "total": 600, 
-    "breakdown": {
-      "tofu_scramble": 300,
-      "roasted_potatoes": 300
-    }
-  },
-  "nutrition": {s
-    "protein": {
-      "grams": 30,
-      "source": "tofu, potatoes"
-    },
-    "carbohydrates": {
-      "grams": 50,
-      "source": "potatoes"
-    },
-    "fat": {
-      "grams": 20,
-      "source": "tofu, potatoes"
-    }, 
-    "fiber": {
-      "grams": 10,
-      "source": "potatoes"
-    },
-    "vitamins": {
-      "vitamin_c": "present in potatoes and possibly vegetables in scramble",
-      "vitamin_k": "present in potatoes"
-    },
-    "minerals": {
-      "potassium": "present in potatoes",
-      "iron": "present in potatoes"
-    }
-  }
+                                    
+                      like this: {
+                      "dish": "Tofu Scramble with Roasted Potatoes",
+                      },
+                      "nutrition": {
+                        "calories": {
+                        "total": 600, 
+                        "breakdown": {
+                          "tofu_scramble": 300,
+                          "roasted_potatoes": 300
+                        },
+                        "protein": {
+                          "grams": 30,
+                          "source": "tofu, potatoes"
+                        },
+                        "carbohydrates": {
+                          "grams": 50,
+                          "source": "potatoes"
+                        },
+                        "fat": {
+                          "grams": 20,
+                          "source": "tofu, potatoes"
+                        }, 
+                        "carbs": {
+                          "grams": 10,
+                          "source": "potatoes"
+                        },
+                        "vitamins": {
+                          "vitamin_A": "present in potatoes and possibly vegetables in scramble",
+                          "vitamin_C": "present in potatoes and possibly vegetables in scramble",
+                          "vitamin_D": "present in potatoes"
+                        },
+                      }
+
+                      without note or "\`\`\`json" and "\`\`\`" at the end of the text.
                 `,
               },
               {
@@ -186,20 +175,30 @@ const FoodAnalyzer = () => {
       }
     );
 
-    setpostReponse(response.data.candidates[0].content.parts[0].text);
+    setPostResponse(response.data.candidates[0].content.parts[0].text);
   };
 
+  function cleanJSONFormat(text) {
+    if (typeof text !== "string") {
+      console.error("Error: input is not a string", text);
+      return "";
+    }
+    return JSON.parse(text.replace(/^```json\s*|\s*```$/g, ""));
+  }
+
   useEffect(() => {
-    postAPI(image);
+    if (image) {
+      postAPI(image.split(",")[1]);
+    }
   }, [image]);
 
   useEffect(() => {
-    console.log(postReponse);
-  }, [postReponse]);
-
-  //////////////////////////////////////////////////////////////////
-
-  /////////////////////////////////////////////////////////////////////////
+    if (postResponse) {
+      console.log(postResponse);
+      console.log(cleanJSONFormat(postResponse));
+      setAnalyzedInfo(cleanJSONFormat(postResponse));
+    }
+  }, [postResponse]);
 
   return (
     <div
@@ -227,7 +226,7 @@ const FoodAnalyzer = () => {
               borderRadius: "8px",
               boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
               width: "100%",
-              height: "250px",
+              height: "220px",
               objectFit: "cover",
             }}
           />
@@ -240,7 +239,7 @@ const FoodAnalyzer = () => {
             borderRadius: "8px",
             boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
             width: "100%",
-            height: "250px",
+            height: "220px",
             objectFit: "cover",
           }}
         />
@@ -250,10 +249,7 @@ const FoodAnalyzer = () => {
           <>
             <Button
               variant="contained"
-              onClick={() => {
-                capture;
-                setShowWebcam(true);
-              }}
+              onClick={() => (capture, setShowWebcam(true))}
             >
               Capture Image
             </Button>
@@ -275,94 +271,145 @@ const FoodAnalyzer = () => {
             Capture Another Image
           </Button>
         )}
-        {image && (
-          <Button variant="contained" onClick={analyzeImage} disabled={loading}>
-            {loading ? <CircularProgress size={24} /> : "Analyze Image"}
-          </Button>
-        )}
       </div>
-      {analysis && (
-        <Card style={{ width: "100%", padding: "16px" }}>
-          <CardContent>
-            <Typography variant="h6">Results</Typography>
-            {typeof analysis === "string" ? (
-              <Typography>{analysis}</Typography>
-            ) : (
-              <div>
-                {dailyMeals.length > 0 ? (
-                  <Stack
-                    direction={"row"}
-                    flexWrap={"wrap"}
-                    justifyContent={{ xs: "center", md: "start" }}
-                    sx={{
-                      mt: { xs: 5, sm: 5 },
-                      gap: { xs: 3, md: 3 },
-                      flexGrow: 1,
-                    }}
-                  >
-                    {dailyMeals.map((meal, index) => (
-                      <Link
-                        key={index}
-                        to={`/meal-details/${meal.id}`}
-                        style={{ textDecoration: "none", color: "inherit" }}
-                      >
-                        <Box
-                          sx={{
-                            position: "relative",
-                            width: "250px",
-                            height: "180px",
-                            borderRadius: "15px",
-                            overflow: "hidden",
-                            boxShadow: 2,
-                            "&:hover": { scale: 1.1 },
-                            transition: "0.3s ease-in-out",
-                          }}
+      {image && Object.keys(analyzedInfo).length>0 ? (
+        <Box sx={{ width: "100%", padding: 2 }}>
+           
+            <Grid container spacing={2} alignItems={"stretch"}>
+              <Grid item xs={12} sm={12}>
+                <Paper
+                  sx={{
+                    padding: 2,
+                    borderRadius: 3,
+                    backgroundColor: "#fbf6fe",
+                    textAlign: "center",
+                  }}
+                >
+                  <Typography variant="h6" color="#A34BCE">
+                    Detected Ingredients
+                  </Typography>
+                  <Typography>
+                    {analyzedInfo.dish || "No ingredients detected"}
+                  </Typography>
+                </Paper>
+              </Grid>
+
+              <Grid item xs={12} sm={6}>
+                <Paper
+                  sx={{
+                    padding: 2,
+                    borderRadius: 3,
+                    backgroundColor: "#fbf6fe",
+                  }}
+                >
+                  <Typography variant="h6" color="#A34BCE">
+                    Calories
+                  </Typography>
+                  <Typography sx={{ mb: 1, fontWeight:'500'}}>
+                    {analyzedInfo?.nutrition?.calories?.total || 0} calories
+                  </Typography>
+                  {analyzedInfo?.nutrition?.calories?.breakdown &&
+                  Object.keys(analyzedInfo?.nutrition?.calories?.breakdown)
+                    .length > 0 && (
+                    <Stack spacing={0}>
+                      <Typography variant="body1" color="#A34BCE">Breakdown:</Typography>
+                      {Object.keys(
+                        analyzedInfo?.nutrition?.calories?.breakdown
+                      ).map((key) => (
+                        <Typography
+                          sx={{ textTransform: "capitalize" }}
+                          key={key}
                         >
-                          <img
-                            src={`${meal.image}`}
-                            alt="Meal"
-                            style={{
-                              width: "100%",
-                              height: "100%",
-                            }}
-                          />
+                          <span style={{mb: 1, fontWeight:'500'}}>{key}:{" "}</span>
+                          {analyzedInfo?.nutrition?.calories?.breakdown[key]}
+                          <br />
+                        </Typography>
+                      ))}
+                    </Stack>
+                  )}
+                </Paper>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Paper
+                  sx={{
+                    padding: 2,
+                    borderRadius: 3,
+                    backgroundColor: "#fbf6fe",
+                  }}
+                >
+                  <Typography variant="h6" color="#A34BCE">
+                    Vitamins
+                  </Typography>
+                  {
+                    Object.keys(analyzedInfo?.nutrition?.vitamins).map((key) => (
+                      <Typography sx={{textTransform:'capitalize',}} key={key}>
+                       <span style={{mb: 1, fontWeight:'500'}}>{key}:</span>  {analyzedInfo?.nutrition?.vitamins[key]}
+                      </Typography>
+                    ))
 
-                          <Box
-                            sx={{
-                              position: "absolute",
-                              bottom: 0,
-                              left: 0,
-                              width: "100%",
-                              height: "100%",
-                              background:
-                                "linear-gradient(to top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.18))",
-                            }}
-                          />
+                  }
+                </Paper>
+              </Grid>
 
-                          <Typography
-                            variant="body1"
-                            sx={{
-                              position: "absolute",
-                              bottom: 10,
-                              left: 10,
-                              color: "white",
-                              fontWeight: "bold",
-                            }}
-                          >
-                            {meal.title}
-                          </Typography>
-                        </Box>
-                      </Link>
-                    ))}
-                  </Stack>
-                ) : (
-                  ""
-                )}
-              </div>
-            )}
-          </CardContent>
-        </Card>
-      )}
+              <Grid item xs={6} sm={4}>
+                <Paper
+                  sx={{
+                    padding: 2,
+                    borderRadius: 3,
+                    backgroundColor: "#fbf6fe",
+                  }}
+                >
+                  <Typography variant="h6" color="#A34BCE">
+                    Protein
+                  </Typography>
+                  <Typography sx={{ mb: 1, fontWeight:'500'}}>
+                    {analyzedInfo?.nutrition?.protein?.grams || 0}g
+                  </Typography>
+                </Paper>
+              </Grid>
+
+              <Grid item xs={6} sm={4}>
+                <Paper
+                  sx={{
+                    padding: 2,
+                    borderRadius: 3,
+                    backgroundColor: "#fbf6fe",
+                  }}
+                >
+                  <Typography variant="h6" color="#A34BCE">
+                    Carbohydrates
+                  </Typography>
+                  <Typography sx={{ mb: 1, fontWeight:'500'}}>
+                    {analyzedInfo?.nutrition?.carbohydrates?.grams || 0}g
+                  </Typography>
+                </Paper>
+              </Grid>
+
+              <Grid item xs={6} sm={4}>
+                <Paper
+                  sx={{
+                    padding: 2,
+                    borderRadius: 3,
+                    backgroundColor: "#fbf6fe",
+                  }}
+                >
+                  <Typography variant="h6" color="#A34BCE">
+                    Fat
+                  </Typography>
+                  <Typography sx={{ mb: 1, fontWeight:'500'}}>
+                    {analyzedInfo?.nutrition?.fat?.grams || 0}g
+                  </Typography>
+                </Paper>
+              </Grid>
+            </Grid>
+          
+        </Box>
+      ) : ( 
+        <Typography variant="body2" color="#A34BCE" sx={{opacity:0.8}}>
+          Upload an image to get the nutrition information
+        </Typography>
+      )
+      }
     </div>
   );
 };

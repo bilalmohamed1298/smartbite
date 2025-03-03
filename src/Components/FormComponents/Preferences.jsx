@@ -24,7 +24,7 @@ import {
 import { MealsContext } from "../../Utils/MealsContext";
 
 const Preferences = () => {
-  const { userDetails,setUserDetails } = useContext(MealsContext);
+  const { userDetails, setUserDetails } = useContext(MealsContext);
   const [preferences, setPreferences] = useState({
     goal: "",
     idealWeight: null,
@@ -32,8 +32,7 @@ const Preferences = () => {
   });
   const [visibleFields, setVisibleFields] = useState(["goal"]);
   const [duration, setDuration] = useState(45);
-  const [submit, setSubmit] = useState(false)
-
+  const [submit, setSubmit] = useState(false);
 
   useEffect(() => {
     setUserDetails((prev) => ({ ...prev, ...preferences }));
@@ -41,12 +40,9 @@ const Preferences = () => {
 
   useEffect(() => {
     if (submit) {
-      localStorage.setItem('userDetails',JSON.stringify(userDetails))
-      console.log(preferences)
+      localStorage.setItem("userDetails", JSON.stringify(userDetails));
     }
   }, [submit]);
-
-
 
   const marks = [
     { value: 90, label: <DirectionsRun fontSize="large" /> },
@@ -75,7 +71,7 @@ const Preferences = () => {
   return (
     <Stack
       sx={{
-        justifyContent:'space-between',
+        justifyContent: "space-between",
         height: "100%",
       }}
     >
@@ -111,7 +107,7 @@ const Preferences = () => {
             <>
               <Stack
                 sx={{
-                  mb: {xs:3,sm:7},
+                  mb: { xs: 3, sm: 7 },
                 }}
               >
                 <Box
@@ -273,7 +269,9 @@ const Preferences = () => {
         {visibleFields.includes("duration") && preferences.duration && (
           <Link to="/diet-meals">
             <Button
-            onClick={()=>{setSubmit(true)}}
+              onClick={() => {
+                setSubmit(true);
+              }}
               size="large"
               sx={{
                 borderRadius: "50px",
@@ -284,7 +282,7 @@ const Preferences = () => {
                 fontWeight: "bold",
                 textTransform: "none",
                 fontSize: "18px",
-                ml:3,
+                ml: 3,
                 "&:hover": {
                   backgroundColor: "#A34BCE",
                 },

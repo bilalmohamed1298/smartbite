@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  CircularProgress,
   createTheme,
   Stack,
   ThemeProvider,
@@ -17,15 +18,15 @@ const MealDetails = () => {
 
   const getMealDetails = async () => {
     let details = await axios.get(
-      `https://api.spoonacular.com/recipes/${id}/information?apiKey=e1960c2436914b008fd31c03c84e51b4`
+      `https://api.spoonacular.com/recipes/${id}/information?apiKey=8120a1495bbb4d05a3373ea228c0bf72`
     );
     let widget = await axios.get(
-      `https://api.spoonacular.com/recipes/${id}/nutritionWidget.json?apiKey=e1960c2436914b008fd31c03c84e51b4`
+      `https://api.spoonacular.com/recipes/${id}/nutritionWidget.json?apiKey=8120a1495bbb4d05a3373ea228c0bf72`
     );
     setMealDetails(details.data);
     setNutritionWidget(widget.data);
-    console.log(details.data);
-    console.log(widget.data);
+    
+    
   };
 
   useEffect(() => {
@@ -437,8 +438,17 @@ const MealDetails = () => {
           </Stack>
         </Box>
       ) : (
-        "Loading"
-      )}
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "750px",
+                  }}
+                >
+                  <CircularProgress />
+                </div>
+              )}
     </Box>
   );
 };
