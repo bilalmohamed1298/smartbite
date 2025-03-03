@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Box, Typography, IconButton, Stack, Button } from "@mui/material";
-import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
+import { ChevronRight, ChevronLeft } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -41,7 +41,7 @@ export default function Welcome() {
       >
         <Typography
           sx={{
-            mb: {xs:5,sm:10},
+            mb: {xs:1,sm:8},
             fontSize: "30px",
             fontWeight: "600",
             textAlign: "center",
@@ -62,7 +62,7 @@ export default function Welcome() {
             justifyContent: "center",
             flexDirection: "column",
             bgcolor: "white",
-            mb: { sm: 16, xs: 5 },
+            mb: { sm: 12, xs: 3 },
             mx: "auto",
           }}
         >
@@ -97,7 +97,7 @@ export default function Welcome() {
               <Typography
                 variant="body1"
                 sx={{
-                  my: 5,
+                  my: 3,
                   color: "#333",
                   fontWeight: 600,
                   fontSize: { sm: "20px" },
@@ -139,7 +139,7 @@ export default function Welcome() {
                 
               }}
             >
-              <ArrowBackIos sx={{}} />
+              <ChevronLeft fontSize="large" pr={1} />
             </IconButton>
           ) : (
             ""
@@ -158,7 +158,7 @@ export default function Welcome() {
                 "&:hover": { bgcolor: "#f5f5f5" },
               }}
             >
-              <ArrowForwardIos />
+              <ChevronRight  fontSize="large"/>
             </IconButton>
           ) : (
             ""

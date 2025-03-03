@@ -14,7 +14,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import { KeyboardArrowLeft } from "@mui/icons-material";
+import { Female, KeyboardArrowLeft, Male, Man, Woman } from "@mui/icons-material";
 import { MealsContext } from "../../Utils/MealsContext";
 
 const PersonalDetails = () => {
@@ -54,7 +54,7 @@ const PersonalDetails = () => {
   return (
     <Stack
       sx={{
-        justifyContent:'space-between',
+        justifyContent: "space-between",
         height: "100%",
       }}
     >
@@ -142,8 +142,12 @@ const PersonalDetails = () => {
                                   fontWeight: "600",
                                   border: "2px solid #A34BCE",
                                   width: { xs: "300px", lg: "300px" },
+                                  display: "flex",
+                                  alignItems: "center",
+                                  gap: 1, 
                                 }}
                               >
+                                {option === "Male" ? <Man /> : <Woman />}
                                 {option}
                               </Button>
                             </ThemeProvider>
@@ -168,6 +172,12 @@ const PersonalDetails = () => {
                 </Typography>
 
                 <TextField
+                 inputRef={(input) => {
+                  if (input) {
+                    input.min = 10;
+                    input.max = 100;
+                  }
+                }}
                   fullWidth
                   type="number"
                   value={personalData.age}
@@ -282,7 +292,7 @@ const PersonalDetails = () => {
                 fontWeight: "bold",
                 textTransform: "none",
                 fontSize: "18px",
-                ml:3,
+                ml: 3,
                 "&:hover": {
                   backgroundColor: "#A34BCE",
                 },

@@ -18,7 +18,9 @@ import { Link } from "react-router-dom";
 import {
   DirectionsBike,
   DirectionsRun,
+  FitnessCenter,
   KeyboardArrowLeft,
+  MonitorWeight,
   RocketLaunch,
 } from "@mui/icons-material";
 import { MealsContext } from "../../Utils/MealsContext";
@@ -142,28 +144,34 @@ const Preferences = () => {
                           control={<Radio sx={{ display: "none" }} />}
                           label={
                             <ThemeProvider theme={theme}>
-                              <Button
-                                color="primary"
-                                size="large"
-                                variant={
-                                  preferences.goal === option
-                                    ? "contained"
-                                    : "outlined"
-                                }
-                                onClick={() => handleChange("goal", option)}
-                                sx={{
-                                  borderRadius: 2,
-                                  textTransform: "none",
-                                  px: 3,
-                                  py: 1,
-                                  fontWeight: "600",
-                                  border: "2px solid #A34BCE",
-                                  width: { xs: "300px", lg: "300px" },
-                                }}
-                              >
-                                {option}
-                              </Button>
-                            </ThemeProvider>
+                            <Button
+                              color="primary"
+                              size="large"
+                              variant={
+                                preferences.goal === option ? "contained" : "outlined"
+                              }
+                              onClick={() => handleChange("goal", option)}
+                              sx={{
+                                borderRadius: 2,
+                                textTransform: "none",
+                                px: 3,
+                                py: 1,
+                                fontWeight: "600",
+                                border: "2px solid #A34BCE",
+                                width: { xs: "300px", lg: "300px" },
+                                display: "flex",
+                                alignItems: "center",
+                                gap: 1,
+                              }}
+                            >
+                              {option === "Losing weight" ? (
+                                <MonitorWeight  />
+                              ) : (
+                                <FitnessCenter />
+                              )}
+                              {option}
+                            </Button>
+                          </ThemeProvider>
                           }
                         />
                       ))}

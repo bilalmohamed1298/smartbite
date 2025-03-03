@@ -208,7 +208,7 @@ const OverallQuestions = () => {
           }}
           gutterBottom
         >
-          Activity
+          Activities
         </Typography>
         <MobileStepper
           variant="progress"

@@ -515,7 +515,7 @@ const DietMeals = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              height: "450px",
+              height: "400px",
             }}
           >
             <CircularProgress />
@@ -527,7 +527,7 @@ const DietMeals = () => {
           mt: 5,
           ml: 1,
           position: "absolute",
-          right: { xs: -20, sm: 10 },
+          right: { xs: -10, sm: 10 },
           bottom: 0,
         }}
       >
