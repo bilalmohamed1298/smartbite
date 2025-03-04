@@ -13,7 +13,7 @@ import { CameraAlt } from "@mui/icons-material";
 import { useState } from "react";
 
 export default function SignupForm() {
-  const [open1, setOpen1] = useState(false);
+  // const [open1, setOpen1] = useState(false);
   return (
     <Box
       sx={{
@@ -48,7 +48,7 @@ export default function SignupForm() {
         <Route path="/food-analyzer" element={<FoodAnalyzer />} />
       </Routes>
 
-      {/*////Camera Button/////*/}
+{/* 
       <Box
         sx={{
           position: "absolute",
@@ -107,8 +107,9 @@ export default function SignupForm() {
             <FoodAnalyzer />
           </Box>
         </Modal>
-      </div>
-      {/*////Camera Button/////*/}
+      </div> */}
+
+      
     </Box>
   );
 }

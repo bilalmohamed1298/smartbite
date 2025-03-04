@@ -7,6 +7,7 @@ import {
   ThemeProvider,
   createTheme,
   IconButton,
+  Stack,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { KeyboardArrowLeft } from "@mui/icons-material";
@@ -27,7 +28,8 @@ const ResultsComponent = () => {
         justifyContent: "space-between",
       }}
     >
-      <Box mx={'auto'} mt={5}>
+      <Stack mt={5}>
+      <Box mx={'auto'} mt={7} mb={5}>
       <img src={'/results.svg'} alt={'results-dishs'} width={'70%'}/>
       </Box>
 
@@ -47,6 +49,7 @@ const ResultsComponent = () => {
           Personalized meals and calories, just for you.
         </Typography>
       </Box>
+      </Stack>
 
       <Box>
         <Link to="/details">

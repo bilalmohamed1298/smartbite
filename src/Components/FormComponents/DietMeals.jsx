@@ -27,13 +27,13 @@ const DietMeals = () => {
 
   const getDailyWidgets = async () => {
     let dw1 = await axios.get(
-      `https://api.spoonacular.com/recipes/${dailyMeals[0].id}/nutritionWidget.json?apiKey=16d84c3222204c619a34ad6b943db6a9`
+      `https://api.spoonacular.com/recipes/${dailyMeals[0].id}/nutritionWidget.json?apiKey=de5cb3fca4e6414283cf5fe92bf7f950`
     );
     let dw2 = await axios.get(
-      `https://api.spoonacular.com/recipes/${dailyMeals[1].id}/nutritionWidget.json?apiKey=16d84c3222204c619a34ad6b943db6a9`
+      `https://api.spoonacular.com/recipes/${dailyMeals[1].id}/nutritionWidget.json?apiKey=de5cb3fca4e6414283cf5fe92bf7f950`
     );
     let dw3 = await axios.get(
-      `https://api.spoonacular.com/recipes/${dailyMeals[2].id}/nutritionWidget.json?apiKey=16d84c3222204c619a34ad6b943db6a9`
+      `https://api.spoonacular.com/recipes/${dailyMeals[2].id}/nutritionWidget.json?apiKey=de5cb3fca4e6414283cf5fe92bf7f950`
     );
     localStorage.setItem("DailyWidgets1", JSON.stringify(dw1.data));
     localStorage.setItem("DailyWidgets2", JSON.stringify(dw2.data));
