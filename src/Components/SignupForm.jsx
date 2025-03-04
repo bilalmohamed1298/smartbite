@@ -1,6 +1,6 @@
-import { Box, Button, Modal, Typography } from "@mui/material";
+import { Box} from "@mui/material";
 import OverallQuestions from "./FormComponents/OverallQuestions";
-import { Link, Route, Routes } from "react-router-dom";
+import {Route, Routes } from "react-router-dom";
 import PersonalDetails from "./FormComponents/PersonalDetails";
 import Welcome from "./FormComponents/Welcome";
 import DietMeals from "./FormComponents/DietMeals";
@@ -9,8 +9,6 @@ import MealDetails from "./FormComponents/MealDetails";
 import FoodAnalyzer from "./FormComponents/FoodAnalayzer";
 import CustomDietComponent from "./FormComponents/CustomDietComponent";
 import ResultsComponent from "./FormComponents/ResultsComponent";
-import { CameraAlt } from "@mui/icons-material";
-import { useState } from "react";
 
 export default function SignupForm() {
   // const [open1, setOpen1] = useState(false);

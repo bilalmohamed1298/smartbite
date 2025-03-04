@@ -22,10 +22,10 @@ const Logo = () => {
         }}
       >
         <img
-          src="/logo.png"
-          alt=""
+          src="/logo.webp"
+          alt="Logo"
           style={{
-            width: "60px",
+            width: "65px",
             borderRadius: "30%",
           }}
         />
@@ -37,7 +37,7 @@ const Logo = () => {
             color: "#201325",
           }}
         >
-          NutriVibe
+          Smartbite
         </Typography>
       </Box>
 
