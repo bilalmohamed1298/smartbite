@@ -82,7 +82,7 @@ const DietMeals = () => {
 
   ////////////////////////////////////////////////////////////////////////////
   return (
-    <Box sx={{ position: "relative" }}>
+    <Box sx={{ position: "relative",maxHeight:'100%' }}>
       <Typography
         sx={{
           fontWeight: "600",

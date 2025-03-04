@@ -32,6 +32,7 @@ export default function SignupForm() {
         justifyContent: "space-between",
         overflowX: { xs: "hidden" },
         overflowY: { xs: "auto", sm: "auto" },
+        overflow:{xs:'auto',sm:'hidden'}
       }}
     >
 

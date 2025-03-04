@@ -1,18 +1,27 @@
-
 body {
-    margin: 0;
-    padding: 0;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    background-image: url("/public/bg.webp");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: '#201325';
-  }
-
-  ::-webkit-scrollbar {
-  display: none;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-image: url("/public/bg.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: "#201325";
 }
 
+::-webkit-scrollbar {
+  width: 5px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #cc25c4, #c547ff);
+  transition: background 0.3s ease-in-out;
+}
