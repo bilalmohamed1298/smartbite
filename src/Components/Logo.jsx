@@ -1,14 +1,18 @@
 import { Box, Stack, Typography } from "@mui/material";
+import { text } from "framer-motion/client";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Logo = () => {
   return (
+    <Link to="/" style={{textDecoration: "none",}}>
     <Stack
       display={{ xs: "none", lg: "flex" }}
       sx={{
         mt: 1,
       }}
     >
+
       <Box
         sx={{
           mx: "auto",
@@ -36,7 +40,9 @@ const Logo = () => {
           NutriVibe
         </Typography>
       </Box>
+
     </Stack>
+    </Link>
   );
 };
 
