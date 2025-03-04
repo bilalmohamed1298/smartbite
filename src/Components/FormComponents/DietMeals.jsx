@@ -584,7 +584,7 @@ const DietMeals = () => {
               bgcolor: "background.paper",
               boxShadow: 24,
               p: 2,
-              borderRadius: 5,
+              borderRadius: 2,
               height: "70%",
               overflowX: "hidden",
               overflowY: "auto",
