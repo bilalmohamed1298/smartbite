@@ -7,6 +7,8 @@ import DietMeals from "./FormComponents/DietMeals";
 import Preferences from "./FormComponents/Preferences";
 import MealDetails from "./FormComponents/MealDetails";
 import FoodAnalyzer from "./FormComponents/FoodAnalayzer";
+import CustomDietComponent from "./FormComponents/CustomDietComponent";
+import ResultsComponent from "./FormComponents/ResultsComponent";
 
 export default function SignupForm() {
   return (
@@ -32,10 +34,11 @@ export default function SignupForm() {
       <Routes>
         <Route path="/" element={<Welcome />} />
         <Route path="/overall" element={<OverallQuestions />} />
+        <Route path="/custom-diet" element={<CustomDietComponent />} />
         <Route path="/details" element={<PersonalDetails />} />
         <Route path="/preferences" element={<Preferences />} />
+        <Route path="/results" element={<ResultsComponent />} />
         <Route path="/diet-meals" element={<DietMeals />} />
-        <Route path="/diet-meals/" element={<DietMeals />} />
         <Route path="/meal-details/:id" element={<MealDetails />} />
         <Route path="/food-analyzer" element={<FoodAnalyzer />} />
       </Routes>

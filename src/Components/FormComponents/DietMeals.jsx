@@ -16,7 +16,7 @@ import FoodAnalyzer from "./FoodAnalayzer";
 import MealDetails from "./MealDetails";
 
 const DietMeals = () => {
-  const { dailyMeals, toggleMealsChange } = useContext(MealsContext);
+  const { dailyMeals, toggleMealsChange, userDetails } = useContext(MealsContext);
   const [dailyWidgets1, setDailyWidgets1] = useState({});
   const [dailyWidgets2, setDailyWidgets2] = useState({});
   const [dailyWidgets3, setDailyWidgets3] = useState({});
@@ -27,13 +27,13 @@ const DietMeals = () => {
 
   const getDailyWidgets = async () => {
     let dw1 = await axios.get(
-      `https://api.spoonacular.com/recipes/${dailyMeals[0].id}/nutritionWidget.json?apiKey=e1960c2436914b008fd31c03c84e51b4`
+      `https://api.spoonacular.com/recipes/${dailyMeals[0].id}/nutritionWidget.json?apiKey=16d84c3222204c619a34ad6b943db6a9`
     );
     let dw2 = await axios.get(
-      `https://api.spoonacular.com/recipes/${dailyMeals[1].id}/nutritionWidget.json?apiKey=e1960c2436914b008fd31c03c84e51b4`
+      `https://api.spoonacular.com/recipes/${dailyMeals[1].id}/nutritionWidget.json?apiKey=16d84c3222204c619a34ad6b943db6a9`
     );
     let dw3 = await axios.get(
-      `https://api.spoonacular.com/recipes/${dailyMeals[2].id}/nutritionWidget.json?apiKey=e1960c2436914b008fd31c03c84e51b4`
+      `https://api.spoonacular.com/recipes/${dailyMeals[2].id}/nutritionWidget.json?apiKey=16d84c3222204c619a34ad6b943db6a9`
     );
     localStorage.setItem("DailyWidgets1", JSON.stringify(dw1.data));
     localStorage.setItem("DailyWidgets2", JSON.stringify(dw2.data));
@@ -75,6 +75,10 @@ const DietMeals = () => {
     getDailyWidgets();
     }
   }, [dailyMeals]);
+
+  useEffect(()=>{
+    getDailyWidgets();
+  },[userDetails])
 
   ////////////////////////////////////////////////////////////////////////////
   return (
@@ -559,7 +563,7 @@ const DietMeals = () => {
               p: "16px 5px",
             }}
             variant="contained"
-            startIcon={<CameraAlt sx={{ ml: "8px" }} />}
+            startIcon={<CameraAlt sx={{ ml: "10px" }} />}
           ></Button>
         </Link>
       </Box>

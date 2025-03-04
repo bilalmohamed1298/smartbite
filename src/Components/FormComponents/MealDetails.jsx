@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const MealDetails = () => {
@@ -18,14 +18,12 @@ const MealDetails = () => {
 
   const getMealDetails = async () => {
     let details = await axios.get(
-      `https://api.spoonacular.com/recipes/${id}/information?apiKey=e1960c2436914b008fd31c03c84e51b4`
+      `https://api.spoonacular.com/recipes/${id}/information?apiKey=16d84c3222204c619a34ad6b943db6a9`
     );
     let widget = await axios.get(
-      `https://api.spoonacular.com/recipes/${id}/nutritionWidget.json?apiKey=e1960c2436914b008fd31c03c84e51b4`
+      `https://api.spoonacular.com/recipes/${id}/nutritionWidget.json?apiKey=7d5e750167ac4dc0b0f4032102e970de`
     );
 
-    localStorage.setItem('MealDetails', JSON.stringify(details.data));
-    localStorage.setItem('NutritionWidget', JSON.stringify(widget.data));
     setMealDetails(details.data);
     setNutritionWidget(widget.data);
     

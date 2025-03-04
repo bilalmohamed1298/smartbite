@@ -263,7 +263,7 @@ const Preferences = () => {
             sx={{
               bgcolor: "#E7EDf5",
               "&:hover": { bgcolor: "#DEE4EB" },
-              width: 65,
+              width: 60,
               height: 60,
             }}
           >
@@ -272,7 +272,7 @@ const Preferences = () => {
         </Link>
 
         {visibleFields.includes("duration") && preferences.duration && (
-          <Link to="/diet-meals">
+          <Link to="/results">
             <Button
               onClick={() => {
                 setSubmit(true);
@@ -282,7 +282,7 @@ const Preferences = () => {
                 borderRadius: "50px",
                 backgroundColor: "#A34BCE",
                 color: "white",
-                width: { xs: "66%", sm: "80%" },
+                width: { xs: "70%", sm: "83%",md:"85%",lg:'83%' },
                 height: 60,
                 fontWeight: "bold",
                 textTransform: "none",

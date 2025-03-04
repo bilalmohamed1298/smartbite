@@ -25,7 +25,7 @@ export function MealsContextProvider({ children }) {
 
   const getAPI = async () => {
     let meals = await axios.get(
-      `https://api.spoonacular.com/mealplanner/generate?apiKey=e1960c2436914b008fd31c03c84e51b4&timeFrame=day&targetCalories=${localMealsCalories}`
+      `https://api.spoonacular.com/mealplanner/generate?apiKey=16d84c3222204c619a34ad6b943db6a9&timeFrame=day&targetCalories=${localMealsCalories}`
     );
     localStorage.setItem("LocalMeals", JSON.stringify(meals.data.meals));
     setDaliyMeals(meals.data.meals);
@@ -64,7 +64,7 @@ export function MealsContextProvider({ children }) {
         ? losCalories / userDetails.duration
         : 0;
       let tempMealsCalories = TDEE - dailyLosCalories;
-      tempMealsCalories !== 0
+      tempMealsCalories !== 0 && isNaN(tempMealsCalories) === false
         ? localStorage.setItem(
             "LocalMealsCalories",
             tempMealsCalories.toFixed(1)
@@ -78,7 +78,7 @@ export function MealsContextProvider({ children }) {
         ? gainCalories / userDetails.duration
         : 0;
       let tempMealsCalories = TDEE + dailygainCalories;
-      tempMealsCalories !== 0
+      tempMealsCalories !== 0 && isNaN(tempMealsCalories) === false
         ? localStorage.setItem(
             "LocalMealsCalories",
             tempMealsCalories.toFixed(1)

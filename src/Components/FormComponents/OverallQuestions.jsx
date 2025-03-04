@@ -289,23 +289,23 @@ const OverallQuestions = () => {
             sx={{
               bgcolor: "#E7EDf5",
               "&:hover": { bgcolor: "#DEE4EB" },
-              width: 65,
+              width: 60,
               height: 60,
             }}
           >
-            <KeyboardArrowLeft />
+            <KeyboardArrowLeft/>
           </IconButton>
         )}
 
         {activeStep === questions.length - 1 && selectedOptions[activeStep] ? (
-          <Link to="/details">
+          <Link to="/custom-diet">
             <Button
               size="large"
               sx={{
                 borderRadius: "50px",
                 backgroundColor: "#A34BCE",
                 color: "white",
-                width: { xs: "66%", sm: "80%" },
+                width: { xs: "70%", sm: "83%",md:"85%",lg:'83%' },
                 height: 60,
                 fontWeight: "bold",
                 textTransform: "none",
