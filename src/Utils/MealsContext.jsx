@@ -25,7 +25,7 @@ export function MealsContextProvider({ children }) {
 
   const getAPI = async () => {
     let meals = await axios.get(
-      `https://api.spoonacular.com/mealplanner/generate?apiKey=de5cb3fca4e6414283cf5fe92bf7f950&timeFrame=day&targetCalories=${localMealsCalories}`
+      `https://api.spoonacular.com/mealplanner/generate?apiKey=8120a1495bbb4d05a3373ea228c0bf72&timeFrame=day&targetCalories=${localMealsCalories}`
     );
     localStorage.setItem("LocalMeals", JSON.stringify(meals.data.meals));
     setDaliyMeals(meals.data.meals);
@@ -133,6 +133,7 @@ export function MealsContextProvider({ children }) {
         submit,
         setSubmit,
         toggleMealsChange,
+        mealsChange
       }}
     >
       {children}

@@ -16,7 +16,7 @@ import FoodAnalyzer from "./FoodAnalayzer";
 import MealDetails from "./MealDetails";
 
 const DietMeals = () => {
-  const { dailyMeals, toggleMealsChange, userDetails } = useContext(MealsContext);
+  const { dailyMeals, toggleMealsChange, userDetails,mealsChange } = useContext(MealsContext);
   const [dailyWidgets1, setDailyWidgets1] = useState({});
   const [dailyWidgets2, setDailyWidgets2] = useState({});
   const [dailyWidgets3, setDailyWidgets3] = useState({});
@@ -27,13 +27,13 @@ const DietMeals = () => {
 
   const getDailyWidgets = async () => {
     let dw1 = await axios.get(
-      `https://api.spoonacular.com/recipes/${dailyMeals[0].id}/nutritionWidget.json?apiKey=de5cb3fca4e6414283cf5fe92bf7f950`
+      `https://api.spoonacular.com/recipes/${dailyMeals[0].id}/nutritionWidget.json?apiKey=8120a1495bbb4d05a3373ea228c0bf72`
     );
     let dw2 = await axios.get(
-      `https://api.spoonacular.com/recipes/${dailyMeals[1].id}/nutritionWidget.json?apiKey=de5cb3fca4e6414283cf5fe92bf7f950`
+      `https://api.spoonacular.com/recipes/${dailyMeals[1].id}/nutritionWidget.json?apiKey=8120a1495bbb4d05a3373ea228c0bf72`
     );
     let dw3 = await axios.get(
-      `https://api.spoonacular.com/recipes/${dailyMeals[2].id}/nutritionWidget.json?apiKey=de5cb3fca4e6414283cf5fe92bf7f950`
+      `https://api.spoonacular.com/recipes/${dailyMeals[2].id}/nutritionWidget.json?apiKey=8120a1495bbb4d05a3373ea228c0bf72`
     );
     localStorage.setItem("DailyWidgets1", JSON.stringify(dw1.data));
     localStorage.setItem("DailyWidgets2", JSON.stringify(dw2.data));
@@ -64,21 +64,12 @@ const DietMeals = () => {
     (dailyWidgets3.protein ? parseFloat(dailyWidgets3.protein) : 0);
 
   useEffect(() => {
-    let localDW1 = localStorage.getItem("DailyWidgets1");
-    let localDW2 = localStorage.getItem("DailyWidgets2");
-    let localDW3 = localStorage.getItem("DailyWidgets3");
-    if (localDW1&&localDW2&&localDW3) {
-      setDailyWidgets1(JSON.parse(localDW1));
-      setDailyWidgets2(JSON.parse(localDW2));
-      setDailyWidgets3(JSON.parse(localDW3));  
-    }else{
+
     getDailyWidgets();
-    }
+
   }, [dailyMeals]);
 
-  useEffect(()=>{
-    getDailyWidgets();
-  },[userDetails])
+
 
   ////////////////////////////////////////////////////////////////////////////
   return (

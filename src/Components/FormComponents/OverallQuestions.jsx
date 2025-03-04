@@ -26,7 +26,6 @@ const questions = [
       "Pescetarianism",
       "Gluten-Free",
       "Lactose intolerant",
-      "Nut allergy",
       "Other",
     ],
   },

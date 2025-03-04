@@ -29,8 +29,8 @@ export default function SignupForm() {
         flexDirection: "column",
         justifyContent: "space-between",
         overflowX: { xs: "hidden" },
-        overflowY: { xs: "auto", sm: "auto" },
-        overflow:{xs:'auto',sm:'hidden'}
+        overflowY:{xs:'auto',sm:'hidden'},
+        overFlowX:'hidden'
       }}
     >
 
