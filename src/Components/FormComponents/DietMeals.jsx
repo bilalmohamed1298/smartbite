@@ -10,30 +10,30 @@ import { useContext, useEffect, useState } from "react";
 import { MealsContext } from "../../Utils/MealsContext";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import { CameraAlt } from "@mui/icons-material";
+import RestaurantIcon from '@mui/icons-material/Restaurant';
 import axios from "axios";
 import FoodAnalyzer from "./FoodAnalayzer";
 import MealDetails from "./MealDetails";
 
 const DietMeals = () => {
-  const { dailyMeals, userDetails, mealsCalories } = useContext(MealsContext);
+  const { dailyMeals, toggleMealsChange } = useContext(MealsContext);
   const [dailyWidgets1, setDailyWidgets1] = useState({});
   const [dailyWidgets2, setDailyWidgets2] = useState({});
   const [dailyWidgets3, setDailyWidgets3] = useState({});
-  let localUserDetails = JSON.parse(localStorage.getItem("userDetails"));
   const [open1, setOpen1] = useState(false);
-  const [open2, setOpen2] = useState(false);
+  let localUserDetails = JSON.parse(localStorage.getItem("userDetails"));
 
   ////////////////////////// Nutrition Widgets APIs //////////////////////////
 
   const getDailyWidgets = async () => {
     let dw1 = await axios.get(
-      `https://api.spoonacular.com/recipes/${dailyMeals[0].id}/nutritionWidget.json?apiKey=de5cb3fca4e6414283cf5fe92bf7f950`
+      `https://api.spoonacular.com/recipes/${dailyMeals[0].id}/nutritionWidget.json?apiKey=e1960c2436914b008fd31c03c84e51b4`
     );
     let dw2 = await axios.get(
-      `https://api.spoonacular.com/recipes/${dailyMeals[1].id}/nutritionWidget.json?apiKey=de5cb3fca4e6414283cf5fe92bf7f950`
+      `https://api.spoonacular.com/recipes/${dailyMeals[1].id}/nutritionWidget.json?apiKey=e1960c2436914b008fd31c03c84e51b4`
     );
     let dw3 = await axios.get(
-      `https://api.spoonacular.com/recipes/${dailyMeals[2].id}/nutritionWidget.json?apiKey=de5cb3fca4e6414283cf5fe92bf7f950`
+      `https://api.spoonacular.com/recipes/${dailyMeals[2].id}/nutritionWidget.json?apiKey=e1960c2436914b008fd31c03c84e51b4`
     );
     localStorage.setItem("DailyWidgets1", JSON.stringify(dw1.data));
     localStorage.setItem("DailyWidgets2", JSON.stringify(dw2.data));
@@ -69,6 +69,8 @@ const DietMeals = () => {
     let localDW3 = localStorage.getItem("DailyWidgets3");
     if (localDW1&&localDW2&&localDW3) {
       setDailyWidgets1(JSON.parse(localDW1));
+      setDailyWidgets2(JSON.parse(localDW2));
+      setDailyWidgets3(JSON.parse(localDW3));  
     }else{
     getDailyWidgets();
     }
@@ -293,20 +295,29 @@ const DietMeals = () => {
         </Typography>
       </Box>
       <hr style={{ opacity: "40%" }} />
+
+      <Stack direction={"row"} sx={{justifyContent:'space-between', }}>
       <Typography
         sx={{
-          mt: 3,
+          mt: 2,
           fontWeight: "600",
           fontSize: "20px",
         }}
       >
         Today's Meals
       </Typography>
+      <Button onClick={toggleMealsChange} variant="contained" sx={{ mt: 'auto',mr:1, borderRadius:2, background: "#A34BCE", color: "#fff",p:'5px' }}>
+        <RestaurantIcon sx={{mr:1,textAlign:'center'}} fontSize="14"/>
+        <Typography sx={{fontSize:'12px'}}>
+        Change Meals
+        </Typography>
+      </Button>
+      </Stack>
 
       <Stack
         direction={"row"}
         sx={{
-          mt: 2,
+          mt: 3,
           flexWrap: "wrap",
           gap: 2,
           justifyContent: { xs: "center", sm: "start" },

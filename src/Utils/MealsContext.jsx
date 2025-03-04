@@ -11,15 +11,21 @@ export function MealsContextProvider({ children }) {
   const [TDEE, setTDEE] = useState(0);
   const [mealsCalories, setMealsCalories] = useState(0);
   const [dailyMeals, setDaliyMeals] = useState([]);
+  const [submit, setSubmit] = useState(false);
+  const [localMealsCalories, setLocalMealsCalories] = useState(
+    JSON.parse(localStorage.getItem("LocalMealsCalories"))
+  );
   const [mealsChange, setMealsChange] = useState(false);
 
-  let localUserDetails = JSON.parse(localStorage.getItem("userDetails"));
+  const toggleMealsChange = () => {
+    setMealsChange((prevState) => !prevState);
+  };
 
   ////////////////////// API //////////////////////////////
 
   const getAPI = async () => {
     let meals = await axios.get(
-      `https://api.spoonacular.com/mealplanner/generate?apiKey=de5cb3fca4e6414283cf5fe92bf7f950&timeFrame=day&targetCalories=${mealsCalories}`
+      `https://api.spoonacular.com/mealplanner/generate?apiKey=e1960c2436914b008fd31c03c84e51b4&timeFrame=day&targetCalories=${localMealsCalories}`
     );
     localStorage.setItem("LocalMeals", JSON.stringify(meals.data.meals));
     setDaliyMeals(meals.data.meals);
@@ -54,17 +60,31 @@ export function MealsContextProvider({ children }) {
     if (userDetails.goal === "Losing weight") {
       let losWeight = userDetails.weight - userDetails.idealWeight;
       let losCalories = losWeight * 7700;
-      let dailyLosCalories = userDetails.duration ? losCalories / userDetails.duration : 0;
+      let dailyLosCalories = userDetails.duration
+        ? losCalories / userDetails.duration
+        : 0;
       let tempMealsCalories = TDEE - dailyLosCalories;
+      tempMealsCalories !== 0
+        ? localStorage.setItem(
+            "LocalMealsCalories",
+            tempMealsCalories.toFixed(1)
+          )
+        : "";
       setMealsCalories(tempMealsCalories.toFixed(1));
-
     } else {
       let gainWeight = userDetails.weight - userDetails.idealWeight;
       let gainCalories = gainWeight * 7700;
-      let dailygainCalories = userDetails.duration ? gainCalories / userDetails.duration : 0;
+      let dailygainCalories = userDetails.duration
+        ? gainCalories / userDetails.duration
+        : 0;
       let tempMealsCalories = TDEE + dailygainCalories;
+      tempMealsCalories !== 0
+        ? localStorage.setItem(
+            "LocalMealsCalories",
+            tempMealsCalories.toFixed(1)
+          )
+        : "";
       setMealsCalories(tempMealsCalories.toFixed(1));
-      
     }
   };
 
@@ -74,25 +94,34 @@ export function MealsContextProvider({ children }) {
 
   useEffect(() => {
     CalculateTDEE();
-  }, [userDetails,BMR]);
+  }, [userDetails, BMR]);
 
   useEffect(() => {
     CalculateMealsCalories();
-  }, [userDetails.duration,TDEE]);
+    setLocalMealsCalories(
+      JSON.parse(localStorage.getItem("LocalMealsCalories"))
+    );
+  }, [userDetails.duration, TDEE]);
 
-  useEffect(() => { 
-localStorage.setItem('MealsCalories', mealsCalories)
-  }, [mealsCalories]);
+  useEffect(() => {
+    if (submit) {
+      localStorage.setItem("userDetails", JSON.stringify(userDetails));
+
+    }
+  }, [submit]);
 
   useEffect(() => {
     let localMeals = JSON.parse(localStorage.getItem("LocalMeals"));
-    if (localMeals&&localUserDetails) {
+    if (localMeals) {
       setDaliyMeals(localMeals);
-    } else {
+    } else if (submit) {
       getAPI();
     }
+  }, [submit]);
 
-  }, [mealsCalories,userDetails]);
+  useEffect(() => {
+    dailyMeals.length>0? getAPI():''
+  }, [mealsChange]);
 
   return (
     <MealsContext.Provider
@@ -101,7 +130,9 @@ localStorage.setItem('MealsCalories', mealsCalories)
         dailyMeals,
         setUserDetails,
         mealsCalories,
-        setMealsChange,
+        submit,
+        setSubmit,
+        toggleMealsChange,
       }}
     >
       {children}

@@ -33,14 +33,9 @@ const MealDetails = () => {
   };
 
   useEffect(() => {
-    let LocalMealDetails = localStorage.getItem('MealDetails');
-    let LocalNutritionWidget = localStorage.getItem('NutritionWidget');
-    if(LocalMealDetails&&LocalNutritionWidget){
-      setMealDetails(LocalMealDetails);
-      setNutritionWidget(LocalNutritionWidget);
-    }else{
+
     getMealDetails();
-    }
+    
   }, [id]);
 
   ///////////////////////// Summary ////////////////////////////
@@ -454,7 +449,7 @@ const MealDetails = () => {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    height: "550px",
+                    height: "700px",
                   }}
                 >
                   <CircularProgress />
