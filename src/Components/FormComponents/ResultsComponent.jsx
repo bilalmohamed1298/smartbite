@@ -32,15 +32,17 @@ const ResultsComponent = () => {
       </Box>
 
       <Box>
-        <Typography variant="h4" fontWeight="bold" gutterBottom mt={5}>
+        <Typography fontWeight="bold" gutterBottom sx={{mt:{xs:2,sm:5},fontSize: { xs: "24px", sm: "30px" }}}>
         NutriVibe tailors your plan based on your data and goals.
         </Typography>
         <Typography
-          fontSize={"18px"}
-          width={"400px"}
           color="textSecondary"
-          mt={2}
+          my={2}
           mx={"auto"}
+          sx={{
+            fontSize: { xs: "16px", },
+            width: { xs: "100%", sm: "80%" },
+          }}
         >
           Personalized meals and calories, just for you.
         </Typography>
@@ -68,11 +70,11 @@ const ResultsComponent = () => {
               borderRadius: "50px",
               backgroundColor: "#A34BCE",
               color: "white",
-              width: { xs: "70%", sm: "83%", md: "85%", lg: "83%" },
+              width: { xs: "60%", sm: "83%", md: "85%", lg: "83%" },
               height: 60,
               fontWeight: "bold",
               textTransform: "none",
-              fontSize: "18px",
+              fontSize:{xs:"14px",sm:"18px"},
               ml: 3,
               "&:hover": {
                 backgroundColor: "#A34BCE",
