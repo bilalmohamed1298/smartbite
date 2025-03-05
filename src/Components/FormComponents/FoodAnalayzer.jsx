@@ -56,7 +56,7 @@ const FoodAnalyzer = () => {
                 text: `Calculate Calories and Nutrition Values in This Photo in json
                                     
                       like this: {
-                      "dish": "Tofu Scramble with Roasted Potatoes",
+                      "dish": "Tofu Scramble with Roasted Potatoes" or "No Food Recognized",
                       },
                       "nutrition": {
                         "calories": {

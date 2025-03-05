@@ -227,7 +227,7 @@ const DietMeals = () => {
               <Typography sx={{ fontSize: { xs: "14px", sm: "16px" } }}>
                 Let us help you achieve your goal by losing
                 <span style={{ color: "#A34BCE", fontWeight: "600" }}>
-                  {""} {localUserDetails.weight - localUserDetails.idealWeight}
+                  {""} {Math.abs(localUserDetails.weight - localUserDetails.idealWeight)}
                   kg
                 </span>{" "}
                 within{" "}
@@ -240,7 +240,7 @@ const DietMeals = () => {
               <Typography>
                 Let us help you achieve your goal by gaining
                 <span style={{ color: "#A34BCE", fontWeight: "600" }}>
-                  {""} {localUserDetails.idealWeight - localUserDetails.weight}
+                  {""} {Math.abs(localUserDetails.idealWeight - localUserDetails.weight)}
                   kg
                 </span>{" "}
                 within{" "}
