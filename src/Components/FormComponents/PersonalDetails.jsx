@@ -273,6 +273,7 @@ const PersonalDetails = () => {
               "&:hover": { bgcolor: "#DEE4EB" },
               width: 60,
               height: 60,
+              mb:2
             }}
           >
             <KeyboardArrowLeft />
@@ -296,6 +297,7 @@ const PersonalDetails = () => {
                 "&:hover": {
                   backgroundColor: "#A34BCE",
                 },
+                mb:2
               }}
             >
               Next
