@@ -26,6 +26,7 @@ const ResultsComponent = () => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
+        
       }}
     >
       <Stack mt={5}>

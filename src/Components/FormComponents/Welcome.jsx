@@ -36,12 +36,14 @@ export default function Welcome() {
     <Box>
       <Stack
         sx={{
-          p: 5,
+          p: 4,
+          display:'flex',
+          justifyContent:{xs:'center',sm:'space-between'},
         }}
       >
         <Typography
           sx={{
-            mb: {xs:1,sm:8},
+            mb: { xs: 1, sm: 8 },
             fontSize: "30px",
             fontWeight: "600",
             textAlign: "center",
@@ -53,16 +55,16 @@ export default function Welcome() {
         <Box
           sx={{
             maxWidth: "350px",
-            height: "400px",
+            height: "300px",
             cursor: "pointer",
             textAlign: "center",
             p: 2,
             borderRadius: "12px",
             display: "flex",
-            justifyContent: "center",
+            justifyContent: { xs: "start", sm: "center" },
             flexDirection: "column",
             bgcolor: "white",
-            mb: { sm: 12, xs: 3 },
+            mb: { sm: 26, xs: 3 },
             mx: "auto",
           }}
         >
@@ -137,7 +139,6 @@ export default function Welcome() {
                 bgcolor: "white",
                 boxShadow: 2,
                 "&:hover": { bgcolor: "#f5f5f5" },
-                
               }}
             >
               <ChevronLeft fontSize="large" pr={1} />
@@ -159,37 +160,38 @@ export default function Welcome() {
                 "&:hover": { bgcolor: "#f5f5f5" },
               }}
             >
-              <ChevronRight  fontSize="large"/>
+              <ChevronRight fontSize="large" />
             </IconButton>
           ) : (
             ""
           )}
         </Box>
-
-        {currentIndex === slides.length - 1 ? (
-          <Link to="/overall">
-            <Button
-              size="large"
-              sx={{
-                borderRadius: "50px",
-                backgroundColor: "#A34BCE",
-                color: "white",
-                width: "100%",
-                height: "60px",
-                fontWeight: "bold",
-                textTransform: "none",
-                fontSize: "18px",
-                "&:hover": {
+        <Box>
+          {currentIndex === slides.length - 1 ? (
+            <Link to="/overall">
+              <Button
+                size="large"
+                sx={{
+                  borderRadius: "50px",
                   backgroundColor: "#A34BCE",
-                },
-              }}
-            >
-              Next
-            </Button>
-          </Link>
-        ) : (
-          ""
-        )}
+                  color: "white",
+                  width: "100%",
+                  height: "60px",
+                  fontWeight: "bold",
+                  textTransform: "none",
+                  fontSize: "18px",
+                  "&:hover": {
+                    backgroundColor: "#A34BCE",
+                  },
+                }}
+              >
+                Next
+              </Button>
+            </Link>
+          ) : (
+            ""
+          )}
+        </Box>
       </Stack>
     </Box>
   );

@@ -37,7 +37,7 @@ const CustomDietComponent = () => {
         justifyContent: "space-between",
       }}
     >
-      <Typography variant={"h4"} fontWeight="bold" gutterBottom sx={{mt:{xs:2,sm:5}}}>
+      <Typography fontWeight="bold" gutterBottom sx={{mt:{xs:2,sm:5},fontSize:{xs:'24px',sm:'40px'}}}>
         The perfect diet is the one tailored for you.
       </Typography>
 
@@ -144,16 +144,17 @@ const CustomDietComponent = () => {
 
         <Link to="/details">
           <Button
-            size="large"
+            variant="contained"
+            size="small"
             sx={{
               borderRadius: "50px",
               backgroundColor: "#A34BCE",
               color: "white",
               width: { xs: "60%", sm: "83%", md: "85%", lg: "83%" },
-              height: 60,
+              height: {xs:50,sm:60},
               fontWeight: "bold",
               textTransform: "none",
-              fontSize:{xs:"14px",sm:"18px"},
+              fontSize:{xs:"12px",sm:"18px"},
               ml: 3,
               "&:hover": {
                 backgroundColor: "#A34BCE",

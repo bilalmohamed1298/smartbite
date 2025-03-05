@@ -28,9 +28,9 @@ import { MealsContext } from "../../Utils/MealsContext";
 const Preferences = () => {
   const { userDetails, setUserDetails, submit,setSubmit } = useContext(MealsContext);
   const [preferences, setPreferences] = useState({
-    goal: "",
-    idealWeight: null,
-    duration: null,
+    goal: '',
+    idealWeight: '',
+    duration: '',
   });
   const [visibleFields, setVisibleFields] = useState(["goal"]);
   const [duration, setDuration] = useState(45);
@@ -256,7 +256,7 @@ const Preferences = () => {
         </Box>
       </Box>
 
-      <Box>
+      <Box sx={{mt:{xs:3},}}>
         <Link to="/details">
           <IconButton
             size="large"

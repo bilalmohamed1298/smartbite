@@ -1,6 +1,6 @@
-import { Box} from "@mui/material";
+import { Box, Button, Modal, Typography} from "@mui/material";
 import OverallQuestions from "./FormComponents/OverallQuestions";
-import {Route, Routes } from "react-router-dom";
+import {Link, Route, Routes } from "react-router-dom";
 import PersonalDetails from "./FormComponents/PersonalDetails";
 import Welcome from "./FormComponents/Welcome";
 import DietMeals from "./FormComponents/DietMeals";
@@ -9,17 +9,19 @@ import MealDetails from "./FormComponents/MealDetails";
 import FoodAnalyzer from "./FormComponents/FoodAnalayzer";
 import CustomDietComponent from "./FormComponents/CustomDietComponent";
 import ResultsComponent from "./FormComponents/ResultsComponent";
+import { CameraAlt } from "@mui/icons-material";
+import { useState } from "react";
 
 export default function SignupForm() {
-  // const [open1, setOpen1] = useState(false);
+  const [open1, setOpen1] = useState(false);
   return (
     <Box
       sx={{
         width: { lg: "55%", sm: "90%", xs: "85%" },
         maxHeight: { xs: "100vh" },
-        height: { xs: "650px", sm: "780px" },
+        height: { xs: "580px", sm: "780px" },
         mx: "auto",
-        my: { xs: 5, lg: 1 },
+        my: { xs: 3, lg: 1 },
         p: 3,
         bgcolor: "white",
         boxShadow: 3,
@@ -47,12 +49,12 @@ export default function SignupForm() {
         <Route path="/food-analyzer" element={<FoodAnalyzer />} />
       </Routes>
 
-{/* 
+
       <Box
         sx={{
           position: "absolute",
-          right: {xs:20,sm:50},
-          top: 20,
+          right: {xs:20,sm:40},
+          top: 25,
           width: "70px",
         }}
       >
@@ -93,7 +95,7 @@ export default function SignupForm() {
               bgcolor: "background.paper",
               boxShadow: 24,
               p: 2,
-              borderRadius: 5,
+              borderRadius: 2,
               height: "70%",
               overflowX: "hidden",
               overflowY: "auto",
@@ -106,7 +108,7 @@ export default function SignupForm() {
             <FoodAnalyzer />
           </Box>
         </Modal>
-      </div> */}
+      </div>
 
       
     </Box>

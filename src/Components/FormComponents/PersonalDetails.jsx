@@ -20,10 +20,10 @@ import { MealsContext } from "../../Utils/MealsContext";
 const PersonalDetails = () => {
   const { setUserDetails } = useContext(MealsContext);
   const [personalData, setPersonalData] = useState({
-    gender: "",
-    age: null,
-    height: null,
-    weight: null,
+    gender: '',
+    age: '',
+    height: '',
+    weight: '',
   });
   const [visibleFields, setVisibleFields] = useState(["gender"]);
 

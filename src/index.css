@@ -12,7 +12,7 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 4px;
   height: 8px;
 }
 
@@ -22,6 +22,6 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(45deg, #cc25c4, #c547ff);
+  background: linear-gradient(45deg, #36263567, #4c38556c);
   transition: background 0.3s ease-in-out;
 }

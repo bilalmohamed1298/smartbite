@@ -82,9 +82,9 @@ const FoodAnalyzer = () => {
                           "source": "potatoes"
                         },
                         "vitamins": {
-                          "vitamin A": "present in potatoes and possibly vegetables in scramble",
-                          "vitamin C": "present in potatoes and possibly vegetables in scramble",
-                          "vitamin D": "present in potatoes"
+                          "vitamin_A": "present in potatoes and possibly vegetables in scramble",
+                          "vitamin_C": "present in potatoes and possibly vegetables in scramble",
+                          "vitamin_D": "present in potatoes"
                         },
                       }
 
@@ -250,7 +250,7 @@ const FoodAnalyzer = () => {
                 <Typography variant="h6" color="#A34BCE">
                   Detected Ingredients
                 </Typography>
-                <Typography sx={{ mb: 1, fontWeight: "600",color:'#4b3055', fontSize: "22px" }}>
+                <Typography>
                   {analyzedInfo.dish || "No ingredients detected"}
                 </Typography>
               </Paper>
@@ -265,10 +265,10 @@ const FoodAnalyzer = () => {
                   height: "90%",
                 }}
               >
-                <Typography variant="h6" color="#A34BCE" mb={1}>
+                <Typography variant="h6" color="#A34BCE">
                   Calories
                 </Typography>
-                <Typography sx={{ mb: 1, fontWeight: "600",color:'#4b3055' }}>
+                <Typography sx={{ mb: 1, fontWeight: "500" }}>
                   {analyzedInfo?.nutrition?.calories?.total || 0} calories
                 </Typography>
                 {analyzedInfo?.nutrition?.calories?.breakdown &&
@@ -276,16 +276,16 @@ const FoodAnalyzer = () => {
                     .length > 0 && (
                     <Stack spacing={0}>
                       <Typography variant="body1" color="#A34BCE">
-                        Breakdown
+                        Breakdown:
                       </Typography>
                       {Object.keys(
                         analyzedInfo?.nutrition?.calories?.breakdown
                       ).map((key) => (
                         <Typography
-                          sx={{ textTransform: "capitalize",fontWeight: "600",fontSize:'14px' }}
+                          sx={{ textTransform: "capitalize" }}
                           key={key}
                         >
-                          <span style={{ mb: 1, fontWeight: "600" }}>
+                          <span style={{ mb: 1, fontWeight: "500" }}>
                             {key}:{" "}
                           </span>
                           {analyzedInfo?.nutrition?.calories?.breakdown[key]}
@@ -305,13 +305,13 @@ const FoodAnalyzer = () => {
                   height: "90%",
                 }}
               >
-                <Typography variant="h6" color="#A34BCE" mb={1}>
+                <Typography variant="h6" color="#A34BCE">
                   Vitamins
                 </Typography>
                 {Object.keys(analyzedInfo?.nutrition?.vitamins).map((key) => (
-                  <Typography sx={{ textTransform: "capitalize",mb:1 }} key={key}>
-                    <span style={{ mb: 1, fontWeight: "600",color:'#4b3055', }}>{key}:</span><br/>{" "}
-                    <span style={{fontSize:'14px'}}>{analyzedInfo?.nutrition?.vitamins[key]}</span>
+                  <Typography sx={{ textTransform: "capitalize" }} key={key}>
+                    <span style={{ mb: 1, fontWeight: "500" }}>{key}:</span>{" "}
+                    {analyzedInfo?.nutrition?.vitamins[key]}
                   </Typography>
                 ))}
               </Paper>
@@ -329,7 +329,7 @@ const FoodAnalyzer = () => {
                 <Typography variant="h6" color="#A34BCE">
                   Protein
                 </Typography>
-                <Typography sx={{ mb: 1, fontWeight: "600",color:'#4b3055' }}>
+                <Typography sx={{ mb: 1, fontWeight: "500" }}>
                   {analyzedInfo?.nutrition?.protein?.grams || 0}g
                 </Typography>
               </Paper>
@@ -347,7 +347,7 @@ const FoodAnalyzer = () => {
                 <Typography variant="h6" color="#A34BCE">
                   Carbs
                 </Typography>
-                <Typography sx={{ mb: 1, fontWeight: "600",color:'#4b3055' }}>
+                <Typography sx={{ mb: 1, fontWeight: "500" }}>
                   {analyzedInfo?.nutrition?.carbohydrates?.grams || 0}g
                 </Typography>
               </Paper>
@@ -365,7 +365,7 @@ const FoodAnalyzer = () => {
                 <Typography variant="h6" color="#A34BCE">
                   Fat
                 </Typography>
-                <Typography sx={{ mb: 1, fontWeight: "600",color:'#4b3055' }}>
+                <Typography sx={{ mb: 1, fontWeight: "500" }}>
                   {analyzedInfo?.nutrition?.fat?.grams || 0}g
                 </Typography>
               </Paper>
