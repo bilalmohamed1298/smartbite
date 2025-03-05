@@ -271,6 +271,7 @@ const DietMeals = () => {
         >
           Today's Meals
         </Typography>
+        
         <Button
           onClick={toggleMealsChange}
           variant="contained"
@@ -287,6 +288,9 @@ const DietMeals = () => {
           <Typography sx={{ fontSize: "12px" }}>Change Meals</Typography>
         </Button>
       </Stack>
+      <Typography>
+        Calculated Calories: {localMealsCalories}
+      </Typography>
       {Object.keys(dailyNutrients).length > 0 ? (
         <Stack
           direction={"row"}
