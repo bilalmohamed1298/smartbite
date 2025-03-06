@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const MealDetails = () => {
   const [MealDetails, setMealDetails] = useState({});
@@ -26,14 +26,10 @@ const MealDetails = () => {
 
     setMealDetails(details.data);
     setNutritionWidget(widget.data);
-    
-    
   };
 
   useEffect(() => {
-
     getMealDetails();
-    
   }, [id]);
 
   ///////////////////////// Summary ////////////////////////////
@@ -50,9 +46,9 @@ const MealDetails = () => {
           sx={{
             fontFamily: "arial",
             fontSize: "14px",
-            textOverflow: "ellipsis", 
+            textOverflow: "ellipsis",
             whiteSpace: "wrap",
-            width: "100%" 
+            width: "100%",
           }}
         >
           <p
@@ -70,7 +66,7 @@ const MealDetails = () => {
             size="small"
             sx={{
               mt: 1,
-              width:{xs:"100%",},
+              width: { xs: "100%" },
             }}
           >
             <a
@@ -110,6 +106,25 @@ const MealDetails = () => {
               overflow: "hidden",
             }}
           >
+            <Link to={'/diet-meals'}>
+              <Button
+                variant="contained"
+                color="error"
+                sx={{
+                  position: "absolute",
+                  zIndex:1,
+                  p:0,
+                  borderRadius:"50px",
+                  width:'10px',
+                  minWidth:"30px",
+                  m:'5px',
+                  textTransform:'lowercase'
+
+                }}
+              >
+                x
+              </Button>
+            </Link>
             <img
               src={`${MealDetails.image}`}
               alt="Meal"
@@ -146,31 +161,35 @@ const MealDetails = () => {
             </Typography>
           </Box>
           <Stack direction={"row"} sx={{ gap: 1, flexWrap: "wrap", m: 1 }}>
-            {nutritionWidget?.ingredients?.map((ingredient, index) => index < 7?(
-              <Box
-                key={index}
-                sx={{
-                  bgcolor: "#A34BCE",
-                  color: "#fff",
-                  p: "5px",
-                  borderRadius: 2,
-                  flexGrow: { xs: 1, sm: 0 },
-                }}
-              >
-                <Typography
-                  variant="body2"
-                  sx={{ textTransform: "capitalize" }}
+            {nutritionWidget?.ingredients?.map((ingredient, index) =>
+              index < 7 ? (
+                <Box
+                  key={index}
+                  sx={{
+                    bgcolor: "#A34BCE",
+                    color: "#fff",
+                    p: "5px",
+                    borderRadius: 2,
+                    flexGrow: { xs: 1, sm: 0 },
+                  }}
                 >
-                  {ingredient.name}
-                </Typography>
-              </Box>
-            ):'')}
+                  <Typography
+                    variant="body2"
+                    sx={{ textTransform: "capitalize" }}
+                  >
+                    {ingredient.name}
+                  </Typography>
+                </Box>
+              ) : (
+                ""
+              )
+            )}
           </Stack>
           <Stack sx={{}}>
             <Typography variant="h5" sx={{ mt: 2, mb: 1 }}>
               Summary
             </Typography>
-            <TruncatedHTML text={MealDetails.summary} limit={60} />
+            <TruncatedHTML text={MealDetails.summary} limit={1000} />
           </Stack>
           <Stack
             direction={"row"}
@@ -442,17 +461,17 @@ const MealDetails = () => {
           </Stack>
         </Box>
       ) : (
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    height: "700px",
-                  }}
-                >
-                  <CircularProgress />
-                </div>
-              )}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "700px",
+          }}
+        >
+          <CircularProgress />
+        </div>
+      )}
     </Box>
   );
 };

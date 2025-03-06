@@ -24,8 +24,8 @@ export default function SignupForm() {
         boxShadow: {xs:0,sm:3},
         borderRadius: 3,
         position: "relative",
-        overflowX: { xs: "hidden" },
-        overflowY:{xs:'auto',sm:'hidden'},
+        overflowX: "hidden",
+        overflowY:"scroll",
       }}
     >
 

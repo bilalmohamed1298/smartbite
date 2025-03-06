@@ -89,11 +89,11 @@ const FoodAnalyzer = () => {
                           "grams": 10,
                           "source": "potatoes"
                         },
-                        "vitamins": {
-                          "vitamin_A": "present in potatoes and possibly vegetables in scramble",
-                          "vitamin_C": "present in potatoes and possibly vegetables in scramble",
-                          "vitamin_D": "present in potatoes"
-                        },
+                        "vitamins":[
+                          "vitamin A: present in potatoes and possibly vegetables in scramble,"
+                          "vitamin C: present in potatoes and possibly vegetables in scramble,"
+                          "vitamin D: present in potatoes"
+                        ],
                       }
 
                       without note or "\`\`\`json" and "\`\`\`" at the end of the text.
@@ -236,7 +236,9 @@ const FoodAnalyzer = () => {
             )}
           </>
         ) : (
-          <Button variant="outlined" onClick={() => setImage(null)}>
+          <Button variant="outlined" onClick={() => (setImage(null)
+            ,setAnalyzedInfo({})
+          )}>
             Capture Another Image
           </Button>
         )}
@@ -309,7 +311,7 @@ const FoodAnalyzer = () => {
                     :''
                   }
             </Grid>
-            {analyzedInfo?.nutrition?.calories?.total !== null ? (
+            {analyzedInfo.dish !== "No Food Recognized" && analyzedInfo?.nutrition?.calories?.total !== null ? (
               <Grid container spacing={3} alignItems={"stretch"} mt={1}>
                 <Grid item xs={12} sm={12}>
                   <Paper
@@ -323,17 +325,15 @@ const FoodAnalyzer = () => {
                     <Typography variant="h6" color="#A34BCE">
                       Vitamins
                     </Typography>
-                    {Object.keys(analyzedInfo?.nutrition?.vitamins).map(
+                    {analyzedInfo?.nutrition?.vitamins.map(
                       (key) => (
                         <Typography
                           sx={{ textTransform: "capitalize" }}
                           key={key}
                         >
                           <span style={{ mb: 1, fontWeight: "500" }}>
-                            {key}:
+                            {key}
                           </span>{" "}
-                          {analyzedInfo?.nutrition?.vitamins[key] ||
-                            "Not Found"}
                         </Typography>
                       )
                     )}

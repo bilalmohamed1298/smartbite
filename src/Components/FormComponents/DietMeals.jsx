@@ -227,7 +227,10 @@ const DietMeals = () => {
               <Typography sx={{ fontSize: { xs: "14px", sm: "16px" } }}>
                 Let us help you achieve your goal by losing
                 <span style={{ color: "#A34BCE", fontWeight: "600" }}>
-                  {""} {Math.abs(localUserDetails.weight - localUserDetails.idealWeight)}
+                  {""}{" "}
+                  {Math.abs(
+                    localUserDetails.weight - localUserDetails.idealWeight
+                  )}
                   kg
                 </span>{" "}
                 within{" "}
@@ -240,7 +243,10 @@ const DietMeals = () => {
               <Typography>
                 Let us help you achieve your goal by gaining
                 <span style={{ color: "#A34BCE", fontWeight: "600" }}>
-                  {""} {Math.abs(localUserDetails.idealWeight - localUserDetails.weight)}
+                  {""}{" "}
+                  {Math.abs(
+                    localUserDetails.idealWeight - localUserDetails.weight
+                  )}
                   kg
                 </span>{" "}
                 within{" "}
@@ -271,7 +277,7 @@ const DietMeals = () => {
         >
           Today's Meals
         </Typography>
-        
+
         <Button
           onClick={toggleMealsChange}
           variant="contained"
@@ -514,74 +520,22 @@ const DietMeals = () => {
           </div>
         )}
       </Box>
-      <Box
-        sx={{
-          position: "sticky",
-          left: 1000,
-          bottom: 10,
-          width: "70px",
-        }}
-      >
-        <Link style={{ textDecoration: "none" }}>
-          <Button
-            onClick={() => setOpen1(true)}
-            sx={{
-              borderRadius: 10,
-              justifyContent: "center",
-              p: "16px 5px",
-              display:'none'
-            }}
-            variant="contained"
-            startIcon={<CameraAlt sx={{ ml: "10px" }} />}
-          ></Button>
-        </Link>
-      </Box>
-
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Modal
-          open={open1}
-          onClose={() => setOpen1(false)}
-          aria-labelledby="modal-title"
-          aria-describedby="modal-description"
-          sx={{ overflow: "scroll", mt: 3, borderRadius: 2 }}
+      <Box sx={{textTransform:'capitalize'}}>
+        <Typography
+          sx={{
+            mt: 5,
+            mb: 2,
+            fontWeight: "600",
+            fontSize: "20px",
+          }}
         >
-          <Box
-            sx={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: { xs: "75%", sm: 500 },
-              bgcolor: "background.paper",
-              boxShadow: 24,
-              p: 2,
-              borderRadius: 2,
-              height: "70%",
-              overflowX: "hidden",
-              overflowY: "auto",
-            }}
-          >
-            <Typography id="modal-title" variant="h6" component="h2" mb={1}>
-              Food Analyzer
-            </Typography>
-
-            <FoodAnalyzer />
-          </Box>
-        </Modal>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      ></div>
+          Examples of suggested foods
+        </Typography>
+        <Typography sx={{fontSize:{xs:'16px',sm:'16px'}}}><span style={{fontWeight:'600'}}>Iron:</span> spinach, lentils, red meat, liver, nuts.</Typography>
+        <Typography sx={{fontSize:{xs:'16px',sm:'16px'}}}><span style={{fontWeight:'600'}}>Vitamin B12:</span> fish, eggs, milk, liver, cheese.</Typography>
+        <Typography sx={{fontSize:{xs:'16px',sm:'16px'}}}><span style={{fontWeight:'600'}}>Vitamin D:</span> fatty fish, eggs, dairy</Typography>
+        <Typography sx={{fontSize:{xs:'16px',sm:'16px'}}}><span style={{fontWeight:'600'}}>Calcium:</span> milk, cheese, sardines, leafy greens.</Typography>
+      </Box>
     </Box>
   );
 };

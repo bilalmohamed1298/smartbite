@@ -54,6 +54,10 @@ const questions = [
     options: ["Diabetes", "Hypertension", "Heart Disease", "None"],
   },
   {
+    question: "Do you often experience fatigue, hair loss, brittle nails, or frequent illnesses?",
+    options: ["Yes, frequently", "Sometimes", "Rarely", "Never"],
+  },
+  {
     question: "How active is your daily routine?",
     options: [
       "Sedentary",
