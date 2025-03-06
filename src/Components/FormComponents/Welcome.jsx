@@ -64,7 +64,7 @@ export default function Welcome() {
             justifyContent: { xs: "start", sm: "center" },
             flexDirection: "column",
             bgcolor: "white",
-            mb:10,
+            mb:2,
             mx: "auto",
           }}
         >
