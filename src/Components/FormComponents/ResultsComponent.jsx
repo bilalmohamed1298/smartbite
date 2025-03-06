@@ -37,7 +37,7 @@ const ResultsComponent = () => {
             gutterBottom
             sx={{ mt: { xs: 2, sm: 5 }, fontSize: { xs: "24px", sm: "30px" } }}
           >
-            NutriVibe tailors your plan based on your data and goals.
+            Smartbite tailors your plan based on your data and goals.
           </Typography>
           <Typography
             color="textSecondary"
@@ -48,7 +48,7 @@ const ResultsComponent = () => {
               width: { xs: "100%", sm: "80%" },
             }}
           >
-            Personalized meals and calories, just for you.
+            Personalized meals and nutrients, just for you.
           </Typography>
         </Box>
       </Stack>

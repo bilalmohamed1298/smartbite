@@ -126,7 +126,7 @@ const CustomDietComponent = () => {
           width: { xs: "100%", sm: "80%" },
         }}
       >
-        NutriVibe helps you discover the perfect plan to achieve your goals.
+        Smartbite helps you discover the perfect plan to achieve your goals.
       </Typography>
 
       <Box
