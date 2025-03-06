@@ -115,7 +115,6 @@ const MealDetails = () => {
                   zIndex:1,
                   p:0,
                   borderRadius:"50px",
-                  width:'10px',
                   minWidth:"30px",
                   m:'5px',
                   textTransform:'lowercase'
