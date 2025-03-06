@@ -17,22 +17,15 @@ export default function SignupForm() {
   return (
     <Box
       sx={{
-        width: { lg: "55%", sm: "90%", xs: "85%" },
-        maxHeight: { xs: "100vh" },
-        height: { xs: "580px", sm: "780px" },
-        mx: "auto",
-        my: { xs: 3, lg: 1 },
+        height: {xs:'95vh',lg:'790px'},
+        my: { xs: 0,lg:1 },
         p: 3,
         bgcolor: "white",
-        boxShadow: 3,
+        boxShadow: {xs:1,sm:3},
         borderRadius: 3,
         position: "relative",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
         overflowX: { xs: "hidden" },
         overflowY:{xs:'auto',sm:'hidden'},
-        overFlowX:'hidden'
       }}
     >
 
@@ -53,7 +46,7 @@ export default function SignupForm() {
       <Box
         sx={{
           position: "absolute",
-          right: {xs:20,sm:40},
+          right: {xs:35,sm:80},
           top: 25,
           width: "70px",
         }}

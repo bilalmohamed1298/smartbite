@@ -27,9 +27,7 @@ const CustomDietComponent = () => {
     <Box
       sx={{
         backgroundColor: "#fcf6ff",
-        p: 3,
         borderRadius: 4,
-        maxWidth: "100%",
         height: "100%",
         textAlign: "center",
         display: "flex",
@@ -37,7 +35,11 @@ const CustomDietComponent = () => {
         justifyContent: "space-between",
       }}
     >
-      <Typography fontWeight="bold" gutterBottom sx={{mt:{xs:2,sm:5},fontSize:{xs:'24px',sm:'40px'}}}>
+      <Typography
+        fontWeight="bold"
+        gutterBottom
+        sx={{ mt: {xs:7,sm:10},mx:'auto', fontSize: { xs: "22px", sm: "40px" },width:{xs:'80%',sm:'60%'} }}
+      >
         The perfect diet is the one tailored for you.
       </Typography>
 
@@ -127,43 +129,52 @@ const CustomDietComponent = () => {
         NutriVibe helps you discover the perfect plan to achieve your goals.
       </Typography>
 
-      <Box>
-        <Link to="/overall">
-          <IconButton
-            size="large"
-            sx={{
-              bgcolor: "#E7EDf5",
-              "&:hover": { bgcolor: "#DEE4EB" },
-              width: 60,
-              height: 60,
-            }}
-          >
-            <KeyboardArrowLeft />
-          </IconButton>
-        </Link>
-
-        <Link to="/details">
-          <Button
-            variant="contained"
-            size="small"
-            sx={{
-              borderRadius: "50px",
-              backgroundColor: "#A34BCE",
-              color: "white",
-              width: { xs: "60%", sm: "83%", md: "85%", lg: "83%" },
-              height: {xs:50,sm:60},
-              fontWeight: "bold",
-              textTransform: "none",
-              fontSize:{xs:"12px",sm:"18px"},
-              ml: 3,
-              "&:hover": {
-                backgroundColor: "#A34BCE",
-              },
-            }}
-          >
-            Let’s Discover You
-          </Button>
-        </Link>
+      <Box
+        sx={{
+          display: "flex",
+          gap: 2,
+          flexDirection: "row",
+          width: "100%",
+          
+        }}
+      >
+        <Box sx={{ width: "auto" }}>
+          <Link to="/overall">
+            <IconButton
+              size="large"
+              sx={{
+                bgcolor: "#E7EDf5",
+                "&:hover": { bgcolor: "#DEE4EB" },
+                width: 60,
+                height: 60,
+              }}
+            >
+              <KeyboardArrowLeft />
+            </IconButton>
+          </Link>
+        </Box>
+        <Box sx={{ width: "100%" }}>
+          <Link to="/details">
+            <Button
+                size="large"
+                sx={{
+                  borderRadius: "50px",
+                  backgroundColor: "#A34BCE",
+                  color: "white",
+                  height: 60,
+                  fontWeight: "bold",
+                  textTransform: "none",
+                  fontSize: "18px",
+                  "&:hover": {
+                    backgroundColor: "#A34BCE",
+                  },
+                  width:'100%'
+                }}
+            >
+              Let’s Discover You
+            </Button>
+          </Link>
+        </Box>
       </Box>
     </Box>
   );

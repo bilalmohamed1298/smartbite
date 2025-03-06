@@ -14,16 +14,22 @@ import {
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import { Female, KeyboardArrowLeft, Male, Man, Woman } from "@mui/icons-material";
+import {
+  Female,
+  KeyboardArrowLeft,
+  Male,
+  Man,
+  Woman,
+} from "@mui/icons-material";
 import { MealsContext } from "../../Utils/MealsContext";
 
 const PersonalDetails = () => {
   const { setUserDetails } = useContext(MealsContext);
   const [personalData, setPersonalData] = useState({
-    gender: '',
-    age: '',
-    height: '',
-    weight: '',
+    gender: "",
+    age: "",
+    height: "",
+    weight: "",
   });
   const [visibleFields, setVisibleFields] = useState(["gender"]);
 
@@ -144,7 +150,7 @@ const PersonalDetails = () => {
                                   width: { xs: "300px", lg: "300px" },
                                   display: "flex",
                                   alignItems: "center",
-                                  gap: 1, 
+                                  gap: 1,
                                 }}
                               >
                                 {option === "Male" ? <Man /> : <Woman />}
@@ -172,12 +178,12 @@ const PersonalDetails = () => {
                 </Typography>
 
                 <TextField
-                 inputRef={(input) => {
-                  if (input) {
-                    input.min = 10;
-                    input.max = 100;
-                  }
-                }}
+                  inputRef={(input) => {
+                    if (input) {
+                      input.min = 10;
+                      input.max = 100;
+                    }
+                  }}
                   fullWidth
                   type="number"
                   value={personalData.age}
@@ -264,46 +270,53 @@ const PersonalDetails = () => {
         </Box>
       </Box>
 
-      <Box>
-        <Link to="/custom-diet">
-          <IconButton
-            size="large"
-            sx={{
-              bgcolor: "#E7EDf5",
-              "&:hover": { bgcolor: "#DEE4EB" },
-              width: 60,
-              height: 60,
-              mb:2
-            }}
-          >
-            <KeyboardArrowLeft />
-          </IconButton>
-        </Link>
-
-        {visibleFields.includes("weight") && personalData.weight && (
-          <Link to="/preferences">
-            <Button
+      <Box
+        sx={{
+          display: "flex",
+          gap: 2,
+          flexDirection: "row",
+          width: "100%",
+        }}
+      >
+        <Box sx={{ width: "auto" }}>
+          <Link to="/custom-diet">
+            <IconButton
               size="large"
               sx={{
-                borderRadius: "50px",
-                backgroundColor: "#A34BCE",
-                color: "white",
-                width: { xs: "70%", sm: "83%",md:"85%",lg:'83%' },
+                bgcolor: "#E7EDf5",
+                "&:hover": { bgcolor: "#DEE4EB" },
+                width: 60,
                 height: 60,
-                fontWeight: "bold",
-                textTransform: "none",
-                fontSize: "18px",
-                ml: 3,
-                "&:hover": {
-                  backgroundColor: "#A34BCE",
-                },
-                mb:2
               }}
             >
-              Next
-            </Button>
+              <KeyboardArrowLeft />
+            </IconButton>
           </Link>
-        )}
+        </Box>
+        <Box sx={{ width: "100%" }}>
+          {visibleFields.includes("weight") && personalData.weight && (
+            <Link to="/preferences">
+              <Button
+                size="large"
+                sx={{
+                  borderRadius: "50px",
+                  backgroundColor: "#A34BCE",
+                  color: "white",
+                  height: 60,
+                  fontWeight: "bold",
+                  textTransform: "none",
+                  fontSize: "18px",
+                  "&:hover": {
+                    backgroundColor: "#A34BCE",
+                  },
+                  width: "100%",
+                }}
+              >
+                Next
+              </Button>
+            </Link>
+          )}
+        </Box>
       </Box>
     </Stack>
   );

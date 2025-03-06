@@ -2,7 +2,15 @@ import { useState, useRef, useEffect } from "react";
 import Webcam from "react-webcam";
 import * as tf from "@tensorflow/tfjs";
 import * as mobilenet from "@tensorflow-models/mobilenet";
-import { Box, Button, Paper, Typography, Grid, Stack, CircularProgress } from "@mui/material";
+import {
+  Box,
+  Button,
+  Paper,
+  Typography,
+  Grid,
+  Stack,
+  CircularProgress,
+} from "@mui/material";
 import { CameraAlt } from "@mui/icons-material";
 import axios from "axios";
 
@@ -124,7 +132,6 @@ const FoodAnalyzer = () => {
 
     CleanAPI = CleanAPI.slice(firstCurly, lastCurly + 1);
     console.log("CleanAPI:", CleanAPI);
-
     try {
       return JSON.parse(CleanAPI);
     } catch (error) {
@@ -234,160 +241,182 @@ const FoodAnalyzer = () => {
           </Button>
         )}
       </div>
-      {image ?(
-         analyzedInfo.dish ? (
-        <Box sx={{ width: "100%", padding: 2 }}>
-          <Grid container spacing={3} alignItems={"stretch"}>
-            <Grid item xs={12} sm={12}>
-              <Paper
-                sx={{
-                  padding: 2,
-                  borderRadius: 3,
-                  backgroundColor: "#fbf6fe",
-                  textAlign: "center",
-                }}
-              >
-                <Typography variant="h6" color="#A34BCE">
-                  Detected Ingredients
-                </Typography>
-                <Typography>
-                  {analyzedInfo.dish || "No ingredients detected"}
-                </Typography>
-              </Paper>
-            </Grid>
-
-            <Grid item xs={12} sm={6}>
-              <Paper
-                sx={{
-                  padding: 2,
-                  borderRadius: 3,
-                  backgroundColor: "#fbf6fe",
-                  height: "90%",
-                }}
-              >
-                <Typography variant="h6" color="#A34BCE">
-                  Calories
-                </Typography>
-                <Typography sx={{ mb: 1, fontWeight: "500" }}>
-                  {analyzedInfo?.nutrition?.calories?.total || 0} calories
-                </Typography>
-                {analyzedInfo?.nutrition?.calories?.breakdown &&
-                  Object.keys(analyzedInfo?.nutrition?.calories?.breakdown)
-                    .length > 0 && (
-                    <Stack spacing={0}>
-                      <Typography variant="body1" color="#A34BCE">
-                        Breakdown:
+      {image ? (
+        analyzedInfo.dish ? (
+          <Box sx={{ width: "100%", padding: 2 }}>
+            <Grid container spacing={2} alignItems={"stretch"}>
+              <Grid item xs={12} sm={12}>
+                <Paper
+                  sx={{
+                    padding: 2,
+                    borderRadius: 3,
+                    backgroundColor: "#fbf6fe",
+                    textAlign: "center",
+                  }}
+                >
+                  <Typography variant="h6" color="#A34BCE">
+                    Detected Ingredients
+                  </Typography>
+                  <Typography>
+                    {analyzedInfo.dish}
+                  </Typography>
+                </Paper>
+              </Grid>
+                  {
+                    analyzedInfo.dish !== "No Food Recognized"?
+                    <Grid item xs={12} sm={12}>
+                    <Paper
+                      sx={{
+                        padding: 2,
+                        borderRadius: 3,
+                        backgroundColor: "#fbf6fe",
+                        height: "90%",
+                      }}
+                    >
+                      <Typography variant="h6" color="#A34BCE">
+                        Calories
                       </Typography>
-                      {Object.keys(
-                        analyzedInfo?.nutrition?.calories?.breakdown
-                      ).map((key) => (
+                      <Typography sx={{ mb: 1, fontWeight: "500" }}>
+                        {analyzedInfo?.nutrition?.calories?.total === null
+                          ? "No Calories Detected"
+                          : analyzedInfo?.nutrition?.calories?.total + " Calories"}
+                      </Typography>
+                      {analyzedInfo?.nutrition?.calories?.breakdown &&
+                        Object.keys(analyzedInfo?.nutrition?.calories?.breakdown)
+                          .length > 0 && (
+                          <Stack spacing={0}>
+                            <Typography variant="body1" color="#A34BCE">
+                              Breakdown:
+                            </Typography>
+                            {Object.keys(
+                              analyzedInfo?.nutrition?.calories?.breakdown
+                            ).map((key) => (
+                              <Typography
+                                sx={{ textTransform: "capitalize" }}
+                                key={key}
+                              >
+                                <span style={{ mb: 1, fontWeight: "500" }}>
+                                  {key}{" "}
+                                </span>
+                                {analyzedInfo?.nutrition?.calories?.breakdown[key]}
+                                <br />
+                              </Typography>
+                            ))}
+                          </Stack>
+                        )}
+                    </Paper>
+                  </Grid>
+                    :''
+                  }
+            </Grid>
+            {analyzedInfo?.nutrition?.calories?.total !== null ? (
+              <Grid container spacing={3} alignItems={"stretch"} mt={1}>
+                <Grid item xs={12} sm={12}>
+                  <Paper
+                    sx={{
+                      padding: 2,
+                      borderRadius: 3,
+                      backgroundColor: "#fbf6fe",
+                      height: "90%",
+                    }}
+                  >
+                    <Typography variant="h6" color="#A34BCE">
+                      Vitamins
+                    </Typography>
+                    {Object.keys(analyzedInfo?.nutrition?.vitamins).map(
+                      (key) => (
                         <Typography
                           sx={{ textTransform: "capitalize" }}
                           key={key}
                         >
                           <span style={{ mb: 1, fontWeight: "500" }}>
-                            {key}:{" "}
-                          </span>
-                          {analyzedInfo?.nutrition?.calories?.breakdown[key]}
-                          <br />
+                            {key}:
+                          </span>{" "}
+                          {analyzedInfo?.nutrition?.vitamins[key] ||
+                            "Not Found"}
                         </Typography>
-                      ))}
-                    </Stack>
-                  )}
-              </Paper>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Paper
-                sx={{
-                  padding: 2,
-                  borderRadius: 3,
-                  backgroundColor: "#fbf6fe",
-                  height: "90%",
-                }}
-              >
-                <Typography variant="h6" color="#A34BCE">
-                  Vitamins
-                </Typography>
-                {Object.keys(analyzedInfo?.nutrition?.vitamins).map((key) => (
-                  <Typography sx={{ textTransform: "capitalize" }} key={key}>
-                    <span style={{ mb: 1, fontWeight: "500" }}>{key}:</span>{" "}
-                    {analyzedInfo?.nutrition?.vitamins[key]}
-                  </Typography>
-                ))}
-              </Paper>
-            </Grid>
+                      )
+                    )}
+                  </Paper>
+                </Grid>
 
-            <Grid item xs={6} sm={4}>
-              <Paper
-                sx={{
-                  padding: 2,
-                  borderRadius: 3,
-                  backgroundColor: "#fbf6fe",
-                  mt: 1,
-                }}
-              >
-                <Typography variant="h6" color="#A34BCE">
-                  Protein
-                </Typography>
-                <Typography sx={{ mb: 1, fontWeight: "500" }}>
-                  {analyzedInfo?.nutrition?.protein?.grams || 0}g
-                </Typography>
-              </Paper>
-            </Grid>
+                <Grid item xs={6} sm={4}>
+                  <Paper
+                    sx={{
+                      padding: 2,
+                      borderRadius: 3,
+                      backgroundColor: "#fbf6fe",
+                      mt: 1,
+                    }}
+                  >
+                    <Typography variant="h6" color="#A34BCE">
+                      Protein
+                    </Typography>
+                    <Typography sx={{ mb: 1, fontWeight: "500" }}>
+                      {analyzedInfo?.nutrition?.protein?.grams || 0}g
+                    </Typography>
+                  </Paper>
+                </Grid>
 
-            <Grid item xs={6} sm={4}>
-              <Paper
-                sx={{
-                  padding: 2,
-                  borderRadius: 3,
-                  backgroundColor: "#fbf6fe",
-                  mt: 1,
-                }}
-              >
-                <Typography variant="h6" color="#A34BCE">
-                  Carbs
-                </Typography>
-                <Typography sx={{ mb: 1, fontWeight: "500" }}>
-                  {analyzedInfo?.nutrition?.carbohydrates?.grams || 0}g
-                </Typography>
-              </Paper>
-            </Grid>
+                <Grid item xs={6} sm={4}>
+                  <Paper
+                    sx={{
+                      padding: 2,
+                      borderRadius: 3,
+                      backgroundColor: "#fbf6fe",
+                      mt: 1,
+                    }}
+                  >
+                    <Typography variant="h6" color="#A34BCE">
+                      Carbs
+                    </Typography>
+                    <Typography sx={{ mb: 1, fontWeight: "500" }}>
+                      {analyzedInfo?.nutrition?.carbohydrates?.grams || 0}g
+                    </Typography>
+                  </Paper>
+                </Grid>
 
-            <Grid item xs={6} sm={4}>
-              <Paper
-                sx={{
-                  padding: 2,
-                  borderRadius: 3,
-                  backgroundColor: "#fbf6fe",
-                  mt: 1,
-                }}
-              >
-                <Typography variant="h6" color="#A34BCE">
-                  Fat
-                </Typography>
-                <Typography sx={{ mb: 1, fontWeight: "500" }}>
-                  {analyzedInfo?.nutrition?.fat?.grams || 0}g
-                </Typography>
-              </Paper>
-            </Grid>
-          </Grid>
-        </Box>
+                <Grid item xs={6} sm={4}>
+                  <Paper
+                    sx={{
+                      padding: 2,
+                      borderRadius: 3,
+                      backgroundColor: "#fbf6fe",
+                      mt: 1,
+                    }}
+                  >
+                    <Typography variant="h6" color="#A34BCE">
+                      Fat
+                    </Typography>
+                    <Typography sx={{ mb: 1, fontWeight: "500" }}>
+                      {analyzedInfo?.nutrition?.fat?.grams || 0}g
+                    </Typography>
+                  </Paper>
+                </Grid>
+              </Grid>
+            ) : (
+              ""
+            )}
+          </Box>
+        ) : (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "250px",
+            }}
+          >
+            <CircularProgress />
+            <Typography variant="body1" color="#A34BCE" mt={2}>
+              Analyzing... Please wait
+            </Typography>
+          </div>
+        )
       ) : (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "250px",
-          }}
-        >
-          <CircularProgress />
-          <Typography variant="body1" color="#A34BCE" mt={2}>
-            Analyzing... Please wait
-          </Typography>
-        </div>
-      )):''}
+        ""
+      )}
     </div>
   );
 };

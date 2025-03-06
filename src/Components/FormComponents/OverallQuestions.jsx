@@ -188,7 +188,7 @@ const OverallQuestions = () => {
   return (
     <Stack
       sx={{
-        justifyContent:'space-between',
+        justifyContent: "space-between",
         height: "100%",
       }}
     >
@@ -279,47 +279,57 @@ const OverallQuestions = () => {
         </AnimatePresence>
       </Box>
 
-      <Box>
-        {activeStep > 0 && (
-          <IconButton
-            onClick={handleBack}
-            size="large"
-            sx={{
-              bgcolor: "#E7EDf5",
-              "&:hover": { bgcolor: "#DEE4EB" },
-              width: 60,
-              height: 60,
-            }}
-          >
-            <KeyboardArrowLeft/>
-          </IconButton>
-        )}
-
-        {activeStep === questions.length - 1 && selectedOptions[activeStep] ? (
-          <Link to="/custom-diet">
-            <Button
+      <Box
+        sx={{
+          display:'flex',
+          gap:2,
+          flexDirection:'row',
+          width:"100%"
+        }}
+      >
+        <Box sx={{width:'auto'}}>
+          {activeStep > 0 && (
+            <IconButton
+              onClick={handleBack}
               size="large"
               sx={{
-                borderRadius: "50px",
-                backgroundColor: "#A34BCE",
-                color: "white",
-                width: { xs: "70%", sm: "83%",md:"85%",lg:'83%' },
+                bgcolor: "#E7EDf5",
+                "&:hover": { bgcolor: "#DEE4EB" },
+                width: 60,
                 height: 60,
-                fontWeight: "bold",
-                textTransform: "none",
-                fontSize: "18px",
-                ml:3,
-                "&:hover": {
-                  backgroundColor: "#A34BCE",
-                },
               }}
             >
-              Next
-            </Button>
-          </Link>
-        ) : (
-          ""
-        )}
+              <KeyboardArrowLeft />
+            </IconButton>
+          )}
+        </Box>
+        <Box sx={{width:'100%'}}>
+          {activeStep === questions.length - 1 &&
+          selectedOptions[activeStep] ? (
+            <Link to="/custom-diet">
+              <Button
+                size="large"
+                sx={{
+                  borderRadius: "50px",
+                  backgroundColor: "#A34BCE",
+                  color: "white",
+                  height: 60,
+                  fontWeight: "bold",
+                  textTransform: "none",
+                  fontSize: "18px",
+                  "&:hover": {
+                    backgroundColor: "#A34BCE",
+                  },
+                  width:'100%'
+                }}
+              >
+                Next
+              </Button>
+            </Link>
+          ) : (
+            ""
+          )}
+        </Box>
       </Box>
     </Stack>
   );

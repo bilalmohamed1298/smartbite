@@ -33,17 +33,17 @@ export default function Welcome() {
   };
 
   return (
-    <Box>
+
       <Stack
         sx={{
-          p: 4,
+          height:'100%',
           display:'flex',
-          justifyContent:{xs:'center',sm:'space-between'},
+          justifyContent:"space-between",
         }}
       >
         <Typography
           sx={{
-            mb: { xs: 1, sm: 8 },
+            my: { xs: 5, sm: 8 },
             fontSize: "30px",
             fontWeight: "600",
             textAlign: "center",
@@ -54,17 +54,17 @@ export default function Welcome() {
         </Typography>
         <Box
           sx={{
-            maxWidth: "350px",
-            height: "300px",
+            maxWidth: {xs:"300px",sm:'380px'},
+            height: "500px",
             cursor: "pointer",
             textAlign: "center",
-            p: 2,
+            p: {xs:5,sm:2},
             borderRadius: "12px",
             display: "flex",
             justifyContent: { xs: "start", sm: "center" },
             flexDirection: "column",
             bgcolor: "white",
-            mb: { sm: 26, xs: 3 },
+            mb:10,
             mx: "auto",
           }}
         >
@@ -193,6 +193,5 @@ export default function Welcome() {
           )}
         </Box>
       </Stack>
-    </Box>
   );
 }

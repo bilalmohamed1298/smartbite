@@ -16,7 +16,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
     <MealsContextProvider>
       <BrowserRouter >
-        <Container>
+        <Container disableGutters>
           <Logo />
           <SignupForm />
         </Container>

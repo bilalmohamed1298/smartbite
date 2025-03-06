@@ -31,7 +31,7 @@ const DietMeals = () => {
   let localUserDetails = JSON.parse(localStorage.getItem("userDetails"));
 
   return (
-    <Box sx={{ position: "relative", maxHeight: "100%" }}>
+    <Box sx={{ position: "relative", height: "100%" }}>
       <Typography
         sx={{
           fontWeight: "600",
@@ -289,7 +289,7 @@ const DietMeals = () => {
         </Button>
       </Stack>
       <Typography>
-        Calculated Calories: {localMealsCalories}
+        Calculated Calories: {localMealsCalories.toFixed(0)}
       </Typography>
       {Object.keys(dailyNutrients).length > 0 ? (
         <Stack
@@ -500,14 +500,6 @@ const DietMeals = () => {
                 </Box>
               </Link>
             ))}
-            <Box
-              sx={{
-                width: "290px",
-                height: "180px",
-                borderRadius: "10px",
-                display: { xs: "none", sm: "block" },
-              }}
-            ></Box>
           </Stack>
         ) : (
           <div
