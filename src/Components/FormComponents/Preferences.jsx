@@ -20,13 +20,14 @@ import {
   DirectionsRun,
   FitnessCenter,
   KeyboardArrowLeft,
+  KeyboardArrowRight,
   MonitorWeight,
   RocketLaunch,
 } from "@mui/icons-material";
 import { MealsContext } from "../../Utils/MealsContext";
 
 const Preferences = () => {
-  const { userDetails, setUserDetails, submit, setSubmit } =
+  const { userDetails, setUserDetails, submit, setSubmit, toggleMealsChange } =
     useContext(MealsContext);
   const [preferences, setPreferences] = useState({
     goal: "",
@@ -87,13 +88,13 @@ const Preferences = () => {
             }}
             gutterBottom
           >
-            Preferences
+            التفضيلات
           </Typography>
           <hr
             style={{
               border: "2px solid #D8BFF2",
-              width: "94%",
-              marginLeft: "8px",
+              width: "98%",
+              marginLeft: "15px",
             }}
           />
         </Box>
@@ -115,7 +116,7 @@ const Preferences = () => {
                     sx={{ fontSize: "18px", textAlign: "center", mt: 2 }}
                     gutterBottom
                   >
-                    What is your goal
+                    ما هو هدفك؟
                   </Typography>
                   <FormControl component="fieldset" sx={{ mb: 2 }}>
                     <RadioGroup
@@ -128,7 +129,7 @@ const Preferences = () => {
                         mt: 1,
                       }}
                     >
-                      {["Losing weight", "Gaining muscle"].map((option) => (
+                      {["خسارة الوزن", "زيادة العضلات"].map((option) => (
                         <FormControlLabel
                           sx={{
                             mx: "auto",
@@ -160,7 +161,7 @@ const Preferences = () => {
                                   gap: 1,
                                 }}
                               >
-                                {option === "Losing weight" ? (
+                                {option === "خسارة الوزن" ? (
                                   <MonitorWeight />
                                 ) : (
                                   <FitnessCenter />
@@ -185,7 +186,7 @@ const Preferences = () => {
                   sx={{ fontSize: "18px", mb: { sm: 2, xs: 1 } }}
                   gutterBottom
                 >
-                  What would be your ideal weight?
+                  ما هو الوزن المثالي بالنسبة لك؟
                 </Typography>
                 <TextField
                   fullWidth
@@ -204,7 +205,7 @@ const Preferences = () => {
                   InputProps={{
                     endAdornment: (
                       <Typography sx={{ fontSize: "18px", ml: 1 }}>
-                        kg
+                        كجم
                       </Typography>
                     ),
                   }}
@@ -227,10 +228,10 @@ const Preferences = () => {
                   sx={{ fontSize: { sm: "18px", xs: "14px" } }}
                   gutterBottom
                 >
-                  Set Your Pace: Pick Your Days! 🚀
+                  حدد وتيرتك: اختر عدد الأيام! 🚀
                 </Typography>
                 <Typography variant="body2" mt={1}>
-                  Selected Duration: <strong>{duration} days</strong>
+                المدة المحددة: <strong>{duration} يوم</strong>
                 </Typography>
                 <Slider
                   value={duration}
@@ -274,7 +275,7 @@ const Preferences = () => {
                 height: 60,
               }}
             >
-              <KeyboardArrowLeft />
+              <KeyboardArrowRight />
             </IconButton>
           </Link>
         </Box>
@@ -282,9 +283,7 @@ const Preferences = () => {
           {visibleFields.includes("duration") && preferences.duration && (
             <Link to="/results">
               <Button
-                onClick={() => {
-                  setSubmit(true);
-                }}
+                onClick={() => (setSubmit(true))}
                 size="large"
                 sx={{
                   borderRadius: "50px",
@@ -300,14 +299,12 @@ const Preferences = () => {
                   width: "100%",
                 }}
               >
-                Next
+                التالي
               </Button>
             </Link>
           )}
         </Box>
       </Box>
-
-
     </Stack>
   );
 };

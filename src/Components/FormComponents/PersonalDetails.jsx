@@ -17,6 +17,7 @@ import { Link } from "react-router-dom";
 import {
   Female,
   KeyboardArrowLeft,
+  KeyboardArrowRight,
   Male,
   Man,
   Woman,
@@ -80,13 +81,13 @@ const PersonalDetails = () => {
             }}
             gutterBottom
           >
-            Personal Details
+            المعلومات الشخصية
           </Typography>
           <hr
             style={{
               border: "2px solid #D8BFF2",
-              width: "94%",
-              marginLeft: "8px",
+              width: "98%",
+              marginLeft: "15px",
             }}
           />
         </Box>
@@ -108,7 +109,7 @@ const PersonalDetails = () => {
                     sx={{ fontSize: "18px", textAlign: "center", mt: 2 }}
                     gutterBottom
                   >
-                    What is your gender
+                    ما هو جنسك؟
                   </Typography>
                   <FormControl component="fieldset" sx={{ mb: 2 }}>
                     <RadioGroup
@@ -121,7 +122,7 @@ const PersonalDetails = () => {
                         mt: 1,
                       }}
                     >
-                      {["Male", "Female"].map((option) => (
+                      {["ذكر", "أنثى"].map((option) => (
                         <FormControlLabel
                           sx={{
                             mx: "auto",
@@ -153,7 +154,7 @@ const PersonalDetails = () => {
                                   gap: 1,
                                 }}
                               >
-                                {option === "Male" ? <Man /> : <Woman />}
+                                {option === "ذكر" ? <Man /> : <Woman />}
                                 {option}
                               </Button>
                             </ThemeProvider>
@@ -174,7 +175,7 @@ const PersonalDetails = () => {
                   sx={{ fontSize: "18px", mb: { sm: 2, xs: 1 } }}
                   gutterBottom
                 >
-                  How old are you?
+                  كم عمرك؟
                 </Typography>
 
                 <TextField
@@ -207,7 +208,7 @@ const PersonalDetails = () => {
                   sx={{ fontSize: "18px", mb: { sm: 2, xs: 1 } }}
                   gutterBottom
                 >
-                  What is your height?
+                  ما هو طولك؟
                 </Typography>
                 <TextField
                   fullWidth
@@ -226,7 +227,7 @@ const PersonalDetails = () => {
                   InputProps={{
                     endAdornment: (
                       <Typography sx={{ fontSize: "18px", ml: 1 }}>
-                        cm
+                        سم
                       </Typography>
                     ),
                   }}
@@ -240,7 +241,7 @@ const PersonalDetails = () => {
                   sx={{ fontSize: "18px", mb: { sm: 2, xs: 1 } }}
                   gutterBottom
                 >
-                  What is your current weight?
+                  ما هو وزنك الحالي؟
                 </Typography>
                 <TextField
                   fullWidth
@@ -259,7 +260,7 @@ const PersonalDetails = () => {
                   InputProps={{
                     endAdornment: (
                       <Typography sx={{ fontSize: "18px", ml: 1 }}>
-                        kg
+                        كجم
                       </Typography>
                     ),
                   }}
@@ -289,7 +290,7 @@ const PersonalDetails = () => {
                 height: 60,
               }}
             >
-              <KeyboardArrowLeft />
+              <KeyboardArrowRight />
             </IconButton>
           </Link>
         </Box>
@@ -312,7 +313,7 @@ const PersonalDetails = () => {
                   width: "100%",
                 }}
               >
-                Next
+                التالي
               </Button>
             </Link>
           )}

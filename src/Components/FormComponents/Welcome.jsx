@@ -7,15 +7,15 @@ import { motion, AnimatePresence } from "framer-motion";
 const slides = [
   {
     img: "/welcome-1.webp",
-    text: "When it comes to nutrition, finding what works for you makes all the difference.",
+    text: "عندما يتعلق الأمر بالتغذية، فإن العثور على ما يناسبك يُحدث فرقًا كبيرًا.",
   },
   {
     img: "/welcome-2.webp",
-    text: "Healthy eating is the foundation of a strong body.",
+    text: "التغذية الصحية هي أساس الجسم القوي.",
   },
   {
     img: "/welcome-3.webp",
-    text: "Stay active, eat well, and live your best life.",
+    text: "كن نشيطًا، تناول طعامًا صحيًا، وعِش حياتك بأفضل شكل.",
   },
 ];
 
@@ -43,14 +43,14 @@ export default function Welcome() {
       >
         <Typography
           sx={{
-            my: { xs: 5, sm: 8 },
+            mt: { xs: 5, sm: 8 },
             fontSize: "30px",
             fontWeight: "600",
             textAlign: "center",
             color: "#201325",
           }}
         >
-          Welcome!
+          مرحباً
         </Typography>
         <Box
           sx={{
@@ -133,7 +133,7 @@ export default function Welcome() {
               onClick={prevSlide}
               sx={{
                 position: "absolute",
-                left: 10,
+                right: 10,
                 top: "50%",
                 transform: "translateY(-50%)",
                 bgcolor: "white",
@@ -141,7 +141,7 @@ export default function Welcome() {
                 "&:hover": { bgcolor: "#f5f5f5" },
               }}
             >
-              <ChevronLeft fontSize="large" pr={1} />
+              <ChevronRight fontSize="large" pr={1} />
             </IconButton>
           ) : (
             ""
@@ -152,7 +152,7 @@ export default function Welcome() {
               onClick={nextSlide}
               sx={{
                 position: "absolute",
-                right: 10,
+                left: 10,
                 top: "50%",
                 transform: "translateY(-50%)",
                 bgcolor: "white",
@@ -160,7 +160,7 @@ export default function Welcome() {
                 "&:hover": { bgcolor: "#f5f5f5" },
               }}
             >
-              <ChevronRight fontSize="large" />
+              <ChevronLeft fontSize="large" />
             </IconButton>
           ) : (
             ""
@@ -185,7 +185,7 @@ export default function Welcome() {
                   },
                 }}
               >
-                Next
+                التالي
               </Button>
             </Link>
           ) : (

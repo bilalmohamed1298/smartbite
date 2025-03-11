@@ -12,7 +12,7 @@ import {
 import { Button, Box, Typography, Paper, IconButton } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Link } from "react-router-dom";
-import { KeyboardArrowLeft } from "@mui/icons-material";
+import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material";
 
 const data = [
   { name: "", generic: 40, weight: 78 },
@@ -38,9 +38,14 @@ const CustomDietComponent = () => {
       <Typography
         fontWeight="bold"
         gutterBottom
-        sx={{ mt: {xs:7,sm:10},mx:'auto', fontSize: { xs: "22px", sm: "40px" },width:{xs:'80%',sm:'60%'} }}
+        sx={{
+          mt: { xs: 7, sm: 10 },
+          mx: "auto",
+          fontSize: { xs: "22px", sm: "40px" },
+          width: { xs: "80%", sm: "60%" },
+        }}
       >
-        The perfect diet is the one tailored for you.
+        النظام الغذائي المثالي هو الذي يناسبك شخصيًا.
       </Typography>
 
       <Paper
@@ -100,7 +105,7 @@ const CustomDietComponent = () => {
               fontSize: 14,
             }}
           >
-            Generic program
+            برنامجك المخصص
           </Box>
           <Box
             sx={{
@@ -112,7 +117,7 @@ const CustomDietComponent = () => {
               fontSize: 14,
             }}
           >
-            Weight
+            الوزن
           </Box>
         </Box>
       </Paper>
@@ -126,7 +131,7 @@ const CustomDietComponent = () => {
           width: { xs: "100%", sm: "80%" },
         }}
       >
-        Smartbite helps you discover the perfect plan to achieve your goals.
+        Smartbite يساعدك في اكتشاف الخطة المثالية لتحقيق أهدافك.{" "}
       </Typography>
 
       <Box
@@ -135,7 +140,6 @@ const CustomDietComponent = () => {
           gap: 2,
           flexDirection: "row",
           width: "100%",
-          
         }}
       >
         <Box sx={{ width: "auto" }}>
@@ -149,29 +153,29 @@ const CustomDietComponent = () => {
                 height: 60,
               }}
             >
-              <KeyboardArrowLeft />
+              <KeyboardArrowRight />
             </IconButton>
           </Link>
         </Box>
         <Box sx={{ width: "100%" }}>
           <Link to="/details">
             <Button
-                size="large"
-                sx={{
-                  borderRadius: "50px",
+              size="large"
+              sx={{
+                borderRadius: "50px",
+                backgroundColor: "#A34BCE",
+                color: "white",
+                height: 60,
+                fontWeight: "bold",
+                textTransform: "none",
+                fontSize: "18px",
+                "&:hover": {
                   backgroundColor: "#A34BCE",
-                  color: "white",
-                  height: 60,
-                  fontWeight: "bold",
-                  textTransform: "none",
-                  fontSize: "18px",
-                  "&:hover": {
-                    backgroundColor: "#A34BCE",
-                  },
-                  width:'100%'
-                }}
+                },
+                width: "100%",
+              }}
             >
-              Let’s Discover You
+              دعنا نتعرف عليك أكثر
             </Button>
           </Link>
         </Box>

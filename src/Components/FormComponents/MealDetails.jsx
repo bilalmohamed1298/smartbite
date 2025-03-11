@@ -101,7 +101,7 @@ const MealDetails = () => {
             sx={{
               position: "relative",
               width: "100%",
-              height: "230px",
+              height: "270px",
               borderRadius: "15px",
               overflow: "hidden",
             }}
@@ -117,11 +117,12 @@ const MealDetails = () => {
                   borderRadius:"50px",
                   minWidth:"30px",
                   m:'5px',
-                  textTransform:'lowercase'
+                  textTransform: 'uppercase',
+                  fontWeight:'bold'
 
                 }}
               >
-                x
+                X
               </Button>
             </Link>
             <img
@@ -130,7 +131,7 @@ const MealDetails = () => {
               style={{
                 width: "100%",
                 height: "100%",
-                objectFit: "cover",
+                objectFit:'cover' ,
               }}
             />
 

@@ -18,12 +18,14 @@ export default function SignupForm() {
     <Box
       sx={{
         height: {xs:'85vh',lg:'790px'},
-        my: { xs: 0,lg:1 },
+        mt: { xs: 0,sm:5,lg:1 },
         p: 3,
         bgcolor: "white",
         boxShadow: {xs:0,sm:3},
         borderRadius: 3,
         position: "relative",
+        overflowY:'auto',
+        overflowX: 'hidden'
       }}
     >
 
@@ -44,7 +46,7 @@ export default function SignupForm() {
       <Box
         sx={{
           position: "absolute",
-          right: {xs:35,sm:80},
+          left: {xs:35},
           top: 25,
           width: "70px",
         }}
@@ -93,7 +95,7 @@ export default function SignupForm() {
             }}
           >
             <Typography id="modal-title" variant="h6" component="h2" mb={1}>
-              Food Analyzer
+              تحليل الوجبات
             </Typography>
 
             <FoodAnalyzer />

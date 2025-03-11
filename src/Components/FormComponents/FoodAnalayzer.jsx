@@ -212,13 +212,13 @@ const FoodAnalyzer = () => {
                   sx={{ pr: "5px" }}
                 ></Button>
                 <Button variant="outlined" onClick={() => setShowWebcam(false)}>
-                  Try another option
+                  جرب خيار آخر
                 </Button>
               </Stack>
             ) : (
               <>
                 <Button variant="contained" onClick={() => setShowWebcam(true)}>
-                  Capture Image
+                  إلتقط صورة
                 </Button>
                 <input
                   type="file"
@@ -229,7 +229,7 @@ const FoodAnalyzer = () => {
                 />
                 <label htmlFor="image-file">
                   <Button variant="outlined" component="span">
-                    Upload Image
+                    إرفع ملف
                   </Button>
                 </label>
               </>
@@ -239,12 +239,12 @@ const FoodAnalyzer = () => {
           <Button variant="outlined" onClick={() => (setImage(null)
             ,setAnalyzedInfo({})
           )}>
-            Capture Another Image
+            إختر صورة أخرى
           </Button>
         )}
       </div>
       {image ? (
-        analyzedInfo.dish ? (
+        analyzedInfo?.dish ? (
           <Box sx={{ width: "100%", padding: 2 }}>
             <Grid container spacing={2} alignItems={"stretch"}>
               <Grid item xs={12} sm={12}>
@@ -254,10 +254,11 @@ const FoodAnalyzer = () => {
                     borderRadius: 3,
                     backgroundColor: "#fbf6fe",
                     textAlign: "center",
+                    border: "3px solid #A34BCE",
                   }}
                 >
                   <Typography variant="h6" color="#A34BCE">
-                    Detected Ingredients
+                    الوجبات المكتشفة
                   </Typography>
                   <Typography>
                     {analyzedInfo.dish}
@@ -273,22 +274,23 @@ const FoodAnalyzer = () => {
                         borderRadius: 3,
                         backgroundColor: "#fbf6fe",
                         height: "90%",
+                        borderBottom: "3px solid #A34BCE"
                       }}
                     >
                       <Typography variant="h6" color="#A34BCE">
-                        Calories
+                        السعرات الحرارية
                       </Typography>
                       <Typography sx={{ mb: 1, fontWeight: "500" }}>
                         {analyzedInfo?.nutrition?.calories?.total === null
                           ? "No Calories Detected"
-                          : analyzedInfo?.nutrition?.calories?.total + " Calories"}
+                          : analyzedInfo?.nutrition?.calories?.total + " سعر حراري"}
                       </Typography>
                       {analyzedInfo?.nutrition?.calories?.breakdown &&
                         Object.keys(analyzedInfo?.nutrition?.calories?.breakdown)
                           .length > 0 && (
                           <Stack spacing={0}>
                             <Typography variant="body1" color="#A34BCE">
-                              Breakdown:
+                              المكونات:
                             </Typography>
                             {Object.keys(
                               analyzedInfo?.nutrition?.calories?.breakdown
@@ -320,12 +322,13 @@ const FoodAnalyzer = () => {
                       borderRadius: 3,
                       backgroundColor: "#fbf6fe",
                       height: "90%",
+                      borderBottom: "3px solid #A34BCE"
                     }}
                   >
                     <Typography variant="h6" color="#A34BCE">
-                      Vitamins
+                      فيتامينات
                     </Typography>
-                    {analyzedInfo?.nutrition?.vitamins.map(
+                    {analyzedInfo?.nutrition?.vitamins?.map(
                       (key) => (
                         <Typography
                           sx={{ textTransform: "capitalize" }}
@@ -347,13 +350,14 @@ const FoodAnalyzer = () => {
                       borderRadius: 3,
                       backgroundColor: "#fbf6fe",
                       mt: 1,
+                      borderBottom: "3px solid #A34BCE"
                     }}
                   >
                     <Typography variant="h6" color="#A34BCE">
-                      Protein
+                      بروتين
                     </Typography>
                     <Typography sx={{ mb: 1, fontWeight: "500" }}>
-                      {analyzedInfo?.nutrition?.protein?.grams || 0}g
+                      {analyzedInfo?.nutrition?.protein?.grams || 0}جم
                     </Typography>
                   </Paper>
                 </Grid>
@@ -365,13 +369,14 @@ const FoodAnalyzer = () => {
                       borderRadius: 3,
                       backgroundColor: "#fbf6fe",
                       mt: 1,
+                      borderBottom: "3px solid #A34BCE"
                     }}
                   >
                     <Typography variant="h6" color="#A34BCE">
-                      Carbs
+                      كربوهيدرات
                     </Typography>
                     <Typography sx={{ mb: 1, fontWeight: "500" }}>
-                      {analyzedInfo?.nutrition?.carbohydrates?.grams || 0}g
+                      {analyzedInfo?.nutrition?.carbohydrates?.grams || 0}جم
                     </Typography>
                   </Paper>
                 </Grid>
@@ -383,13 +388,14 @@ const FoodAnalyzer = () => {
                       borderRadius: 3,
                       backgroundColor: "#fbf6fe",
                       mt: 1,
+                      borderBottom: "3px solid #A34BCE"
                     }}
                   >
                     <Typography variant="h6" color="#A34BCE">
-                      Fat
+                      دهون
                     </Typography>
                     <Typography sx={{ mb: 1, fontWeight: "500" }}>
-                      {analyzedInfo?.nutrition?.fat?.grams || 0}g
+                      {analyzedInfo?.nutrition?.fat?.grams || 0}جم
                     </Typography>
                   </Paper>
                 </Grid>
@@ -410,7 +416,7 @@ const FoodAnalyzer = () => {
           >
             <CircularProgress />
             <Typography variant="body1" color="#A34BCE" mt={2}>
-              Analyzing... Please wait
+              جار تحليل الصورة...
             </Typography>
           </div>
         )

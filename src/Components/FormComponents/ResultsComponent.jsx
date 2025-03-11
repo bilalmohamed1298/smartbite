@@ -10,7 +10,7 @@ import {
   Stack,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { KeyboardArrowLeft } from "@mui/icons-material";
+import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 const ResultsComponent = () => {
@@ -37,7 +37,7 @@ const ResultsComponent = () => {
             gutterBottom
             sx={{ mt: { xs: 2, sm: 5 }, fontSize: { xs: "24px", sm: "30px" } }}
           >
-            Smartbite tailors your plan based on your data and goals.
+            Smartbite يصمم خطتك بناءً على بياناتك وأهدافك.
           </Typography>
           <Typography
             color="textSecondary"
@@ -48,7 +48,7 @@ const ResultsComponent = () => {
               width: { xs: "100%", sm: "80%" },
             }}
           >
-            Personalized meals and nutrients, just for you.
+            وجبات وعناصر غذائية مصممة خصيصًا لك.
           </Typography>
         </Box>
       </Stack>
@@ -72,7 +72,7 @@ const ResultsComponent = () => {
                 height: 60,
               }}
             >
-              <KeyboardArrowLeft />
+              <KeyboardArrowRight />
             </IconButton>
           </Link>
         </Box>
@@ -94,7 +94,7 @@ const ResultsComponent = () => {
                 width: "100%",
               }}
             >
-              Show Results
+              عرض النتائج
             </Button>
           </Link>
         </Box>

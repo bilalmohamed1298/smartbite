@@ -14,20 +14,19 @@ import RestaurantIcon from "@mui/icons-material/Restaurant";
 import axios from "axios";
 import FoodAnalyzer from "./FoodAnalayzer";
 import MealDetails from "./MealDetails";
+import VitaminRecommendations from "./VitaminRecommendations";
 
 const DietMeals = () => {
   const {
     dailyMeals,
     dailyNutrients,
     toggleMealsChange,
-    userDetails,
     mealsChange,
     localMealsCalories,
+    specialNutrients,
+    vitaminDeficiencies,
   } = useContext(MealsContext);
-  const [dailyWidgets1, setDailyWidgets1] = useState({});
-  const [dailyWidgets2, setDailyWidgets2] = useState({});
-  const [dailyWidgets3, setDailyWidgets3] = useState({});
-  const [open1, setOpen1] = useState(false);
+
   let localUserDetails = JSON.parse(localStorage.getItem("userDetails"));
 
   return (
@@ -39,12 +38,17 @@ const DietMeals = () => {
           mb: 2,
         }}
       >
-        Your Profile
+      📋 بياناتك الشخصية
       </Typography>
       <Box>
         <Stack
           direction={"row"}
-          sx={{ flexWrap: "wrap", gap: { xs: 1, md: 2 }, mb: { xs: 3, sm: 5 } }}
+          sx={{
+            flexWrap: "wrap",
+            gap: { xs: 1, md: 2 },
+            mb: { xs: 3, sm: 5 },
+            borderRadius: 3,
+          }}
         >
           <Box
             sx={{
@@ -66,7 +70,7 @@ const DietMeals = () => {
                 textAlign: { xs: "center", sm: "start" },
               }}
             >
-              Age
+              العمر
             </Typography>
             <Typography
               sx={{
@@ -76,8 +80,8 @@ const DietMeals = () => {
                 color: "#A34BCE",
               }}
             >
-              {localUserDetails.age}
-              <span style={{ fontSize: "14px", marginLeft: "5px" }}>years</span>
+              {localUserDetails.age}{' '}
+              <span style={{ fontSize: "14px", marginLeft: "5px" }}>سنة</span>
             </Typography>
           </Box>
           <Box
@@ -100,7 +104,7 @@ const DietMeals = () => {
                 textAlign: { xs: "center", sm: "start" },
               }}
             >
-              Height
+              الطول
             </Typography>
             <Typography
               sx={{
@@ -111,7 +115,7 @@ const DietMeals = () => {
               }}
             >
               {localUserDetails.height}
-              <span style={{ fontSize: "14px", marginLeft: "5px" }}>cm</span>
+              <span style={{ fontSize: "14px", marginLeft: "5px" }}>سم</span>
             </Typography>
           </Box>
           <Box
@@ -134,7 +138,7 @@ const DietMeals = () => {
                 textAlign: { xs: "center", sm: "start" },
               }}
             >
-              Weight
+              الوزن
             </Typography>
             <Typography
               sx={{
@@ -145,7 +149,7 @@ const DietMeals = () => {
               }}
             >
               {localUserDetails.weight}
-              <span style={{ fontSize: "14px", marginLeft: "5px" }}>kg</span>
+              <span style={{ fontSize: "14px", marginLeft: "5px" }}>كجم</span>
             </Typography>
           </Box>
           <Box
@@ -168,7 +172,7 @@ const DietMeals = () => {
                 textAlign: { xs: "center", sm: "start" },
               }}
             >
-              Goal
+              الهدف
             </Typography>
             <Typography
               sx={{
@@ -179,7 +183,7 @@ const DietMeals = () => {
               }}
             >
               {localUserDetails.idealWeight}
-              <span style={{ fontSize: "14px", marginLeft: "5px" }}>kg</span>
+              <span style={{ fontSize: "14px", marginLeft: "5px" }}>كجم</span>
             </Typography>
           </Box>
           <Box
@@ -202,7 +206,7 @@ const DietMeals = () => {
                 textAlign: { xs: "center", sm: "start" },
               }}
             >
-              Duration
+              المدة
             </Typography>
             <Typography
               sx={{
@@ -212,8 +216,8 @@ const DietMeals = () => {
                 color: "#A34BCE",
               }}
             >
-              {localUserDetails.duration}
-              <span style={{ fontSize: "14px", marginLeft: "1px" }}>days</span>
+              {localUserDetails.duration}{' '}
+              <span style={{ fontSize: "14px", marginLeft: "1px" }}>يوم</span>
             </Typography>
           </Box>
         </Stack>
@@ -223,37 +227,37 @@ const DietMeals = () => {
         localUserDetails.idealWeight &&
         localUserDetails.duration ? (
           <Typography sx={{ mb: 3, display: { xs: "block", md: "block" } }}>
-            {localUserDetails.goal === "Losing weight" ? (
+            {localUserDetails.goal === "خسارة الوزن" ? (
               <Typography sx={{ fontSize: { xs: "14px", sm: "16px" } }}>
-                Let us help you achieve your goal by losing
+                دعنا نساعدك للوصول لهدفك بخسارة
                 <span style={{ color: "#A34BCE", fontWeight: "600" }}>
                   {""}{" "}
                   {Math.abs(
                     localUserDetails.weight - localUserDetails.idealWeight
                   )}
-                  kg
+                  كجم
                 </span>{" "}
-                within{" "}
+                دهون خلال{" "}
                 <span style={{ color: "#A34BCE", fontWeight: "600" }}>
-                  {localUserDetails.duration} days
+                  {localUserDetails.duration} يوم
                 </span>{" "}
-                💪🔥
+                🔥
               </Typography>
-            ) : localUserDetails.goal === "Gaining muscle" ? (
+            ) : localUserDetails.goal === "زيادة العضلات" ? (
               <Typography>
-                Let us help you achieve your goal by gaining
+                دعنا نساعدك للوصول لهدفك بزايدة
                 <span style={{ color: "#A34BCE", fontWeight: "600" }}>
                   {""}{" "}
                   {Math.abs(
                     localUserDetails.idealWeight - localUserDetails.weight
                   )}
-                  kg
+                  كجم
                 </span>{" "}
-                within{" "}
+                عضلات خلال{" "}
                 <span style={{ color: "#A34BCE", fontWeight: "600" }}>
-                  {localUserDetails.duration} days
+                  {localUserDetails.duration} يوم
                 </span>{" "}
-                💪🔥
+                💪
               </Typography>
             ) : (
               ""
@@ -261,7 +265,7 @@ const DietMeals = () => {
           </Typography>
         ) : (
           <Typography variant="body2" color="error">
-            Please complete the missing information!
+            من فضلك اكمل البيانات الناقصة!
           </Typography>
         )}
       </Box>
@@ -270,12 +274,12 @@ const DietMeals = () => {
       <Stack direction={"row"} sx={{ justifyContent: "space-between" }}>
         <Typography
           sx={{
-            mt: 2,
+            mt: 1,
             fontWeight: "600",
             fontSize: "20px",
           }}
         >
-          Today's Meals
+        🥗  وجبات اليوم
         </Typography>
 
         <Button
@@ -290,18 +294,18 @@ const DietMeals = () => {
             p: "5px",
           }}
         >
-          <RestaurantIcon sx={{ mr: 1, textAlign: "center" }} fontSize="14" />
-          <Typography sx={{ fontSize: "12px" }}>Change Meals</Typography>
+          <RestaurantIcon sx={{ ml: 1, textAlign: "center" }} fontSize="14" />
+          <Typography sx={{ fontSize: "12px" }}>تغيير الوجبات</Typography>
         </Button>
       </Stack>
-      <Typography>
-        Calculated Calories: {localMealsCalories.toFixed(0)}
+      <Typography mb={0}>
+        السعرات المطلوبة: {localMealsCalories.toFixed(0)}
       </Typography>
       {Object.keys(dailyNutrients).length > 0 ? (
         <Stack
           direction={"row"}
           sx={{
-            mt: 3,
+            mt: 2,
             flexWrap: "wrap",
             gap: 2,
             justifyContent: { xs: "center", sm: "start" },
@@ -318,6 +322,7 @@ const DietMeals = () => {
               background: "#fff",
               border: "1px solid #A34BCE",
               width: "100px",
+              borderBottom: "2px solid #A34BCE",
             }}
           >
             <Typography
@@ -328,7 +333,8 @@ const DietMeals = () => {
                 color: "#A34BCE",
               }}
             >
-              {dailyNutrients.calories.toFixed(0)}
+              {Number(dailyNutrients.calories.toFixed(0)) +
+                specialNutrients.specialCalories}
             </Typography>
             <Typography
               sx={{
@@ -337,7 +343,7 @@ const DietMeals = () => {
                 mb: "4px",
               }}
             >
-              Calories
+              سعر حراري
             </Typography>
           </Box>
           <Box
@@ -351,6 +357,7 @@ const DietMeals = () => {
               background: "#fff",
               border: "1px solid #A34BCE",
               width: "100px",
+              borderBottom: "2px solid #A34BCE",
             }}
           >
             <Typography
@@ -361,7 +368,8 @@ const DietMeals = () => {
                 color: "#A34BCE",
               }}
             >
-              {dailyNutrients.carbohydrates.toFixed(0)}
+              {Number(dailyNutrients.carbohydrates.toFixed(0)) +
+                parseInt(specialNutrients.specialCarbs)}
             </Typography>
             <Typography
               sx={{
@@ -370,7 +378,7 @@ const DietMeals = () => {
                 mb: "4px",
               }}
             >
-              Carbs
+              كربوهيدرات
             </Typography>
           </Box>
           <Box
@@ -384,6 +392,7 @@ const DietMeals = () => {
               background: "#fff",
               border: "1px solid #A34BCE",
               width: "100px",
+              borderBottom: "2px solid #A34BCE",
             }}
           >
             <Typography
@@ -394,7 +403,8 @@ const DietMeals = () => {
                 color: "#A34BCE",
               }}
             >
-              {dailyNutrients.fat.toFixed(0)}
+              {Number(dailyNutrients.fat.toFixed(0)) +
+                parseInt(specialNutrients.specialFat)}
             </Typography>
             <Typography
               sx={{
@@ -403,7 +413,7 @@ const DietMeals = () => {
                 mb: "4px",
               }}
             >
-              Fat
+              دهون
             </Typography>
           </Box>
           <Box
@@ -417,6 +427,7 @@ const DietMeals = () => {
               background: "#fff",
               border: "1px solid #A34BCE",
               width: "100px",
+              borderBottom: "2px solid #A34BCE",
             }}
           >
             <Typography
@@ -427,7 +438,8 @@ const DietMeals = () => {
                 color: "#A34BCE",
               }}
             >
-              {dailyNutrients.protein.toFixed(0)}
+              {Number(dailyNutrients.protein.toFixed(0)) +
+                parseInt(specialNutrients.specialProtein)}
             </Typography>
             <Typography
               sx={{
@@ -436,7 +448,7 @@ const DietMeals = () => {
                 mb: "4px",
               }}
             >
-              Protein
+              بروتين
             </Typography>
           </Box>
         </Stack>
@@ -448,8 +460,8 @@ const DietMeals = () => {
           <Stack
             direction={"row"}
             flexWrap={"wrap"}
-            justifyContent={{ xs: "center", md: "space-evenly" }}
-            sx={{ mt: { xs: 3, sm: 4 }, gap: { xs: 3, md: 3 } }}
+            justifyContent={{ xs: "center", md: "start" }}
+            sx={{ my: { xs: 3, sm: 4 }, gap: { xs: 3, md: 4 } }}
           >
             {dailyMeals.map((meal, index) => (
               <Link
@@ -460,7 +472,7 @@ const DietMeals = () => {
                 <Box
                   sx={{
                     position: "relative",
-                    width: "290px",
+                    width: { xs: "340px", sm: "360px" },
                     height: "180px",
                     borderRadius: "15px",
                     overflow: "hidden",
@@ -470,7 +482,11 @@ const DietMeals = () => {
                   }}
                 >
                   <img
-                    src={`https://spoonacular.com/recipeImages/${meal.image}`}
+                    src={
+                      meal.image.startsWith("http")
+                        ? meal.image
+                        : `https://img.spoonacular.com/recipes/${meal.image}`
+                    }
                     alt="Meal"
                     style={{
                       width: "100%",
@@ -520,22 +536,8 @@ const DietMeals = () => {
           </div>
         )}
       </Box>
-      <Box sx={{textTransform:'capitalize'}}>
-        <Typography
-          sx={{
-            mt: 5,
-            mb: 2,
-            fontWeight: "600",
-            fontSize: "20px",
-          }}
-        >
-          Examples of suggested foods
-        </Typography>
-        <Typography sx={{fontSize:{xs:'16px',sm:'16px'}}}><span style={{fontWeight:'600'}}>Iron:</span> spinach, lentils, red meat, liver, nuts.</Typography>
-        <Typography sx={{fontSize:{xs:'16px',sm:'16px'}}}><span style={{fontWeight:'600'}}>Vitamin B12:</span> fish, eggs, milk, liver, cheese.</Typography>
-        <Typography sx={{fontSize:{xs:'16px',sm:'16px'}}}><span style={{fontWeight:'600'}}>Vitamin D:</span> fatty fish, eggs, dairy</Typography>
-        <Typography sx={{fontSize:{xs:'16px',sm:'16px'}}}><span style={{fontWeight:'600'}}>Calcium:</span> milk, cheese, sardines, leafy greens.</Typography>
-      </Box>
+      <hr style={{ opacity: "40%" }} />
+      <VitaminRecommendations />
     </Box>
   );
 };

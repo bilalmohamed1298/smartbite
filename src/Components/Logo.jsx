@@ -21,15 +21,6 @@ const Logo = () => {
           gap: 1,
         }}
       >
-        <img
-          src="/logo.webp"
-          alt="Logo"
-          style={{
-            width: "65px",
-            borderRadius: "30%",
-          }}
-        />
-
         <Typography
           sx={{
             fontSize: "45px",
@@ -39,6 +30,15 @@ const Logo = () => {
         >
           Smartbite
         </Typography>
+
+        <img
+          src="/logo.webp"
+          alt="Logo"
+          style={{
+            width: "65px",
+            borderRadius: "30%",
+          }}
+        />
       </Box>
 
     </Stack>
