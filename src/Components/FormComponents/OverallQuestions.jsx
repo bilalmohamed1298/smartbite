@@ -55,7 +55,10 @@ const questions = [
     question: "ما نوع النظام الغذائي الذي تتبعه؟",
     options: ["متوازن", "غني بالبروتين", "منخفض الكربوهيدرات", "أخرى"],
   },
-  { question: "هل تتناول المكملات الغذائية؟", options: ["نعم", "لا", "أحيانًا"] },
+  {
+    question: "هل تتناول المكملات الغذائية؟",
+    options: ["نعم", "لا", "أحيانًا"],
+  },
   {
     question: "هل أنت مهتم بتخطيط الوجبات؟",
     options: ["نعم", "لا", "ربما"],
@@ -86,52 +89,51 @@ const OverallQuestions = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [selectedOptions, setSelectedOptions] = useState({});
   const [direction, setDirection] = useState(1);
-  const { userDetails, setUserDetails, setVitaminDeficiencies } = useContext(MealsContext);
+  const { userDetails, setUserDetails, setVitaminDeficiencies } =
+    useContext(MealsContext);
 
   /////////////////////////////////////////////////////////
 
   const activityMap = {
-    "أبدًا": 1.2,
+    أبدًا: 1.2,
     "1-2 مرات أسبوعيًا": 1.375,
     "3-4 مرات أسبوعيًا": 1.55,
-    "يوميًا": 1.725,
+    يوميًا: 1.725,
   };
-  
+
   const routineMap = {
-    "خامل": 1.2,
+    خامل: 1.2,
     "نشاط خفيف": 1.375,
     "نشاط معتدل": 1.55,
     "نشاط عالي": 1.725,
   };
-  
+
   const waterIntakeMap = {
     "أقل من 1 لتر": -0.1,
     "1-2 لتر": 0,
     "2-3 لتر": 0.1,
     "أكثر من 3 لتر": 0.2,
   };
-  
+
   const medicalConditionMap = {
-    "سكري": -0.1,
+    سكري: -0.1,
     "ارتفاع ضغط الدم": -0.1,
     "أمراض القلب": -0.2,
     "لا شيء": 0,
   };
-  
+
   const sleepMap = {
     "أقل من 5 ساعات": -0.2,
     "5-6 ساعات": -0.1,
     "7-8 ساعات": 0,
     "أكثر من 8 ساعات": 0.1,
   };
-  
+
   const smokingMap = {
-    "نعم": -0.2,
-    "لا": 0.1,
+    نعم: -0.2,
+    لا: 0.1,
     "أحاول الإقلاع": -0.1,
   };
-  
-  
 
   const exerciseLevel = selectedOptions[1] || "أبدًا";
   const dailyRoutine = selectedOptions[9] || "خامل";
@@ -139,14 +141,14 @@ const OverallQuestions = () => {
   const medicalCondition = selectedOptions[8] || "لا شيء";
   const sleepQuality = selectedOptions[7] || "7-8 ساعات";
   const smokingStatus = selectedOptions[5] || "لا";
-  
+
   const exerciseMultiplier = activityMap[exerciseLevel] || 1.2;
   const routineMultiplier = routineMap[dailyRoutine] || 1.2;
   const waterEffect = waterIntakeMap[waterIntake] || 0;
   const medicalEffect = medicalConditionMap[medicalCondition] || 0;
   const sleepEffect = sleepMap[sleepQuality] || 0;
   const smokingEffect = smokingMap[smokingStatus] || 0;
-  
+
   const activityLevel = (
     (exerciseMultiplier + routineMultiplier) / 2 +
     waterEffect +
@@ -154,29 +156,31 @@ const OverallQuestions = () => {
     sleepEffect +
     smokingEffect
   ).toFixed(2);
-  
-  //////////////////// vitaminDeficiencies /////////////////
 
+  //////////////////// vitaminDeficiencies /////////////////
 
   const vitaminDeficiencyMap = {
     "هل تشعر بالتعب أو الضعف غالبًا؟": "فيتامين B12, فيتامين D",
     "هل تعاني من تساقط الشعر أو ضعف الأظافر؟": "البيوتين, الزنك, الحديد",
     "هل لديك جفاف في الجلد أو تشققات في زوايا الفم؟": "فيتامين B2, أوميغا-3",
-    "هل تعاني من تشنجات عضلية أو وخز متكرر؟": "المغنيسيوم, البوتاسيوم, الكالسيوم",
+    "هل تعاني من تشنجات عضلية أو وخز متكرر؟":
+      "المغنيسيوم, البوتاسيوم, الكالسيوم",
     "هل تواجه صعوبة في الرؤية الليلية؟": "فيتامين A",
   };
 
-  
   const vitaminDeficiencies = useMemo(() => {
-    return questions.slice(-5)
-      .filter((q, index) => selectedOptions[questions.length - 5 + index] === "نعم")
-      .map(q => vitaminDeficiencyMap[q.question]);
+    return questions
+      .slice(-5)
+      .filter(
+        (q, index) => selectedOptions[questions.length - 5 + index] === "نعم"
+      )
+      .map((q) => vitaminDeficiencyMap[q.question]);
   }, [selectedOptions, questions]);
 
-    useEffect(()=>{
-      setVitaminDeficiencies(vitaminDeficiencies)
-      console.log(vitaminDeficiencies)
-    },[vitaminDeficiencies])
+  useEffect(() => {
+    setVitaminDeficiencies(vitaminDeficiencies);
+    console.log(vitaminDeficiencies);
+  }, [vitaminDeficiencies]);
 
   //////////////////////////////////////////////////////////
 
@@ -218,7 +222,7 @@ const OverallQuestions = () => {
             fontSize: "12px",
             bgcolor: "#A34BCE",
             color: "#fff",
-            width: "80px",
+            width: "90px",
             padding: "5px",
             borderRadius: "5px",
             textAlign: "center",
@@ -290,7 +294,7 @@ const OverallQuestions = () => {
                         },
                       }}
                     />
-                    <ListItemText primary={option} sx={{flex: "0 0 auto"}} />
+                    <ListItemText primary={option} sx={{ flex: "0 0 auto" }} />
                   </ListItemButton>
                 </ListItem>
               ))}
@@ -301,13 +305,13 @@ const OverallQuestions = () => {
 
       <Box
         sx={{
-          display:'flex',
-          gap:2,
-          flexDirection:'row',
-          width:"100%"
+          display: "flex",
+          gap: 2,
+          flexDirection: "row",
+          width: "100%",
         }}
       >
-        <Box sx={{width:'auto'}}>
+        <Box sx={{ width: "auto" }}>
           {activeStep > 0 && (
             <IconButton
               onClick={handleBack}
@@ -323,7 +327,7 @@ const OverallQuestions = () => {
             </IconButton>
           )}
         </Box>
-        <Box sx={{width:'100%'}}>
+        <Box sx={{ width: "100%" }}>
           {activeStep === questions.length - 1 &&
           selectedOptions[activeStep] ? (
             <Link to="/custom-diet">
@@ -340,7 +344,7 @@ const OverallQuestions = () => {
                   "&:hover": {
                     backgroundColor: "#A34BCE",
                   },
-                  width:'100%'
+                  width: "100%",
                 }}
               >
                 التالي

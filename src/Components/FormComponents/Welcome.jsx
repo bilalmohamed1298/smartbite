@@ -33,165 +33,169 @@ export default function Welcome() {
   };
 
   return (
-
-      <Stack
+    <Stack
+      sx={{
+        height: "100%",
+        display: "flex",
+        justifyContent: "space-between",
+      }}
+    >
+      <Typography
         sx={{
-          height:'100%',
-          display:'flex',
-          justifyContent:"space-between",
+          mt: { xs: 5, sm: 8 },
+          fontSize: "30px",
+          fontWeight: "600",
+          textAlign: "center",
+          color: "#201325",
         }}
       >
-        <Typography
-          sx={{
-            mt: { xs: 5, sm: 8 },
-            fontSize: "30px",
-            fontWeight: "600",
-            textAlign: "center",
-            color: "#201325",
-          }}
-        >
-          مرحباً
-        </Typography>
-        <Box
-          sx={{
-            maxWidth: {xs:"300px",sm:'380px'},
-            height: "500px",
-            cursor: "pointer",
-            textAlign: "center",
-            p: {xs:5,sm:2},
-            borderRadius: "12px",
-            display: "flex",
-            justifyContent: { xs: "start", sm: "center" },
-            flexDirection: "column",
-            bgcolor: "white",
-            mb:2,
-            mx: "auto",
-          }}
-        >
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentIndex}
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.3 }}
+        مرحباً
+      </Typography>
+      <Box
+        sx={{
+          maxWidth: { xs: "300px", sm: "380px" },
+          height: "500px",
+          cursor: "pointer",
+          textAlign: "center",
+          p: { xs: 5, sm: 2 },
+          borderRadius: "12px",
+          display: "flex",
+          justifyContent: { xs: "start", sm: "center" },
+          flexDirection: "column",
+          bgcolor: "white",
+          mb: 2,
+          mx: "auto",
+        }}
+      >
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentIndex}
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -50 }}
+            transition={{ duration: 0.3 }}
+          >
+            <Box
+              sx={{
+                backgroundColor: "#D8BFF2",
+                borderRadius: { sm: "28px", xs: "24px" },
+                p: { sm: "16px", xs: "12px" },
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
             >
-              <Box
-                sx={{
-                  backgroundColor: "#D8BFF2",
-                  borderRadius: { sm: "28px", xs: "24px" },
-                  p: { sm: "16px", xs: "12px" },
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <img
-                  src={slides[currentIndex].img}
-                  alt="Nutrition"
-                  style={{
-                    width: "100%",
-                    borderRadius: "12px",
-                    objectFit: "cover",
-                  }}
-                />
-              </Box>
-
-              <Typography
-                variant="body1"
-                sx={{
-                  my: 3,
-                  color: "#333",
-                  fontWeight: 600,
-                  fontSize: { sm: "20px" },
-                }}
-              >
-                {slides[currentIndex].text}
-              </Typography>
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Pagination Dots */}
-          <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
-            {slides.map((_, index) => (
-              <Box
-                key={index}
-                sx={{
-                  width: 12,
-                  height: 12,
-                  borderRadius: "50%",
-                  bgcolor: index === currentIndex ? "#555" : "#ccc",
-                  mx: 0.5,
-                  transition: "0.3s",
+              <img
+                src={slides[currentIndex].img}
+                alt="Nutrition"
+                style={{
+                  width: "100%",
+                  borderRadius: "12px",
+                  objectFit: "cover",
                 }}
               />
-            ))}
-          </Box>
+            </Box>
 
-          {currentIndex !== 0 ? (
-            <IconButton
-              onClick={prevSlide}
+            <Typography
+              variant="body1"
               sx={{
-                position: "absolute",
-                right: 10,
-                top: "50%",
-                transform: "translateY(-50%)",
-                bgcolor: "white",
-                boxShadow: 2,
-                "&:hover": { bgcolor: "#f5f5f5" },
+                my: 3,
+                color: "#333",
+                fontWeight: 600,
+                fontSize: { sm: "20px" },
+                height: "70px",
               }}
             >
-              <ChevronRight fontSize="large" pr={1} />
-            </IconButton>
-          ) : (
-            ""
-          )}
+              {slides[currentIndex].text}
+            </Typography>
+          </motion.div>
+        </AnimatePresence>
 
-          {currentIndex !== slides.length - 1 ? (
-            <IconButton
-              onClick={nextSlide}
+        {/* Pagination Dots */}
+        <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
+          {slides.map((_, index) => (
+            <Box
+              key={index}
               sx={{
-                position: "absolute",
-                left: 10,
-                top: "50%",
-                transform: "translateY(-50%)",
-                bgcolor: "white",
-                boxShadow: 2,
-                "&:hover": { bgcolor: "#f5f5f5" },
+                width: 12,
+                height: 12,
+                borderRadius: "50%",
+                bgcolor: index === currentIndex ? "#555" : "#ccc",
+                mx: 0.5,
+                transition: "0.3s",
               }}
-            >
-              <ChevronLeft fontSize="large" />
-            </IconButton>
-          ) : (
-            ""
-          )}
+            />
+          ))}
         </Box>
-        <Box>
-          {currentIndex === slides.length - 1 ? (
-            <Link to="/overall">
-              <Button
-                size="large"
-                sx={{
-                  borderRadius: "50px",
+
+        {currentIndex !== 0 ? (
+          <IconButton
+            onClick={prevSlide}
+            sx={{
+              position: "absolute",
+              right: 10,
+              top: "50%",
+              transform: "translateY(-50%)",
+              bgcolor: "white",
+              boxShadow: 2,
+              "&:hover": { bgcolor: "#f5f5f5" },
+              width: { xs: 40, sm: 50, md: 60 },
+              height: { xs: 40, sm: 50, md: 60 },
+            }}
+          >
+            <ChevronRight fontSize="large" pr={1} sx={{ fontSize: { xs: 20, sm: 30, md: 40 } }}/>
+          </IconButton>
+        ) : (
+          ""
+        )}
+
+        {currentIndex !== slides.length - 1 ? (
+          <IconButton
+            onClick={nextSlide}
+            sx={{
+              position: "absolute",
+              left: 10,
+              top: "50%",
+              transform: "translateY(-50%)",
+              bgcolor: "white",
+              boxShadow: 2,
+              "&:hover": { bgcolor: "#f5f5f5" },
+              width: { xs: 40, sm: 50, md: 60 },
+              height: { xs: 40, sm: 50, md: 60 },
+            }}
+          >
+            <ChevronLeft fontSize="large" sx={{ fontSize: { xs: 20, sm: 30, md: 40 } }}/>
+          </IconButton>
+        ) : (
+          ""
+        )}
+      </Box>
+      <Box>
+        {currentIndex === slides.length - 1 ? (
+          <Link to="/overall">
+            <Button
+              size="large"
+              sx={{
+                borderRadius: "50px",
+                backgroundColor: "#A34BCE",
+                color: "white",
+                width: "100%",
+                height: "60px",
+                fontWeight: "bold",
+                textTransform: "none",
+                fontSize: "18px",
+                "&:hover": {
                   backgroundColor: "#A34BCE",
-                  color: "white",
-                  width: "100%",
-                  height: "60px",
-                  fontWeight: "bold",
-                  textTransform: "none",
-                  fontSize: "18px",
-                  "&:hover": {
-                    backgroundColor: "#A34BCE",
-                  },
-                }}
-              >
-                التالي
-              </Button>
-            </Link>
-          ) : (
-            ""
-          )}
-        </Box>
-      </Stack>
+                },
+              }}
+            >
+              التالي
+            </Button>
+          </Link>
+        ) : (
+          ""
+        )}
+      </Box>
+    </Stack>
   );
 }

@@ -90,7 +90,7 @@ export function MealsContextProvider({ children }) {
   };
 
   //////////////////////////////////////////////////////////
-
+  
   const CalculateBMR = () => {
     var tempBMR = 0;
     if (userDetails.gender === "ذكر") {

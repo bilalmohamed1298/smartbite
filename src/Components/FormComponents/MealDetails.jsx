@@ -18,10 +18,10 @@ const MealDetails = () => {
 
   const getMealDetails = async () => {
     let details = await axios.get(
-      `https://api.spoonacular.com/recipes/${id}/information?apiKey=7d5e750167ac4dc0b0f4032102e970de`
+      `https://api.spoonacular.com/recipes/${id}/information?apiKey=e1960c2436914b008fd31c03c84e51b4`
     );
     let widget = await axios.get(
-      `https://api.spoonacular.com/recipes/${id}/nutritionWidget.json?apiKey=7d5e750167ac4dc0b0f4032102e970de`
+      `https://api.spoonacular.com/recipes/${id}/nutritionWidget.json?apiKey=e1960c2436914b008fd31c03c84e51b4`
     );
 
     setMealDetails(details.data);
@@ -74,7 +74,7 @@ const MealDetails = () => {
               href={MealDetails.sourceUrl}
               style={{ textDecoration: "none", color: "#A34BCE" }}
             >
-              More Information
+              المزيد من المعلومات
             </a>
           </Button>
         </ThemeProvider>
@@ -84,6 +84,24 @@ const MealDetails = () => {
 
   //////////////////////////////////////////////////////////////////////
 
+
+  /////////////////////////////// Translator ///////////////////////////
+
+  async function translateGoogle(text) {
+    const res = await fetch(
+      `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=ar&dt=t&q=${encodeURIComponent(text)}`
+    );
+    const data = await res.json();
+    console.log("الترجمة:", data[0][0][0]);
+  }
+  
+  useEffect(() => {
+    translateGoogle(MealDetails.title)
+  
+  }, [MealDetails])
+  
+
+  //////////////////////////////////////////////////////////////////////
   const theme = createTheme({
     palette: {
       primary: {
@@ -106,20 +124,19 @@ const MealDetails = () => {
               overflow: "hidden",
             }}
           >
-            <Link to={'/diet-meals'}>
+            <Link to={"/diet-meals"}>
               <Button
                 variant="contained"
                 color="error"
                 sx={{
                   position: "absolute",
-                  zIndex:1,
-                  p:0,
-                  borderRadius:"50px",
-                  minWidth:"30px",
-                  m:'5px',
-                  textTransform: 'uppercase',
-                  fontWeight:'bold'
-
+                  zIndex: 1,
+                  p: 0,
+                  borderRadius: "50px",
+                  minWidth: "30px",
+                  m: "5px",
+                  textTransform: "uppercase",
+                  fontWeight: "bold",
                 }}
               >
                 X
@@ -131,7 +148,7 @@ const MealDetails = () => {
               style={{
                 width: "100%",
                 height: "100%",
-                objectFit:'cover' ,
+                objectFit: "cover",
               }}
             />
 
@@ -187,7 +204,7 @@ const MealDetails = () => {
           </Stack>
           <Stack sx={{}}>
             <Typography variant="h5" sx={{ mt: 2, mb: 1 }}>
-              Summary
+              معلومات الوجبة
             </Typography>
             <TruncatedHTML text={MealDetails.summary} limit={1000} />
           </Stack>
@@ -218,7 +235,7 @@ const MealDetails = () => {
                   mb: "4px",
                 }}
               >
-                Calories
+                سعرات حرارية
               </Typography>
               <Typography
                 variant="h6"
@@ -228,7 +245,7 @@ const MealDetails = () => {
                   color: "#A34BCE",
                 }}
               >
-                {nutritionWidget.calories}
+                {parseInt(nutritionWidget.calories)}جم
               </Typography>
             </Box>
             <Box
@@ -249,7 +266,7 @@ const MealDetails = () => {
                   mb: "4px",
                 }}
               >
-                Carbs
+                كاربوهيدرات
               </Typography>
               <Typography
                 variant="h6"
@@ -259,7 +276,7 @@ const MealDetails = () => {
                   color: "#A34BCE",
                 }}
               >
-                {nutritionWidget.carbs}
+                {parseInt(nutritionWidget.carbs)}جم
               </Typography>
             </Box>
             <Box
@@ -280,7 +297,7 @@ const MealDetails = () => {
                   mb: "4px",
                 }}
               >
-                Fat
+                دهون
               </Typography>
               <Typography
                 variant="h6"
@@ -290,7 +307,7 @@ const MealDetails = () => {
                   color: "#A34BCE",
                 }}
               >
-                {nutritionWidget.fat}
+                {parseInt(nutritionWidget.fat)}جم
               </Typography>
             </Box>
             <Box
@@ -311,7 +328,7 @@ const MealDetails = () => {
                   mb: "4px",
                 }}
               >
-                Protein
+                بروتين
               </Typography>
               <Typography
                 variant="h6"
@@ -321,7 +338,7 @@ const MealDetails = () => {
                   color: "#A34BCE",
                 }}
               >
-                {nutritionWidget.protein}
+                {parseInt(nutritionWidget.protein)}جم
               </Typography>
             </Box>
           </Stack>
@@ -352,7 +369,7 @@ const MealDetails = () => {
                   mb: "4px",
                 }}
               >
-                Percent Carbs
+                نسبة الكربوهيدرات
               </Typography>
               <Typography
                 variant="h6"
@@ -383,7 +400,7 @@ const MealDetails = () => {
                   mb: "4px",
                 }}
               >
-                Percent Carbs
+                نسبة الدهون
               </Typography>
               <Typography
                 variant="h6"
@@ -393,7 +410,7 @@ const MealDetails = () => {
                   color: "#A34BCE",
                 }}
               >
-                {nutritionWidget.caloricBreakdown.percentCarbs}%
+                {nutritionWidget.caloricBreakdown.percentFat}%
               </Typography>
             </Box>
             <Box
@@ -414,7 +431,7 @@ const MealDetails = () => {
                   mb: "4px",
                 }}
               >
-                Percent Carbs
+                نسبة البروتين
               </Typography>
               <Typography
                 variant="h6"
@@ -424,7 +441,7 @@ const MealDetails = () => {
                   color: "#A34BCE",
                 }}
               >
-                {nutritionWidget.caloricBreakdown.percentCarbs}%
+                {nutritionWidget.caloricBreakdown.percentProtein}%
               </Typography>
             </Box>
             <Box
@@ -445,7 +462,7 @@ const MealDetails = () => {
                   mb: "4px",
                 }}
               >
-                Weight/Meal
+                الوزن لكل حصة
               </Typography>
               <Typography
                 variant="h6"
@@ -455,7 +472,7 @@ const MealDetails = () => {
                   color: "#A34BCE",
                 }}
               >
-                {nutritionWidget.weightPerServing.amount}g
+                {nutritionWidget.weightPerServing.amount}جم
               </Typography>
             </Box>
           </Stack>
