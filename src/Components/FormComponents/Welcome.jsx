@@ -42,7 +42,7 @@ export default function Welcome() {
     >
       <Typography
         sx={{
-          mt: { xs: 5, sm: 8 },
+          mt: { xs: 8, sm: 8 },
           fontSize: "30px",
           fontWeight: "600",
           textAlign: "center",
@@ -54,7 +54,7 @@ export default function Welcome() {
       <Box
         sx={{
           maxWidth: { xs: "300px", sm: "380px" },
-          height: "500px",
+          height: "550px",
           cursor: "pointer",
           textAlign: "center",
           p: { xs: 5, sm: 2 },
@@ -77,8 +77,8 @@ export default function Welcome() {
             <Box
               sx={{
                 backgroundColor: "#D8BFF2",
-                borderRadius: { sm: "28px", xs: "24px" },
-                p: { sm: "16px", xs: "12px" },
+                borderRadius: { sm: "22px", xs: "18px" },
+                p: { sm: "10px", xs: "6px" },
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -185,6 +185,7 @@ export default function Welcome() {
                 fontSize: "18px",
                 "&:hover": {
                   backgroundColor: "#A34BCE",
+                  
                 },
               }}
             >

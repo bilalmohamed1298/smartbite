@@ -282,7 +282,7 @@ const OverallQuestions = () => {
                       bgcolor:
                         selectedOptions[activeStep] === option
                           ? "#f5e6ff"
-                          : "#fff",
+                          : "#fcfcfc",
                       ":hover": { bgcolor: "#F9F3FE" },
                     }}
                   >
