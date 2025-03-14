@@ -15,8 +15,6 @@ const MealDetails = () => {
   const [MealDetails, setMealDetails] = useState({});
   const [nutritionWidget, setNutritionWidget] = useState({});
   const [Summary, setSummary] = useState("");
-  const [Title, setTitle] = useState("");
-  const [Ingredients, setIngredients] = useState([]);
   const { id } = useParams();
 
   const getMealDetails = async () => {
@@ -27,7 +25,7 @@ const MealDetails = () => {
       let widget = await axios.get(
         `https://api.spoonacular.com/recipes/${id}/nutritionWidget.json?apiKey=e1960c2436914b008fd31c03c84e51b4`
       );
-  
+
       setMealDetails(details.data);
       setNutritionWidget(widget.data);
     } catch (error) {
@@ -45,15 +43,6 @@ const MealDetails = () => {
     const doc = new DOMParser().parseFromString(html, "text/html");
     return doc.body.textContent || "";
   };
-
-  useEffect(() => {
-    TitleTranslator(MealDetails.title);
-    if (MealDetails.summary) {
-      SummaryTranslator(stripHtmlTags(MealDetails.summary));
-    }
-
-  }, [MealDetails.summary, nutritionWidget.ingredients]);
-
 
   //////////////////////////////////////////////////////////////////////
 
@@ -82,30 +71,12 @@ const MealDetails = () => {
     setSummary(response.data.candidates[0].content.parts[0].text);
   };
 
-  const TitleTranslator = async (textToTranslate) => {
-    let response = await axios.post(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyAnKgAF69LPmgVVKxfu3tBKXEvtcrF3Ka4`,
-      {
-        contents: [
-          {
-            parts: [
-              {
-                text: `Translate the following text to Arabic:
-                    
-                    "${textToTranslate}"
-                    
-                    Only return the translated text without extra comments or formatting.
-                  `,
-              },
-            ],
-          },
-        ],
-      }
-    );
-    setTitle(response.data.candidates[0].content.parts[0].text);
-  };
 
-
+  useEffect(() => {
+    if (MealDetails.summary) {
+      SummaryTranslator(stripHtmlTags(MealDetails.summary));
+    }
+  }, [MealDetails.summary, nutritionWidget.ingredients]);
 
   //////////////////////////////////////////////////////////////////////
   const theme = createTheme({
@@ -170,37 +141,37 @@ const MealDetails = () => {
               }}
             />
 
-              {
-                Title !== "غير معرف" ?(
-                  <Typography
-                  variant="h6"
-                  sx={{
-                    position: "absolute",
-                    bottom: 10,
-                    right: 20,
-                    color: "white",
-                    fontWeight: "bold",
-                  }}
-                >
-                  {MealDetails.title}
-                </Typography>
-                ):''
-              }
+            <Typography
+              variant="h6"
+              sx={{
+                position: "absolute",
+                bottom: 10,
+                right: 20,
+                color: "white",
+                fontWeight: "bold",
+              }}
+            >
+              {MealDetails.title}
+            </Typography>
           </Box>
 
           <Stack sx={{}}>
             <Typography variant="h5" sx={{ mt: 2, mb: 1 }}>
               معلومات الوجبة
             </Typography>
-            {Summary !== ""?(
-              <Typography
-              color="textSecondary"
-              my={2}
-              sx={{
-                fontSize: { xs: "14px", sm: "18px" },
-              }}
-              >{Summary}</Typography>
-            ):(
+            {Summary !== "" ? (
+              <Box>
+                <Typography
+                  color="textSecondary"
+                  my={2}
+                  sx={{
+                    fontSize: { xs: "14px", sm: "18px" },
+                  }}
+                >
+                  {Summary}
+                </Typography>
+              </Box>
+            ) : (
               <div
                 style={{
                   display: "flex",

@@ -60,7 +60,7 @@ export default function Welcome() {
           p: { xs: 5, sm: 2 },
           borderRadius: "12px",
           display: "flex",
-          justifyContent: { xs: "start", sm: "center" },
+          justifyContent: { xs: "start", sm: "start" },
           flexDirection: "column",
           mb: 2,
           mx: "auto",
