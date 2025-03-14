@@ -14,18 +14,25 @@ import { Link, useParams } from "react-router-dom";
 const MealDetails = () => {
   const [MealDetails, setMealDetails] = useState({});
   const [nutritionWidget, setNutritionWidget] = useState({});
+  const [Summary, setSummary] = useState("");
+  const [Title, setTitle] = useState("");
+  const [Ingredients, setIngredients] = useState([]);
   const { id } = useParams();
 
   const getMealDetails = async () => {
-    let details = await axios.get(
-      `https://api.spoonacular.com/recipes/${id}/information?apiKey=e1960c2436914b008fd31c03c84e51b4`
-    );
-    let widget = await axios.get(
-      `https://api.spoonacular.com/recipes/${id}/nutritionWidget.json?apiKey=e1960c2436914b008fd31c03c84e51b4`
-    );
-
-    setMealDetails(details.data);
-    setNutritionWidget(widget.data);
+    try {
+      let details = await axios.get(
+        `https://api.spoonacular.com/recipes/${id}/information?apiKey=e1960c2436914b008fd31c03c84e51b4`
+      );
+      let widget = await axios.get(
+        `https://api.spoonacular.com/recipes/${id}/nutritionWidget.json?apiKey=e1960c2436914b008fd31c03c84e51b4`
+      );
+  
+      setMealDetails(details.data);
+      setNutritionWidget(widget.data);
+    } catch (error) {
+      console.error("Error fetching meal details:", error);
+    }
   };
 
   useEffect(() => {
@@ -34,72 +41,71 @@ const MealDetails = () => {
 
   ///////////////////////// Summary ////////////////////////////
 
-  const TruncatedHTML = ({ text, limit }) => {
-    const truncated =
-      text.split(" ").length > limit
-        ? text.split(" ").slice(0, limit).join(" ") + "..."
-        : text;
-
-    return (
-      <Box>
-        <Typography
-          sx={{
-            fontFamily: "arial",
-            fontSize: "14px",
-            textOverflow: "ellipsis",
-            whiteSpace: "wrap",
-            width: "100%",
-          }}
-        >
-          <p
-            style={{
-              margin: "5px 0px 5px 0px",
-              color: "black",
-              textDecoration: "none",
-            }}
-            dangerouslySetInnerHTML={{ __html: truncated }}
-          />
-        </Typography>
-        <ThemeProvider theme={theme}>
-          <Button
-            variant="outlined"
-            size="small"
-            sx={{
-              mt: 1,
-              width: { xs: "100%" },
-            }}
-          >
-            <a
-              target="_blank"
-              href={MealDetails.sourceUrl}
-              style={{ textDecoration: "none", color: "#A34BCE" }}
-            >
-              المزيد من المعلومات
-            </a>
-          </Button>
-        </ThemeProvider>
-      </Box>
-    );
+  const stripHtmlTags = (html) => {
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    return doc.body.textContent || "";
   };
+
+  useEffect(() => {
+    TitleTranslator(MealDetails.title);
+    if (MealDetails.summary) {
+      SummaryTranslator(stripHtmlTags(MealDetails.summary));
+    }
+
+  }, [MealDetails.summary, nutritionWidget.ingredients]);
+
 
   //////////////////////////////////////////////////////////////////////
 
-
   /////////////////////////////// Translator ///////////////////////////
 
-  async function translateGoogle(text) {
-    const res = await fetch(
-      `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=ar&dt=t&q=${encodeURIComponent(text)}`
+  const SummaryTranslator = async (textToTranslate) => {
+    let response = await axios.post(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyAnKgAF69LPmgVVKxfu3tBKXEvtcrF3Ka4`,
+      {
+        contents: [
+          {
+            parts: [
+              {
+                text: `Translate the following text to Arabic:
+                    
+                    "${textToTranslate}"
+                    
+                    Only return the translated text without extra comments or formatting.
+                  `,
+              },
+            ],
+          },
+        ],
+      }
     );
-    const data = await res.json();
-    console.log("الترجمة:", data[0][0][0]);
-  }
-  
-  useEffect(() => {
-    translateGoogle(MealDetails.title)
-  
-  }, [MealDetails])
-  
+    setSummary(response.data.candidates[0].content.parts[0].text);
+  };
+
+  const TitleTranslator = async (textToTranslate) => {
+    let response = await axios.post(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyAnKgAF69LPmgVVKxfu3tBKXEvtcrF3Ka4`,
+      {
+        contents: [
+          {
+            parts: [
+              {
+                text: `Translate the following text to Arabic:
+                    
+                    "${textToTranslate}"
+                    
+                    Only return the translated text without extra comments or formatting.
+                  `,
+              },
+            ],
+          },
+        ],
+      }
+    );
+    setTitle(response.data.candidates[0].content.parts[0].text);
+  };
+
+
 
   //////////////////////////////////////////////////////////////////////
   const theme = createTheme({
@@ -134,7 +140,7 @@ const MealDetails = () => {
                   p: 0,
                   borderRadius: "50px",
                   minWidth: "30px",
-                  m: "5px",
+                  m: "3px",
                   textTransform: "uppercase",
                   fontWeight: "bold",
                 }}
@@ -164,49 +170,48 @@ const MealDetails = () => {
               }}
             />
 
-            <Typography
-              variant="h6"
-              sx={{
-                position: "absolute",
-                bottom: 10,
-                left: 10,
-                color: "white",
-                fontWeight: "bold",
-              }}
-            >
-              {MealDetails.title}
-            </Typography>
-          </Box>
-          <Stack direction={"row"} sx={{ gap: 1, flexWrap: "wrap", m: 1 }}>
-            {nutritionWidget?.ingredients?.map((ingredient, index) =>
-              index < 7 ? (
-                <Box
-                  key={index}
+              {
+                Title !== "غير معرف" ?(
+                  <Typography
+                  variant="h6"
                   sx={{
-                    bgcolor: "#A34BCE",
-                    color: "#fff",
-                    p: "5px",
-                    borderRadius: 2,
-                    flexGrow: { xs: 1, sm: 0 },
+                    position: "absolute",
+                    bottom: 10,
+                    right: 20,
+                    color: "white",
+                    fontWeight: "bold",
                   }}
                 >
-                  <Typography
-                    variant="body2"
-                    sx={{ textTransform: "capitalize" }}
-                  >
-                    {ingredient.name}
-                  </Typography>
-                </Box>
-              ) : (
-                ""
-              )
-            )}
-          </Stack>
+                  {MealDetails.title}
+                </Typography>
+                ):''
+              }
+          </Box>
+
           <Stack sx={{}}>
             <Typography variant="h5" sx={{ mt: 2, mb: 1 }}>
               معلومات الوجبة
             </Typography>
-            <TruncatedHTML text={MealDetails.summary} limit={1000} />
+            {Summary !== ""?(
+              <Typography
+              color="textSecondary"
+              my={2}
+              sx={{
+                fontSize: { xs: "14px", sm: "18px" },
+              }}
+              >{Summary}</Typography>
+            ):(
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "200px",
+                }}
+              >
+                <CircularProgress />
+              </div>
+            )}
           </Stack>
           <Stack
             direction={"row"}

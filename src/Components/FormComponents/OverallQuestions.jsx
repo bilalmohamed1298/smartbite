@@ -222,7 +222,7 @@ const OverallQuestions = () => {
             fontSize: "12px",
             bgcolor: "#A34BCE",
             color: "#fff",
-            width: "90px",
+            width: "100px",
             padding: "5px",
             borderRadius: "5px",
             textAlign: "center",
@@ -239,7 +239,7 @@ const OverallQuestions = () => {
           activeStep={activeStep}
           sx={{
             bgcolor: "transparent",
-            width: "196%",
+            width: "198%",
             mb: 2,
             "& .MuiLinearProgress-root": {
               bgcolor: "#D8BFF2",
@@ -282,7 +282,7 @@ const OverallQuestions = () => {
                       bgcolor:
                         selectedOptions[activeStep] === option
                           ? "#f5e6ff"
-                          : "#F5F8FC",
+                          : "#fff",
                       ":hover": { bgcolor: "#F9F3FE" },
                     }}
                   >

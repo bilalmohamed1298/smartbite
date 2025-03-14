@@ -93,7 +93,7 @@ const Preferences = () => {
           <hr
             style={{
               border: "2px solid #D8BFF2",
-              width: "98%",
+              width: "99%",
               marginLeft: "15px",
             }}
           />
@@ -228,7 +228,7 @@ const Preferences = () => {
                   sx={{ fontSize: { sm: "18px", xs: "14px" } }}
                   gutterBottom
                 >
-                  حدد وتيرتك: اختر عدد الأيام! 🚀
+                  حدد المدة: اختر عدد الأيام 🚀
                 </Typography>
                 <Typography variant="body2" mt={1}>
                 المدة المحددة: <strong>{duration} يوم</strong>

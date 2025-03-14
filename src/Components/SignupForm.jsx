@@ -17,7 +17,7 @@ export default function SignupForm() {
   return (
     <Box
       sx={{
-        height: {xs:'85vh',lg:'790px'},
+        height: {xs:'85vh',lg:'800px'},
         mt: { xs: 0,sm:5,lg:1 },
         p: 3,
         bgcolor: "white",
@@ -25,8 +25,9 @@ export default function SignupForm() {
         borderRadius: 3,
         position: "relative",
         overflowY:'auto',
-        overflowX: 'hidden'
-      }}
+        overflowX: 'hidden',
+        background: 'linear-gradient(to top, #EAD8F7 5%, #FFFFFF 60%); '
+           }}
     >
 
 
@@ -46,7 +47,7 @@ export default function SignupForm() {
       <Box
         sx={{
           position: "absolute",
-          left: {xs:35},
+          left: {xs:20},
           top: 25,
           width: "70px",
         }}

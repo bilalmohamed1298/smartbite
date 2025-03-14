@@ -64,7 +64,7 @@ const FoodAnalyzer = () => {
                 text: `Calculate Calories and Nutrition Values in This Photo in json
                                     
                       like this: {
-                      "dish": "Tofu Scramble with Roasted Potatoes" or "No Food Recognized",
+                      "dish": "Tofu Scramble with Roasted Potatoes" or "لم يتم التعرف على أي طعام",
                       },
                       "nutrition": {
                         "calories": {
@@ -97,6 +97,7 @@ const FoodAnalyzer = () => {
                       }
 
                       without note or "\`\`\`json" and "\`\`\`" at the end of the text.
+                      and translate the proprities values to Arabic Language
                 `,
               },
               {
@@ -112,6 +113,7 @@ const FoodAnalyzer = () => {
     );
 
     setPostResponse(response.data.candidates[0].content.parts[0].text);
+    console.log(response.data.candidates[0].content.parts[0].text);
   };
 
   function cleanJSONFormat(text) {
@@ -266,7 +268,7 @@ const FoodAnalyzer = () => {
                 </Paper>
               </Grid>
                   {
-                    analyzedInfo.dish !== "No Food Recognized"?
+                    analyzedInfo.dish !== "لم يتم التعرف على أي طعام"?
                     <Grid item xs={12} sm={12}>
                     <Paper
                       sx={{
@@ -282,7 +284,7 @@ const FoodAnalyzer = () => {
                       </Typography>
                       <Typography sx={{ mb: 1, fontWeight: "500" }}>
                         {analyzedInfo?.nutrition?.calories?.total === null
-                          ? "No Calories Detected"
+                          ? "غير محدد سعر حراري"
                           : analyzedInfo?.nutrition?.calories?.total + " سعر حراري"}
                       </Typography>
                       {analyzedInfo?.nutrition?.calories?.breakdown &&
@@ -313,7 +315,7 @@ const FoodAnalyzer = () => {
                     :''
                   }
             </Grid>
-            {analyzedInfo.dish !== "No Food Recognized" && analyzedInfo?.nutrition?.calories?.total !== null ? (
+            {analyzedInfo.dish !== "لم يتم التعرف على أي طعام" && analyzedInfo?.nutrition?.calories?.total !== null ? (
               <Grid container spacing={3} alignItems={"stretch"} mt={1}>
                 <Grid item xs={12} sm={12}>
                   <Paper

@@ -9,7 +9,7 @@ const Logo = () => {
     <Stack
       display={{ xs: "none", lg: "flex" }}
       sx={{
-        mt: 1,
+        mt: 0,
       }}
     >
 

@@ -26,7 +26,6 @@ const CustomDietComponent = () => {
   return (
     <Box
       sx={{
-        backgroundColor: "#fcf6ff",
         borderRadius: 4,
         height: "100%",
         textAlign: "center",

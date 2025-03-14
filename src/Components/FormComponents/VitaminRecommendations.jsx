@@ -21,7 +21,7 @@ const VitaminRecommendations = () => {
 
   return (
 <div style={{ maxWidth: "100%", margin: "auto", padding: "20px" }}>
-      <Typography variant="h5" mb={2} gutterBottom>
+      <Typography variant="h6" fontWeight={'600'} mb={2} gutterBottom>
         💊 توصيات غذائية بناءً على العناصر الغذائية الناقصة
       </Typography>
 

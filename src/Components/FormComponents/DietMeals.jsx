@@ -26,8 +26,45 @@ const DietMeals = () => {
     specialNutrients,
     vitaminDeficiencies,
   } = useContext(MealsContext);
+  const [Title, setTitle] = useState("");
+
 
   let localUserDetails = JSON.parse(localStorage.getItem("userDetails"));
+
+
+  ///////////////////////// APITranslation //////////////////////
+
+  const TitleTranslator = async (textToTranslate) => {
+    let response = await axios.post(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyAnKgAF69LPmgVVKxfu3tBKXEvtcrF3Ka4`,
+      {
+        contents: [
+          {
+            parts: [
+              {
+                text: `Translate the following text to Arabic:
+                    
+                    "${textToTranslate}"
+                    
+                    Only return the translated text without extra comments or formatting.
+                  `,
+              },
+            ],
+          },
+        ],
+      }
+    );
+    setTitle(response.data.candidates[0].content.parts[0].text);
+  };
+
+
+  useEffect(() => {
+    TitleTranslator()
+  
+  }, [])
+  
+
+  ///////////////////////////////////////////////////////////////
 
   return (
     <Box sx={{ position: "relative", height: "100%" }}>

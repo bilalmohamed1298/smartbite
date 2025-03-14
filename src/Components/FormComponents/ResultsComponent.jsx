@@ -17,7 +17,6 @@ const ResultsComponent = () => {
   return (
     <Box
       sx={{
-        backgroundColor: "#fcf6ff",
         borderRadius: 4,
         height: "100%",
         textAlign: "center",
@@ -26,7 +25,8 @@ const ResultsComponent = () => {
         justifyContent: "space-between",
       }}
     >
-      <Stack mt={5}>
+      <Box></Box>
+      <Stack mb={5} sx={{ alignItems: "center" }}>
         <Box mx={"auto"} mt={7} mb={5}>
           <img src={"/results.svg"} alt={"results-dishs"} width={"70%"} />
         </Box>
@@ -44,7 +44,7 @@ const ResultsComponent = () => {
             my={2}
             mx={"auto"}
             sx={{
-              fontSize: { xs: "16px" },
+              fontSize: { xs: "14px", sm: "18px" },
               width: { xs: "100%", sm: "80%" },
             }}
           >

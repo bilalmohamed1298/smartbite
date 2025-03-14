@@ -62,7 +62,6 @@ export default function Welcome() {
           display: "flex",
           justifyContent: { xs: "start", sm: "center" },
           flexDirection: "column",
-          bgcolor: "white",
           mb: 2,
           mx: "auto",
         }}
@@ -120,7 +119,7 @@ export default function Welcome() {
                 width: 12,
                 height: 12,
                 borderRadius: "50%",
-                bgcolor: index === currentIndex ? "#555" : "#ccc",
+                bgcolor: index === currentIndex ? "#A34BCE" : "#fff",
                 mx: 0.5,
                 transition: "0.3s",
               }}

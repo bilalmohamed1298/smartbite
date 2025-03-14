@@ -86,7 +86,7 @@ const PersonalDetails = () => {
           <hr
             style={{
               border: "2px solid #D8BFF2",
-              width: "98%",
+              width: "99%",
               marginLeft: "15px",
             }}
           />
