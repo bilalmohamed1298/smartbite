@@ -91,7 +91,8 @@ export default function Welcome() {
                   width: "100%",
                   borderRadius: "12px",
                   objectFit: "cover",
-                  loading:"eager"
+                  loading:"eager",
+                  fetchpriority:"high"
                 }}
               />
             </Box>
