@@ -52,6 +52,7 @@ export default function Welcome() {
         مرحباً
       </Typography>
       <Box
+
         sx={{
           maxWidth: { xs: "300px", sm: "380px" },
           height: "550px",
@@ -66,7 +67,7 @@ export default function Welcome() {
           mx: "auto",
         }}
       >
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="wait" >
           <motion.div
             key={currentIndex}
             initial={{ opacity: 0, x: 50 }}
