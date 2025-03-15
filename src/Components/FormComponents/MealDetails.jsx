@@ -20,10 +20,10 @@ const MealDetails = () => {
   const getMealDetails = async () => {
     try {
       let details = await axios.get(
-        `https://api.spoonacular.com/recipes/${id}/information?apiKey=e1960c2436914b008fd31c03c84e51b4`
+        `https://api.spoonacular.com/recipes/${id}/information?apiKey=16d84c3222204c619a34ad6b943db6a9`
       );
       let widget = await axios.get(
-        `https://api.spoonacular.com/recipes/${id}/nutritionWidget.json?apiKey=e1960c2436914b008fd31c03c84e51b4`
+        `https://api.spoonacular.com/recipes/${id}/nutritionWidget.json?apiKey=16d84c3222204c619a34ad6b943db6a9`
       );
 
       setMealDetails(details.data);
@@ -163,9 +163,9 @@ const MealDetails = () => {
               <Box>
                 <Typography
                   color="textSecondary"
-                  my={2}
                   sx={{
-                    fontSize: { xs: "14px", sm: "18px" },
+                    fontSize: { xs: "16px", sm: "18px" },
+                    textAlign: 'justify'
                   }}
                 >
                   {Summary}
@@ -196,7 +196,6 @@ const MealDetails = () => {
             <Box
               sx={{
                 flexGrow: 1,
-                height: "50px",
                 boxShadow: 2,
                 p: 1,
                 textAlign: "center",

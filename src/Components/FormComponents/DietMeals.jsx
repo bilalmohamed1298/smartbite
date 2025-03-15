@@ -335,9 +335,18 @@ const DietMeals = () => {
           <Typography sx={{ fontSize: "12px" }}>تغيير الوجبات</Typography>
         </Button>
       </Stack>
-      <Typography mb={0}>
-        السعرات المطلوبة: {localMealsCalories.toFixed(0)}
-      </Typography>
+      {
+        localMealsCalories.toFixed(0) > 0 ? (
+          <Typography mb={0}>
+          السعرات المطلوبة: {localMealsCalories.toFixed(0)}
+        </Typography>
+        ):(
+          <Typography mb={0}>
+        انت تحتاج لخسارة سعرات يومية بمقدار: {Math.abs(localMealsCalories.toFixed(0))}
+        </Typography>
+        )
+      }
+
       {Object.keys(dailyNutrients).length > 0 ? (
         <Stack
           direction={"row"}

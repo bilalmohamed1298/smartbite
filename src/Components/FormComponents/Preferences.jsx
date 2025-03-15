@@ -27,13 +27,9 @@ import {
 import { MealsContext } from "../../Utils/MealsContext";
 
 const Preferences = () => {
-  const { userDetails, setUserDetails, submit, setSubmit, toggleMealsChange } =
+  const { userDetails, setUserDetails, submit, setSubmit, toggleMealsChange, preferences, setPreferences } =
     useContext(MealsContext);
-  const [preferences, setPreferences] = useState({
-    goal: "",
-    idealWeight: "",
-    duration: "",
-  });
+
   const [visibleFields, setVisibleFields] = useState(["goal"]);
   const [duration, setDuration] = useState(45);
 

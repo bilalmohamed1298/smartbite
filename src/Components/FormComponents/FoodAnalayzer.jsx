@@ -315,7 +315,7 @@ const FoodAnalyzer = () => {
                     :''
                   }
             </Grid>
-            {analyzedInfo.dish !== "لم يتم التعرف على أي طعام" && analyzedInfo?.nutrition?.calories?.total !== null ? (
+            {analyzedInfo.dish !== "لم يتم التعرف على أي طعام" && analyzedInfo?.nutrition?.calories?.total !== null && analyzedInfo?.nutrition?.vitamins ? (
               <Grid container spacing={3} alignItems={"stretch"} mt={1}>
                 <Grid item xs={12} sm={12}>
                   <Paper

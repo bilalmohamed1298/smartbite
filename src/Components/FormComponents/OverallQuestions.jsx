@@ -236,16 +236,16 @@ const OverallQuestions = () => {
           variant="progress"
           steps={questions.length}
           position="static"
-          activeStep={activeStep}
+          activeStep={questions.length - 1 - activeStep}
           sx={{
             bgcolor: "transparent",
             width: "198%",
             mb: 2,
             "& .MuiLinearProgress-root": {
-              bgcolor: "#D8BFF2",
+              bgcolor: "#A34BCE",
             },
             "& .MuiLinearProgress-bar": {
-              bgcolor: "#A34BCE",
+              bgcolor: "#D8BFF2",
             },
           }}
           backButton={<></>}

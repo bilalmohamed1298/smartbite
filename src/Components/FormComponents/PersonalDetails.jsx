@@ -25,13 +25,8 @@ import {
 import { MealsContext } from "../../Utils/MealsContext";
 
 const PersonalDetails = () => {
-  const { setUserDetails } = useContext(MealsContext);
-  const [personalData, setPersonalData] = useState({
-    gender: "",
-    age: "",
-    height: "",
-    weight: "",
-  });
+  const { setUserDetails,personalData, setPersonalData } = useContext(MealsContext);
+
   const [visibleFields, setVisibleFields] = useState(["gender"]);
 
   useEffect(() => {

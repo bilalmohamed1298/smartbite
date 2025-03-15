@@ -119,7 +119,7 @@ export default function Welcome() {
                 width: 12,
                 height: 12,
                 borderRadius: "50%",
-                bgcolor: index === currentIndex ? "#A34BCE" : "#fff",
+                bgcolor: index === currentIndex ? "#A34BCE" : "#cce",
                 mx: 0.5,
                 transition: "0.3s",
               }}

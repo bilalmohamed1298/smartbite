@@ -5,12 +5,9 @@ import { Link } from "react-router-dom";
 
 const Logo = () => {
   return (
-    <Link to="/" style={{textDecoration: "none",}}>
+    <Link to="/" style={{textDecoration: "none", width:'auto'}}>
     <Stack
       display={{ xs: "none", lg: "flex" }}
-      sx={{
-        mt: 0,
-      }}
     >
 
       <Box
