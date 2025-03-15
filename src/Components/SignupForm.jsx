@@ -1,6 +1,6 @@
-import { Box, Button, Modal, Typography} from "@mui/material";
+import { Box, Button, Modal, Typography } from "@mui/material";
 import OverallQuestions from "./FormComponents/OverallQuestions";
-import {Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import PersonalDetails from "./FormComponents/PersonalDetails";
 import Welcome from "./FormComponents/Welcome";
 import DietMeals from "./FormComponents/DietMeals";
@@ -17,20 +17,18 @@ export default function SignupForm() {
   return (
     <Box
       sx={{
-        height: {xs:'95vh',lg:'800px'},
-        mt: { xs: 0,lg:1 },
+        height: { xs: "95vh", lg: "800px" },
+        mt: { xs: 0, lg: 1 },
         p: 3,
         bgcolor: "white",
-        boxShadow: {xs:0,sm:3},
+        boxShadow: { xs: 0, sm: 3 },
         borderRadius: 3,
         position: "relative",
-        overflowY:'auto',
-        overflowX: 'hidden',
-        background: 'linear-gradient(to top, #EAD8F7 5%, #FFFFFF 60%); '
-           }}
+        overflowY: "auto",
+        overflowX: "hidden",
+        background: "linear-gradient(to top, #EAD8F7 5%, #FFFFFF 60%); ",
+      }}
     >
-
-
       <Routes>
         <Route path="/" element={<Welcome />} />
         <Route path="/overall" element={<OverallQuestions />} />
@@ -43,11 +41,10 @@ export default function SignupForm() {
         <Route path="/food-analyzer" element={<FoodAnalyzer />} />
       </Routes>
 
-
       <Box
         sx={{
           position: "absolute",
-          left: {xs:20},
+          left: { xs: 20 },
           top: 25,
           width: "70px",
         }}
@@ -103,8 +100,6 @@ export default function SignupForm() {
           </Box>
         </Modal>
       </div>
-
-      
     </Box>
   );
 }

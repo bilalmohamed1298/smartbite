@@ -5,25 +5,23 @@ import Logo from "./Components/Logo";
 import { BrowserRouter } from "react-router-dom";
 
 export default function App() {
-    const theme = createTheme({
-      palette: {
-        primary: {
-          main: "#A34BCE",
-        },
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: "#A34BCE",
       },
-    });
+    },
+  });
   return (
-    <BrowserRouter >
-    <ThemeProvider theme={theme}>
-    <MealsContextProvider>
-
-        <Container disableGutters>
-          <Logo />
-          <SignupForm />
-        </Container>
-
-    </MealsContextProvider>
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <MealsContextProvider>
+          <Container disableGutters>
+            <Logo />
+            <SignupForm />
+          </Container>
+        </MealsContextProvider>
+      </ThemeProvider>
     </BrowserRouter>
   );
 }
