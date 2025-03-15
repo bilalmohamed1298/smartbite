@@ -26,7 +26,7 @@ import {
 import { MealsContext } from "../../Utils/MealsContext";
 
 const Preferences = () => {
-  const { setUserDetails, setSubmit, preferences, setPreferences } =
+  const { setUserDetails, setSubmit, preferences, setPreferences, toggleMealsChange } =
     useContext(MealsContext);
 
   const [visibleFields, setVisibleFields] = useState(["goal"]);
@@ -278,7 +278,7 @@ const Preferences = () => {
           {visibleFields.includes("duration") && preferences.duration && (
             <Link to="/results">
               <Button
-                onClick={() => setSubmit(true)}
+                onClick={() => (setSubmit(true),toggleMealsChange() )}
                 size="large"
                 sx={{
                   borderRadius: "50px",
