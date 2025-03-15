@@ -17,12 +17,12 @@ export default function SignupForm() {
   return (
     <Box
       sx={{
-        height: { xs: "95vh", lg: "800px" },
+        height: { xs: "85vh", lg: "800px" },
         mt: { xs: 0, lg: 1 },
         p: 3,
         bgcolor: "white",
         boxShadow: { xs: 0, sm: 3 },
-        borderRadius: 3,
+        borderRadius: {xs:0,sm:3},
         position: "relative",
         overflowY: "auto",
         overflowX: "hidden",
