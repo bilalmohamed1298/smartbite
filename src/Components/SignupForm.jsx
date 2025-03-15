@@ -22,7 +22,7 @@ export default function SignupForm() {
         p: 3,
         bgcolor: "white",
         boxShadow: { xs: 0, sm: 3 },
-        borderRadius: {xs:0,sm:3},
+        borderRadius: { xs: 0, sm: 3 },
         position: "relative",
         overflowY: "auto",
         overflowX: "hidden",

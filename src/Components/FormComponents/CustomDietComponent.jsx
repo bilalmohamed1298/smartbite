@@ -1,7 +1,4 @@
-import React from "react";
 import {
-  LineChart,
-  Line,
   XAxis,
   YAxis,
   Tooltip,
@@ -10,9 +7,8 @@ import {
   AreaChart,
 } from "recharts";
 import { Button, Box, Typography, Paper, IconButton } from "@mui/material";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Link } from "react-router-dom";
-import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material";
+import { KeyboardArrowRight } from "@mui/icons-material";
 
 const data = [
   { name: "", generic: 40, weight: 78 },

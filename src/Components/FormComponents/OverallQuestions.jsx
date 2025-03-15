@@ -12,7 +12,7 @@ import {
   Button,
   Stack,
 } from "@mui/material";
-import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material";
+import { KeyboardArrowRight } from "@mui/icons-material";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { MealsContext } from "../../Utils/MealsContext";
@@ -179,8 +179,7 @@ const OverallQuestions = () => {
 
   useEffect(() => {
     setVitaminDeficiencies(vitaminDeficiencies);
-    console.log(vitaminDeficiencies);
-  }, [vitaminDeficiencies]);
+      }, [vitaminDeficiencies]);
 
   //////////////////////////////////////////////////////////
 

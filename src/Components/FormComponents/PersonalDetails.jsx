@@ -14,18 +14,12 @@ import {
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import {
-  Female,
-  KeyboardArrowLeft,
-  KeyboardArrowRight,
-  Male,
-  Man,
-  Woman,
-} from "@mui/icons-material";
+import { KeyboardArrowRight, Man, Woman } from "@mui/icons-material";
 import { MealsContext } from "../../Utils/MealsContext";
 
 const PersonalDetails = () => {
-  const { setUserDetails,personalData, setPersonalData } = useContext(MealsContext);
+  const { setUserDetails, personalData, setPersonalData } =
+    useContext(MealsContext);
 
   const [visibleFields, setVisibleFields] = useState(["gender"]);
 

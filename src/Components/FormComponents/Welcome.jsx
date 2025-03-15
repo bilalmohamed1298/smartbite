@@ -52,7 +52,6 @@ export default function Welcome() {
         مرحباً
       </Typography>
       <Box
-
         sx={{
           maxWidth: { xs: "300px", sm: "380px" },
           height: "550px",
@@ -67,7 +66,7 @@ export default function Welcome() {
           mx: "auto",
         }}
       >
-        <AnimatePresence mode="wait" >
+        <AnimatePresence mode="wait">
           <motion.div
             key={currentIndex}
             initial={{ opacity: 0, x: 50 }}
@@ -92,8 +91,8 @@ export default function Welcome() {
                   width: "100%",
                   borderRadius: "12px",
                   objectFit: "cover",
-                  loading:"eager",
-                  fetchpriority:"high"
+                  loading: "eager",
+                  fetchpriority: "high",
                 }}
               />
             </Box>
@@ -145,7 +144,11 @@ export default function Welcome() {
               height: { xs: 40, sm: 50, md: 60 },
             }}
           >
-            <ChevronRight fontSize="large" pr={1} sx={{ fontSize: { xs: 20, sm: 30, md: 40 } }}/>
+            <ChevronRight
+              fontSize="large"
+              pr={1}
+              sx={{ fontSize: { xs: 20, sm: 30, md: 40 } }}
+            />
           </IconButton>
         ) : (
           ""
@@ -166,7 +169,10 @@ export default function Welcome() {
               height: { xs: 40, sm: 50, md: 60 },
             }}
           >
-            <ChevronLeft fontSize="large" sx={{ fontSize: { xs: 20, sm: 30, md: 40 } }}/>
+            <ChevronLeft
+              fontSize="large"
+              sx={{ fontSize: { xs: 20, sm: 30, md: 40 } }}
+            />
           </IconButton>
         ) : (
           ""
@@ -188,7 +194,6 @@ export default function Welcome() {
                 fontSize: "18px",
                 "&:hover": {
                   backgroundColor: "#A34BCE",
-                  
                 },
               }}
             >

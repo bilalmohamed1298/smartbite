@@ -2,18 +2,13 @@ import {
   Box,
   Button,
   CircularProgress,
-  Modal,
   Stack,
   Typography,
 } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { MealsContext } from "../../Utils/MealsContext";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
-import { CameraAlt } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
-import axios from "axios";
-import FoodAnalyzer from "./FoodAnalayzer";
-import MealDetails from "./MealDetails";
 import VitaminRecommendations from "./VitaminRecommendations";
 
 const DietMeals = () => {
@@ -21,50 +16,11 @@ const DietMeals = () => {
     dailyMeals,
     dailyNutrients,
     toggleMealsChange,
-    mealsChange,
     localMealsCalories,
     specialNutrients,
-    vitaminDeficiencies,
   } = useContext(MealsContext);
-  const [Title, setTitle] = useState("");
-
 
   let localUserDetails = JSON.parse(localStorage.getItem("userDetails"));
-
-
-  ///////////////////////// APITranslation //////////////////////
-
-  const TitleTranslator = async (textToTranslate) => {
-    let response = await axios.post(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyAnKgAF69LPmgVVKxfu3tBKXEvtcrF3Ka4`,
-      {
-        contents: [
-          {
-            parts: [
-              {
-                text: `Translate the following text to Arabic:
-                    
-                    "${textToTranslate}"
-                    
-                    Only return the translated text without extra comments or formatting.
-                  `,
-              },
-            ],
-          },
-        ],
-      }
-    );
-    setTitle(response.data.candidates[0].content.parts[0].text);
-  };
-
-
-  useEffect(() => {
-    TitleTranslator()
-  
-  }, [])
-  
-
-  ///////////////////////////////////////////////////////////////
 
   return (
     <Box sx={{ position: "relative", height: "100%" }}>
@@ -75,7 +31,7 @@ const DietMeals = () => {
           mb: 2,
         }}
       >
-      📋 بياناتك الشخصية
+        📋 بياناتك الشخصية
       </Typography>
       <Box>
         <Stack
@@ -117,7 +73,7 @@ const DietMeals = () => {
                 color: "#A34BCE",
               }}
             >
-              {localUserDetails.age}{' '}
+              {localUserDetails.age}{" "}
               <span style={{ fontSize: "14px", marginLeft: "5px" }}>سنة</span>
             </Typography>
           </Box>
@@ -253,7 +209,7 @@ const DietMeals = () => {
                 color: "#A34BCE",
               }}
             >
-              {localUserDetails.duration}{' '}
+              {localUserDetails.duration}{" "}
               <span style={{ fontSize: "14px", marginLeft: "1px" }}>يوم</span>
             </Typography>
           </Box>
@@ -316,7 +272,7 @@ const DietMeals = () => {
             fontSize: "20px",
           }}
         >
-        🥗  وجبات اليوم
+          🥗 وجبات اليوم
         </Typography>
 
         <Button
@@ -335,17 +291,16 @@ const DietMeals = () => {
           <Typography sx={{ fontSize: "12px" }}>تغيير الوجبات</Typography>
         </Button>
       </Stack>
-      {
-        localMealsCalories.toFixed(0) > 0 ? (
-          <Typography mb={0}>
+      {localMealsCalories.toFixed(0) > 0 ? (
+        <Typography mb={0}>
           السعرات المطلوبة: {localMealsCalories.toFixed(0)}
         </Typography>
-        ):(
-          <Typography mb={0}>
-        انت تحتاج لخسارة سعرات يومية بمقدار: {Math.abs(localMealsCalories.toFixed(0))}
+      ) : (
+        <Typography mb={0}>
+          انت تحتاج لخسارة سعرات يومية بمقدار:{" "}
+          {Math.abs(localMealsCalories.toFixed(0))}
         </Typography>
-        )
-      }
+      )}
 
       {Object.keys(dailyNutrients).length > 0 ? (
         <Stack

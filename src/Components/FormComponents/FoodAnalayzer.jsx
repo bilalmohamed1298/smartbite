@@ -113,8 +113,7 @@ const FoodAnalyzer = () => {
     );
 
     setPostResponse(response.data.candidates[0].content.parts[0].text);
-    console.log(response.data.candidates[0].content.parts[0].text);
-  };
+      };
 
   function cleanJSONFormat(text) {
     if (typeof text !== "string") {
@@ -133,8 +132,7 @@ const FoodAnalyzer = () => {
     }
 
     CleanAPI = CleanAPI.slice(firstCurly, lastCurly + 1);
-    console.log("CleanAPI:", CleanAPI);
-    try {
+        try {
       return JSON.parse(CleanAPI);
     } catch (error) {
       console.error("Error: Invalid JSON format", error);
@@ -146,13 +144,11 @@ const FoodAnalyzer = () => {
     if (image) {
       postAPI(image.split(",")[1]);
     }
-    console.log("Image:", image);
-  }, [image]);
+      }, [image]);
 
   useEffect(() => {
     if (postResponse) {
-      console.log(postResponse);
-      setAnalyzedInfo(cleanJSONFormat(postResponse));
+            setAnalyzedInfo(cleanJSONFormat(postResponse));
     }
   }, [postResponse]);
 
@@ -186,6 +182,8 @@ const FoodAnalyzer = () => {
               width: "100%",
               height: "220px",
               objectFit: "cover",
+              loading: "eager",
+              fetchpriority: "high",
             }}
           />
         )
@@ -238,9 +236,10 @@ const FoodAnalyzer = () => {
             )}
           </>
         ) : (
-          <Button variant="outlined" onClick={() => (setImage(null)
-            ,setAnalyzedInfo({})
-          )}>
+          <Button
+            variant="outlined"
+            onClick={() => (setImage(null), setAnalyzedInfo({}))}
+          >
             إختر صورة أخرى
           </Button>
         )}
@@ -262,60 +261,65 @@ const FoodAnalyzer = () => {
                   <Typography variant="h6" color="#A34BCE">
                     الوجبات المكتشفة
                   </Typography>
-                  <Typography>
-                    {analyzedInfo.dish}
-                  </Typography>
+                  <Typography>{analyzedInfo.dish}</Typography>
                 </Paper>
               </Grid>
-                  {
-                    analyzedInfo.dish !== "لم يتم التعرف على أي طعام"?
-                    <Grid item xs={12} sm={12}>
-                    <Paper
-                      sx={{
-                        padding: 2,
-                        borderRadius: 3,
-                        backgroundColor: "#fbf6fe",
-                        height: "90%",
-                        borderBottom: "3px solid #A34BCE"
-                      }}
-                    >
-                      <Typography variant="h6" color="#A34BCE">
-                        السعرات الحرارية
-                      </Typography>
-                      <Typography sx={{ mb: 1, fontWeight: "500" }}>
-                        {analyzedInfo?.nutrition?.calories?.total === null
-                          ? "غير محدد سعر حراري"
-                          : analyzedInfo?.nutrition?.calories?.total + " سعر حراري"}
-                      </Typography>
-                      {analyzedInfo?.nutrition?.calories?.breakdown &&
-                        Object.keys(analyzedInfo?.nutrition?.calories?.breakdown)
-                          .length > 0 && (
-                          <Stack spacing={0}>
-                            <Typography variant="body1" color="#A34BCE">
-                              المكونات:
+              {analyzedInfo.dish !== "لم يتم التعرف على أي طعام" ? (
+                <Grid item xs={12} sm={12}>
+                  <Paper
+                    sx={{
+                      padding: 2,
+                      borderRadius: 3,
+                      backgroundColor: "#fbf6fe",
+                      height: "90%",
+                      borderBottom: "3px solid #A34BCE",
+                    }}
+                  >
+                    <Typography variant="h6" color="#A34BCE">
+                      السعرات الحرارية
+                    </Typography>
+                    <Typography sx={{ mb: 1, fontWeight: "500" }}>
+                      {analyzedInfo?.nutrition?.calories?.total === null
+                        ? "غير محدد سعر حراري"
+                        : analyzedInfo?.nutrition?.calories?.total +
+                          " سعر حراري"}
+                    </Typography>
+                    {analyzedInfo?.nutrition?.calories?.breakdown &&
+                      Object.keys(analyzedInfo?.nutrition?.calories?.breakdown)
+                        .length > 0 && (
+                        <Stack spacing={0}>
+                          <Typography variant="body1" color="#A34BCE">
+                            المكونات:
+                          </Typography>
+                          {Object.keys(
+                            analyzedInfo?.nutrition?.calories?.breakdown
+                          ).map((key) => (
+                            <Typography
+                              sx={{ textTransform: "capitalize" }}
+                              key={key}
+                            >
+                              <span style={{ mb: 1, fontWeight: "500" }}>
+                                {key}{" "}
+                              </span>
+                              {
+                                analyzedInfo?.nutrition?.calories?.breakdown[
+                                  key
+                                ]
+                              }
+                              <br />
                             </Typography>
-                            {Object.keys(
-                              analyzedInfo?.nutrition?.calories?.breakdown
-                            ).map((key) => (
-                              <Typography
-                                sx={{ textTransform: "capitalize" }}
-                                key={key}
-                              >
-                                <span style={{ mb: 1, fontWeight: "500" }}>
-                                  {key}{" "}
-                                </span>
-                                {analyzedInfo?.nutrition?.calories?.breakdown[key]}
-                                <br />
-                              </Typography>
-                            ))}
-                          </Stack>
-                        )}
-                    </Paper>
-                  </Grid>
-                    :''
-                  }
+                          ))}
+                        </Stack>
+                      )}
+                  </Paper>
+                </Grid>
+              ) : (
+                ""
+              )}
             </Grid>
-            {analyzedInfo.dish !== "لم يتم التعرف على أي طعام" && analyzedInfo?.nutrition?.calories?.total !== null && analyzedInfo?.nutrition?.vitamins ? (
+            {analyzedInfo.dish !== "لم يتم التعرف على أي طعام" &&
+            analyzedInfo?.nutrition?.calories?.total !== null &&
+            analyzedInfo?.nutrition?.vitamins ? (
               <Grid container spacing={3} alignItems={"stretch"} mt={1}>
                 <Grid item xs={12} sm={12}>
                   <Paper
@@ -324,24 +328,20 @@ const FoodAnalyzer = () => {
                       borderRadius: 3,
                       backgroundColor: "#fbf6fe",
                       height: "90%",
-                      borderBottom: "3px solid #A34BCE"
+                      borderBottom: "3px solid #A34BCE",
                     }}
                   >
                     <Typography variant="h6" color="#A34BCE">
                       فيتامينات
                     </Typography>
-                    {analyzedInfo?.nutrition?.vitamins?.map(
-                      (key) => (
-                        <Typography
-                          sx={{ textTransform: "capitalize" }}
-                          key={key}
-                        >
-                          <span style={{ mb: 1, fontWeight: "500" }}>
-                            {key}
-                          </span>{" "}
-                        </Typography>
-                      )
-                    )}
+                    {analyzedInfo?.nutrition?.vitamins?.map((key) => (
+                      <Typography
+                        sx={{ textTransform: "capitalize" }}
+                        key={key}
+                      >
+                        <span style={{ mb: 1, fontWeight: "500" }}>{key}</span>{" "}
+                      </Typography>
+                    ))}
                   </Paper>
                 </Grid>
 
@@ -352,7 +352,7 @@ const FoodAnalyzer = () => {
                       borderRadius: 3,
                       backgroundColor: "#fbf6fe",
                       mt: 1,
-                      borderBottom: "3px solid #A34BCE"
+                      borderBottom: "3px solid #A34BCE",
                     }}
                   >
                     <Typography variant="h6" color="#A34BCE">
@@ -371,7 +371,7 @@ const FoodAnalyzer = () => {
                       borderRadius: 3,
                       backgroundColor: "#fbf6fe",
                       mt: 1,
-                      borderBottom: "3px solid #A34BCE"
+                      borderBottom: "3px solid #A34BCE",
                     }}
                   >
                     <Typography variant="h6" color="#A34BCE">
@@ -390,7 +390,7 @@ const FoodAnalyzer = () => {
                       borderRadius: 3,
                       backgroundColor: "#fbf6fe",
                       mt: 1,
-                      borderBottom: "3px solid #A34BCE"
+                      borderBottom: "3px solid #A34BCE",
                     }}
                   >
                     <Typography variant="h6" color="#A34BCE">

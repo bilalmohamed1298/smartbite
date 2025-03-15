@@ -2,9 +2,7 @@ import {
   Box,
   Button,
   CircularProgress,
-  createTheme,
   Stack,
-  ThemeProvider,
   Typography,
 } from "@mui/material";
 import axios from "axios";
@@ -71,7 +69,6 @@ const MealDetails = () => {
     setSummary(response.data.candidates[0].content.parts[0].text);
   };
 
-
   useEffect(() => {
     if (MealDetails.summary) {
       SummaryTranslator(stripHtmlTags(MealDetails.summary));
@@ -79,14 +76,6 @@ const MealDetails = () => {
   }, [MealDetails.summary, nutritionWidget.ingredients]);
 
   //////////////////////////////////////////////////////////////////////
-  const theme = createTheme({
-    palette: {
-      primary: {
-        main: "#A34BCE",
-        color: "#fff",
-      },
-    },
-  });
 
   return (
     <Box>
@@ -165,7 +154,7 @@ const MealDetails = () => {
                   color="textSecondary"
                   sx={{
                     fontSize: { xs: "16px", sm: "18px" },
-                    textAlign: 'justify'
+                    textAlign: "justify",
                   }}
                 >
                   {Summary}

@@ -1,16 +1,5 @@
-import React from "react";
-import {
-  Box,
-  Typography,
-  Button,
-  Paper,
-  ThemeProvider,
-  createTheme,
-  IconButton,
-  Stack,
-} from "@mui/material";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material";
+import { Box, Typography, Button, IconButton, Stack } from "@mui/material";
+import { KeyboardArrowRight } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 const ResultsComponent = () => {
@@ -28,7 +17,12 @@ const ResultsComponent = () => {
       <Box></Box>
       <Stack mb={5} sx={{ alignItems: "center" }}>
         <Box mx={"auto"} mt={7} mb={5}>
-          <img src={"/results.svg"} alt={"results-dishs"} width={"70%"} />
+          <img
+            src={"/results.svg"}
+            alt={"results-dishs"}
+            width={"70%"}
+            style={{ loading: "eager", fetchpriority: "high" }}
+          />
         </Box>
 
         <Box>

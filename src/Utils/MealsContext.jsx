@@ -7,17 +7,17 @@ export function MealsContextProvider({ children }) {
   const [userDetails, setUserDetails] = useState({
     activity: 1.5,
   });
-    const [personalData, setPersonalData] = useState({
-      gender: "",
-      age: "",
-      height: "",
-      weight: "",
-    });
-      const [preferences, setPreferences] = useState({
-        goal: "",
-        idealWeight: "",
-        duration: "",
-      });
+  const [personalData, setPersonalData] = useState({
+    gender: "",
+    age: "",
+    height: "",
+    weight: "",
+  });
+  const [preferences, setPreferences] = useState({
+    goal: "",
+    idealWeight: "",
+    duration: "",
+  });
   const [BMR, setBMR] = useState(0);
   const [TDEE, setTDEE] = useState(0);
   const [mealsCalories, setMealsCalories] = useState(0);
@@ -29,12 +29,12 @@ export function MealsContextProvider({ children }) {
   );
   const [mealsChange, setMealsChange] = useState(false);
   const [specialNutrients, setSpecialNutrients] = useState({
-    specialCalories:0,
-    specialCarbs:0,
-    specialFat:0,
-    specialProtein:0
+    specialCalories: 0,
+    specialCarbs: 0,
+    specialFat: 0,
+    specialProtein: 0,
   });
-  const [vitaminDeficiencies,setVitaminDeficiencies] = useState([])
+  const [vitaminDeficiencies, setVitaminDeficiencies] = useState([]);
 
   const toggleMealsChange = () => {
     setMealsChange((prevState) => !prevState);
@@ -44,7 +44,9 @@ export function MealsContextProvider({ children }) {
 
   const getAPI = async () => {
     const meals = await axios.get(
-      `https://api.spoonacular.com/mealplanner/generate?apiKey=16d84c3222204c619a34ad6b943db6a9&timeFrame=day&targetCalories=${localMealsCalories> 0? localMealsCalories:200}`
+      `https://api.spoonacular.com/mealplanner/generate?apiKey=16d84c3222204c619a34ad6b943db6a9&timeFrame=day&targetCalories=${
+        localMealsCalories > 0 ? localMealsCalories : 200
+      }`
     );
 
     if (localMealsCalories > 3000) {
@@ -52,9 +54,8 @@ export function MealsContextProvider({ children }) {
         localMealsCalories - meals.data.nutrients.calories;
       let SpecialMealsCount = 1;
 
-      if (spicalCaseCalories > 1200){
+      if (spicalCaseCalories > 1200) {
         SpecialMealsCount = 2;
-
       }
 
       if (spicalCaseCalories > 2400) {
@@ -72,12 +73,24 @@ export function MealsContextProvider({ children }) {
         }&number=${SpecialMealsCount}&apiKey=16d84c3222204c619a34ad6b943db6a9`
       );
 
-      let specialInfo = { ...specialNutrients }
-      specialInfo.specialCalories = specialMeals.data.reduce((sum, item) => sum + item.calories, 0);
-      specialInfo.specialCarbs = specialMeals.data.reduce((sum, item) => sum + item.carbs, 0);
-      specialInfo.specialFat = specialMeals.data.reduce((sum, item) => sum + item.fat, 0);
-      specialInfo.specialProtein = specialMeals.data.reduce((sum, item) => sum + item.protein, 0);
-      setSpecialNutrients(specialInfo)
+      let specialInfo = { ...specialNutrients };
+      specialInfo.specialCalories = specialMeals.data.reduce(
+        (sum, item) => sum + item.calories,
+        0
+      );
+      specialInfo.specialCarbs = specialMeals.data.reduce(
+        (sum, item) => sum + item.carbs,
+        0
+      );
+      specialInfo.specialFat = specialMeals.data.reduce(
+        (sum, item) => sum + item.fat,
+        0
+      );
+      specialInfo.specialProtein = specialMeals.data.reduce(
+        (sum, item) => sum + item.protein,
+        0
+      );
+      setSpecialNutrients(specialInfo);
 
       localStorage.setItem(
         "LocalMeals",
@@ -101,7 +114,7 @@ export function MealsContextProvider({ children }) {
   };
 
   //////////////////////////////////////////////////////////
-  
+
   const CalculateBMR = () => {
     var tempBMR = 0;
     if (userDetails.gender === "ذكر") {
@@ -192,10 +205,13 @@ export function MealsContextProvider({ children }) {
   }, [mealsChange]);
 
   useMemo(() => {
-    if(submit){
-    localStorage.setItem('vitaminDeficiencies',JSON.stringify(vitaminDeficiencies))
+    if (submit) {
+      localStorage.setItem(
+        "vitaminDeficiencies",
+        JSON.stringify(vitaminDeficiencies)
+      );
     }
-  }, [submit,vitaminDeficiencies]);
+  }, [submit, vitaminDeficiencies]);
 
   return (
     <MealsContext.Provider
@@ -217,7 +233,6 @@ export function MealsContextProvider({ children }) {
         setPersonalData,
         preferences,
         setPreferences,
-
       }}
     >
       {children}

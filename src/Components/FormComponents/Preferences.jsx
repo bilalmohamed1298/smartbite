@@ -19,7 +19,6 @@ import {
   DirectionsBike,
   DirectionsRun,
   FitnessCenter,
-  KeyboardArrowLeft,
   KeyboardArrowRight,
   MonitorWeight,
   RocketLaunch,
@@ -27,7 +26,7 @@ import {
 import { MealsContext } from "../../Utils/MealsContext";
 
 const Preferences = () => {
-  const { userDetails, setUserDetails, submit, setSubmit, toggleMealsChange, preferences, setPreferences } =
+  const { setUserDetails, setSubmit, preferences, setPreferences } =
     useContext(MealsContext);
 
   const [visibleFields, setVisibleFields] = useState(["goal"]);
@@ -227,7 +226,7 @@ const Preferences = () => {
                   حدد المدة: اختر عدد الأيام 🚀
                 </Typography>
                 <Typography variant="body2" mt={1}>
-                المدة المحددة: <strong>{duration} يوم</strong>
+                  المدة المحددة: <strong>{duration} يوم</strong>
                 </Typography>
                 <Slider
                   value={duration}
@@ -279,7 +278,7 @@ const Preferences = () => {
           {visibleFields.includes("duration") && preferences.duration && (
             <Link to="/results">
               <Button
-                onClick={() => (setSubmit(true))}
+                onClick={() => setSubmit(true)}
                 size="large"
                 sx={{
                   borderRadius: "50px",
