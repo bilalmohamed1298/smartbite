@@ -67,6 +67,7 @@ const PersonalDetails = () => {
               textAlign: "center",
               fontWeight: "600",
               mb: "12px",
+              mt:1
             }}
             gutterBottom
           >

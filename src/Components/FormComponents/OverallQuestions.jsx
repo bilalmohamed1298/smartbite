@@ -226,6 +226,7 @@ const OverallQuestions = () => {
             borderRadius: "5px",
             textAlign: "center",
             fontWeight: "600",
+            mt:1
           }}
           gutterBottom
         >

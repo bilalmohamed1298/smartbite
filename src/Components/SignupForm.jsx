@@ -45,7 +45,7 @@ export default function SignupForm() {
         sx={{
           position: "absolute",
           left: { xs: 20 },
-          top: 18,
+          top: 25,
           width: "70px",
         }}
       >

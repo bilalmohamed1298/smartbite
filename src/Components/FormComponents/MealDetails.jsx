@@ -158,6 +158,11 @@ const MealDetails = () => {
                   }}
                 >
                   {Summary}
+                  <Button sx={{fontWeight:'600'}}>
+                    <a target={'_blank'} href={MealDetails.sourceUrl} style={{textDecoration:'none',color:'#A34BCE'}}>
+                      المزيد من المعلومات
+                    </a>
+                  </Button>
                 </Typography>
               </Box>
             ) : (

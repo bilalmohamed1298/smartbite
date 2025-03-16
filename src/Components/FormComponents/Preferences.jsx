@@ -80,6 +80,7 @@ const Preferences = () => {
               textAlign: "center",
               fontWeight: "600",
               mb: "12px",
+              mt:1
             }}
             gutterBottom
           >
