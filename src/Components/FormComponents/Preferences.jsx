@@ -30,7 +30,7 @@ const Preferences = () => {
     useContext(MealsContext);
 
   const [visibleFields, setVisibleFields] = useState(["goal"]);
-  const [duration, setDuration] = useState(45);
+  const [duration, setDuration] = useState(30);
 
   useEffect(() => {
     setUserDetails((prev) => ({ ...prev, ...preferences }));
@@ -38,7 +38,7 @@ const Preferences = () => {
 
   const marks = [
     { value: 90, label: <DirectionsRun fontSize="large" /> },
-    { value: 45, label: <DirectionsBike fontSize="large" /> },
+    { value: 60, label: <DirectionsBike fontSize="large" /> },
     { value: 30, label: <RocketLaunch fontSize="large" /> },
   ];
 
