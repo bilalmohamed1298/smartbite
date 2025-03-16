@@ -68,7 +68,7 @@ const FoodAnalyzer = () => {
                       },
                       "nutrition": {
                         "calories": {
-                        "total": 600, 
+                        "total": 600, (for each 100g)
                         "breakdown": {
                           "tofu_scramble": 300,
                           "roasted_potatoes": 300
@@ -282,7 +282,7 @@ const FoodAnalyzer = () => {
                       {analyzedInfo?.nutrition?.calories?.total === null
                         ? "غير محدد سعر حراري"
                         : analyzedInfo?.nutrition?.calories?.total +
-                          " سعر حراري"}
+                          " سعر حراري لكل 100جم"}
                     </Typography>
                     {analyzedInfo?.nutrition?.calories?.breakdown &&
                       Object.keys(analyzedInfo?.nutrition?.calories?.breakdown)
