@@ -17,7 +17,7 @@ export default function SignupForm() {
   return (
     <Box
       sx={{
-        height: { xs: "95vh", lg: "800px", xxl:'90vh' },
+        height: { xs: "95vh", lg: "90vh", xxl:'90vh' },
         mt: { xs: 0, lg: 1 },
         p: 3,
         bgcolor: "white",
