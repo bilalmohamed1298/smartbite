@@ -231,69 +231,90 @@ const MealDetails = () => {
           </Box>
 
           <Box sx={{ mt: 2 }}>
-      <Typography variant="h4" sx={{ mb: 2, fontWeight: "bold" }}>
-        معلومات الوجبة
-      </Typography>
+            <Typography variant="h4" sx={{ mb: 2, fontWeight: "bold" }}>
+              معلومات الوجبة
+            </Typography>
 
-      {Summary !== "" ? (
-        <Box>
-          <Typography
-            color="textSecondary"
-            sx={{ fontSize: { xs: "16px", sm: "18px" }, textAlign: "justify", mb: 2 }}
-          >
-            سعر الوجبة: {analyzedInfo?.meal_cost || "غير متوفر"} (قد يختلف السعر باختلاف أسعار المقادير)
-          </Typography>
+            {Summary !== "" ? (
+              <Box>
+                <Typography
+                  color="textSecondary"
+                  sx={{
+                    fontSize: { xs: "16px", sm: "18px" },
+                    textAlign: "justify",
+                    mb: 2,
+                  }}
+                >
+                  سعر الوجبة: {analyzedInfo?.meal_cost || "غير متوفر"} (قد يختلف
+                  السعر باختلاف أسعار المقادير)
+                </Typography>
 
-          {/* المقادير */}
-          {analyzedInfo?.recipe?.ingredients && (
-            <Box sx={{ mb: 3 }}>
-              <Typography variant="h5" sx={{ fontWeight: "bold", mb: 1 }}>المقادير</Typography>
-              <ul style={{ paddingRight: "20px", margin: 0 }}>
-                {analyzedInfo.recipe.ingredients.map((ingredient, index) => (
-                  <li key={index}>
-                    <Typography>
-                      {ingredient.quantity || "-"} {ingredient.name || "غير متوفر"}
+                {/* المقادير */}
+                {analyzedInfo?.recipe?.ingredients && (
+                  <Box sx={{ mb: 3 }}>
+                    <Typography variant="h5" sx={{ fontWeight: "bold", mb: 1 }}>
+                      المقادير
                     </Typography>
-                  </li>
-                ))}
-              </ul>
-            </Box>
-          )}
+                    <ul style={{ paddingRight: "20px", margin: 0 }}>
+                      {analyzedInfo.recipe.ingredients.map(
+                        (ingredient, index) => (
+                          <li key={index}>
+                            <Typography>
+                              {ingredient.quantity || "-"}{" "}
+                              {ingredient.name || "غير متوفر"}
+                            </Typography>
+                          </li>
+                        )
+                      )}
+                    </ul>
+                  </Box>
+                )}
 
-          {/* طريقة التحضير */}
-          {analyzedInfo?.recipe?.steps && (
-            <Box sx={{ mb: 3 }}>
-              <Typography variant="h5" sx={{ fontWeight: "bold", mb: 1 }}>طريقة التحضير</Typography>
-              <ol style={{ paddingRight: "20px", margin: 0 }}>
-                {analyzedInfo.recipe.steps.map((step, index) => (
-                  <li key={index}>
-                    <Typography>{step || "غير متوفر"}</Typography>
-                  </li>
-                ))}
-              </ol>
-            </Box>
-          )}
+                {/* طريقة التحضير */}
+                {analyzedInfo?.recipe?.steps && (
+                  <Box sx={{ mb: 3 }}>
+                    <Typography variant="h5" sx={{ fontWeight: "bold", mb: 1 }}>
+                      طريقة التحضير
+                    </Typography>
+                    <ol style={{ paddingRight: "20px", margin: 0 }}>
+                      {analyzedInfo.recipe.steps.map((step, index) => (
+                        <li key={index}>
+                          <Typography>{step || "غير متوفر"}</Typography>
+                        </li>
+                      ))}
+                    </ol>
+                  </Box>
+                )}
 
-          {/* نصائح صحية */}
-          {analyzedInfo?.nutritional_notes?.health_tips && (
-            <Box sx={{ mb: 3 }}>
-              <Typography variant="h5" sx={{ fontWeight: "bold", mb: 1 }}>نصائح صحية</Typography>
-              <ul style={{ paddingRight: "20px", margin: 0 }}>
-                {analyzedInfo.nutritional_notes.health_tips.map((tip, index) => (
-                  <li key={index}>
-                    <Typography>{tip || "غير متوفر"}</Typography>
-                  </li>
-                ))}
-              </ul>
-            </Box>
-          )}
-        </Box>
-      ) : (
-        <Box display="flex" justifyContent="center" alignItems="center" height={200}>
-          <CircularProgress />
-        </Box>
-      )}
-    </Box>
+                {/* نصائح صحية */}
+                {analyzedInfo?.nutritional_notes?.health_tips && (
+                  <Box sx={{ mb: 3 }}>
+                    <Typography variant="h5" sx={{ fontWeight: "bold", mb: 1 }}>
+                      نصائح صحية
+                    </Typography>
+                    <ul style={{ paddingRight: "20px", margin: 0 }}>
+                      {analyzedInfo.nutritional_notes.health_tips.map(
+                        (tip, index) => (
+                          <li key={index}>
+                            <Typography>{tip || "غير متوفر"}</Typography>
+                          </li>
+                        )
+                      )}
+                    </ul>
+                  </Box>
+                )}
+              </Box>
+            ) : (
+              <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                height={200}
+              >
+                <CircularProgress />
+              </Box>
+            )}
+          </Box>
           <Stack
             direction={"row"}
             sx={{
