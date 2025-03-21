@@ -14,14 +14,15 @@ const MealDetails = () => {
   const [nutritionWidget, setNutritionWidget] = useState({});
   const [Summary, setSummary] = useState("");
   const { id } = useParams();
+  const [analyzedInfo, setAnalyzedInfo] = useState({});
 
   const getMealDetails = async () => {
     try {
       let details = await axios.get(
-        `https://api.spoonacular.com/recipes/${id}/information?apiKey=7d5e750167ac4dc0b0f4032102e970de`
+        `https://api.spoonacular.com/recipes/${id}/information?apiKey=e1960c2436914b008fd31c03c84e51b4`
       );
       let widget = await axios.get(
-        `https://api.spoonacular.com/recipes/${id}/nutritionWidget.json?apiKey=7d5e750167ac4dc0b0f4032102e970de`
+        `https://api.spoonacular.com/recipes/${id}/nutritionWidget.json?apiKey=e1960c2436914b008fd31c03c84e51b4`
       );
 
       setMealDetails(details.data);
@@ -46,7 +47,7 @@ const MealDetails = () => {
 
   /////////////////////////////// Translator ///////////////////////////
 
-  const SummaryTranslator = async (textToTranslate) => {
+  const mealDetailsAPI = async (MealName) => {
     let response = await axios.post(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyAnKgAF69LPmgVVKxfu3tBKXEvtcrF3Ka4`,
       {
@@ -54,11 +55,62 @@ const MealDetails = () => {
           {
             parts: [
               {
-                text: `Translate the following text to Arabic:
-                    
-                    "${textToTranslate}"
-                    
-                    Only return the translated text without extra comments or formatting.
+                text: `Based on the name of the following meal "${MealName}", I would like you to present me with an JSON API like this:
+{
+  "meal_cost": "", Find the meal price in ريال سعودي
+  "recipe": {
+    "name": "فوتوتشيني ألفريدو",
+    "ingredients": [
+      { "name": "زبدة غير مملحة", "quantity": "1 ملعقة كبيرة" },
+      { "name": "ثوم مهروس", "quantity": "1 فص" },
+      { "name": "برش الليمون", "quantity": "1 ملعقة صغيرة" },
+      { "name": "طحين أبيض", "quantity": "2 ملعقة صغيرة" },
+      { "name": "حليب قليل الدسم", "quantity": "1 كوب" },
+      { "name": "ملح", "quantity": "حسب الرغبة" },
+      { "name": "جبنة كريمية قليلة الدسم", "quantity": "2 ملعقة كبيرة" },
+      { "name": "جبنة البرمزان", "quantity": "3/4 كوب" },
+      { "name": "بقدونس طازج مفروم", "quantity": "3 ملعقة كبيرة" },
+      { "name": "معكرونة الفوتوتشيني", "quantity": "340 غرام" },
+      { "name": "فلفل مطحون طازج", "quantity": "حسب الرغبة" }
+    ],
+    "steps": [
+      "إذابة الزبدة في مقلاة على درجة حرارة متوسطة.",
+      "إضافة الثوم وبرش الليمون، وتحريك المكونات لمدة دقيقة حتى يذبل الثوم.",
+      "إضافة الطحين وتحريكه لمدة دقيقة.",
+      "إضافة الحليب والخفق حتى يتجانس.",
+      "إضافة الملح وتحريك المكونات.",
+      "طبخ الصوص مع التحريك المستمر لمدة 3 دقائق حتى يزداد سمكه.",
+      "إضافة جبنة البرمزان وتحريكها حتى تذوب.",
+      "إضافة البقدونس وتحريكه جيدًا.",
+      "تحضير قدر كبير به ماء وملح وتركه يغلي.",
+      "إضافة المعكرونة وتركها تنضج لمدة 2-3 دقائق.",
+      "الاحتفاظ بكوب من ماء السلق وتصفيتها من الباقي.",
+      "إضافة الصوص ونصف كوب من ماء السلق إلى المعكرونة وخلطها برفق.",
+      "إضافة المزيد من ماء السلق عند الحاجة لتخفيف الصوص.",
+      "رش جبنة البرمزان والفلفل على الوجه للتزيين."
+    ]
+  },
+  "nutritional_notes": {
+    "calories_per_serving": {
+      "healthy_version": "350 سعرة حرارية",
+      "regular_version": "530 سعرة حرارية"
+    },
+    "health_tips": [
+      "استخدم الفيتوتشيني المصنوع من القمح الكامل.",
+      "قلل من كمية الزبدة.",
+      "استخدم حليب خالي الدسم.",
+      "قلل كمية جبنة البرمزان.",
+      "استبدل الكريمة الثقيلة بكريمة خفيفة الدسم."
+    ],
+    "dietary_recommendations": {
+      "diabetes": "الوجبة غير مناسبة لمرضى السكري بسبب ارتفاع الكربوهيدرات.",
+      "heart_patients": "اختر الحليب والأجبان قليلة الدسم، واستبدل الزبدة بالزيت النباتي وقلل الملح.",
+      "pregnant_women": "الوصفة متوازنة وغنية بالبروتينات والمعادن الضرورية للحمل."
+    }
+  }
+}
+
+                    Only return the result for each meal like above without extra comments or formatting.
                   `,
               },
             ],
@@ -71,9 +123,43 @@ const MealDetails = () => {
 
   useEffect(() => {
     if (MealDetails.summary) {
-      SummaryTranslator(stripHtmlTags(MealDetails.summary));
+      mealDetailsAPI(MealDetails.title);
     }
   }, [MealDetails.summary, nutritionWidget.ingredients]);
+
+  function cleanJSONFormat(text) {
+    if (typeof text !== "string") {
+      console.error("Error: input is not a string", text);
+      return "";
+    }
+
+    let CleanAPI = text.replace(/^```json\s*|```[\s\n]*$/g, "").trim();
+
+    let firstCurly = CleanAPI.indexOf("{");
+    let lastCurly = CleanAPI.lastIndexOf("}");
+
+    if (firstCurly === -1 || lastCurly === -1) {
+      console.error("Error: JSON structure not found");
+      return null;
+    }
+
+    CleanAPI = CleanAPI.slice(firstCurly, lastCurly + 1);
+    try {
+      return JSON.parse(CleanAPI);
+    } catch (error) {
+      console.error("Error: Invalid JSON format", error);
+      return null;
+    }
+  }
+
+  useEffect(() => {
+    if (Summary) {
+      setAnalyzedInfo(cleanJSONFormat(Summary));
+    }
+  }, [Summary]);
+  useEffect(() => {
+    console.log(analyzedInfo);
+  }, [analyzedInfo]);
 
   //////////////////////////////////////////////////////////////////////
 
@@ -144,40 +230,70 @@ const MealDetails = () => {
             </Typography>
           </Box>
 
-          <Stack sx={{}}>
-            <Typography variant="h5" sx={{ mt: 2, mb: 1 }}>
-              معلومات الوجبة
-            </Typography>
-            {Summary !== "" ? (
-              <Box>
-                <Typography
-                  color="textSecondary"
-                  sx={{
-                    fontSize: { xs: "16px", sm: "18px" },
-                    textAlign: "justify",
-                  }}
-                >
-                  {Summary}
-                  <Button sx={{fontWeight:'600'}}>
-                    <a target={'_blank'} href={MealDetails.sourceUrl} style={{textDecoration:'none',color:'#A34BCE'}}>
-                      المزيد من المعلومات
-                    </a>
-                  </Button>
-                </Typography>
-              </Box>
-            ) : (
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: "200px",
-                }}
-              >
-                <CircularProgress />
-              </div>
-            )}
-          </Stack>
+          <Box sx={{ mt: 2 }}>
+      <Typography variant="h4" sx={{ mb: 2, fontWeight: "bold" }}>
+        معلومات الوجبة
+      </Typography>
+
+      {Summary !== "" ? (
+        <Box>
+          <Typography
+            color="textSecondary"
+            sx={{ fontSize: { xs: "16px", sm: "18px" }, textAlign: "justify", mb: 2 }}
+          >
+            سعر الوجبة: {analyzedInfo?.meal_cost || "غير متوفر"} (قد يختلف السعر باختلاف أسعار المقادير)
+          </Typography>
+
+          {/* المقادير */}
+          {analyzedInfo?.recipe?.ingredients && (
+            <Box sx={{ mb: 3 }}>
+              <Typography variant="h5" sx={{ fontWeight: "bold", mb: 1 }}>المقادير</Typography>
+              <ul style={{ paddingRight: "20px", margin: 0 }}>
+                {analyzedInfo.recipe.ingredients.map((ingredient, index) => (
+                  <li key={index}>
+                    <Typography>
+                      {ingredient.quantity || "-"} {ingredient.name || "غير متوفر"}
+                    </Typography>
+                  </li>
+                ))}
+              </ul>
+            </Box>
+          )}
+
+          {/* طريقة التحضير */}
+          {analyzedInfo?.recipe?.steps && (
+            <Box sx={{ mb: 3 }}>
+              <Typography variant="h5" sx={{ fontWeight: "bold", mb: 1 }}>طريقة التحضير</Typography>
+              <ol style={{ paddingRight: "20px", margin: 0 }}>
+                {analyzedInfo.recipe.steps.map((step, index) => (
+                  <li key={index}>
+                    <Typography>{step || "غير متوفر"}</Typography>
+                  </li>
+                ))}
+              </ol>
+            </Box>
+          )}
+
+          {/* نصائح صحية */}
+          {analyzedInfo?.nutritional_notes?.health_tips && (
+            <Box sx={{ mb: 3 }}>
+              <Typography variant="h5" sx={{ fontWeight: "bold", mb: 1 }}>نصائح صحية</Typography>
+              <ul style={{ paddingRight: "20px", margin: 0 }}>
+                {analyzedInfo.nutritional_notes.health_tips.map((tip, index) => (
+                  <li key={index}>
+                    <Typography>{tip || "غير متوفر"}</Typography>
+                  </li>
+                ))}
+              </ul>
+            </Box>
+          )}
+        </Box>
+      ) : (
+        <Box display="flex" justifyContent="center" alignItems="center" height={200}>
+          <CircularProgress />
+        </Box>
+      )}
+    </Box>
           <Stack
             direction={"row"}
             sx={{

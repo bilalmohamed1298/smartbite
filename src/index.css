@@ -27,3 +27,8 @@ body {
   background: linear-gradient(45deg, #9e4e9a67, #804d976c);
   transition: background 0.3s ease-in-out;
 }
+
+ul li::marker {
+  color: #A34BCE; 
+  font-size: 1.2em;
+}

@@ -44,7 +44,7 @@ export function MealsContextProvider({ children }) {
 
   const getAPI = async () => {
     const meals = await axios.get(
-      `https://api.spoonacular.com/mealplanner/generate?apiKey=7d5e750167ac4dc0b0f4032102e970de&timeFrame=day&targetCalories=${
+      `https://api.spoonacular.com/mealplanner/generate?apiKey=e1960c2436914b008fd31c03c84e51b4&timeFrame=day&targetCalories=${
         localMealsCalories > 0 ? localMealsCalories : 200
       }`
     );
@@ -70,7 +70,7 @@ export function MealsContextProvider({ children }) {
           spicalCaseCalories / SpecialMealsCount - 5
         }&maxCalories=${
           spicalCaseCalories / SpecialMealsCount + 5
-        }&number=${SpecialMealsCount}&apiKey=7d5e750167ac4dc0b0f4032102e970de`
+        }&number=${SpecialMealsCount}&apiKey=e1960c2436914b008fd31c03c84e51b4`
       );
 
       let specialInfo = { ...specialNutrients };
