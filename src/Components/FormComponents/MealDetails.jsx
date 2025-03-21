@@ -36,15 +36,6 @@ const MealDetails = () => {
     getMealDetails();
   }, [id]);
 
-  ///////////////////////// Summary ////////////////////////////
-
-  const stripHtmlTags = (html) => {
-    const doc = new DOMParser().parseFromString(html, "text/html");
-    return doc.body.textContent || "";
-  };
-
-  //////////////////////////////////////////////////////////////////////
-
   /////////////////////////////// Translator ///////////////////////////
 
   const mealDetailsAPI = async (MealName) => {
