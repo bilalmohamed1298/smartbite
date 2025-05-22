@@ -1,3 +1,7 @@
+# Live Demo
+Visit [Smartbite](https://smartbite-demo.vercel.app/) to live a personalized nutrition experience.
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
