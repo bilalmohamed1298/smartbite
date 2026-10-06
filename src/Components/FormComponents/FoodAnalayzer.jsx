@@ -55,7 +55,7 @@ const FoodAnalyzer = () => {
 
   const postAPI = async (imageFile) => {
     let response = await axios.post(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyAnKgAF69LPmgVVKxfu3tBKXEvtcrF3Ka4`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${import.meta.env.VITE_Gemini_Key}`,
       {
         contents: [
           {

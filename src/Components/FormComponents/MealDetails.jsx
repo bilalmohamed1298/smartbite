@@ -19,10 +19,10 @@ const MealDetails = () => {
   const getMealDetails = async () => {
     try {
       let details = await axios.get(
-        `https://api.spoonacular.com/recipes/${id}/information?apiKey=16d84c3222204c619a34ad6b943db6a9`
+        `https://api.spoonacular.com/recipes/${id}/information?apiKey=16d84c3222204c619a34ad6b943db6a9`,
       );
       let widget = await axios.get(
-        `https://api.spoonacular.com/recipes/${id}/nutritionWidget.json?apiKey=16d84c3222204c619a34ad6b943db6a9`
+        `https://api.spoonacular.com/recipes/${id}/nutritionWidget.json?apiKey=16d84c3222204c619a34ad6b943db6a9`,
       );
 
       setMealDetails(details.data);
@@ -40,7 +40,7 @@ const MealDetails = () => {
 
   const mealDetailsAPI = async (MealName) => {
     let response = await axios.post(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyAnKgAF69LPmgVVKxfu3tBKXEvtcrF3Ka4`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${import.meta.env.VITE_Gemini_Key}`,
       {
         contents: [
           {
@@ -107,7 +107,7 @@ const MealDetails = () => {
             ],
           },
         ],
-      }
+      },
     );
     setSummary(response.data.candidates[0].content.parts[0].text);
   };
@@ -255,7 +255,7 @@ const MealDetails = () => {
                               {ingredient.name || "غير متوفر"}
                             </Typography>
                           </li>
-                        )
+                        ),
                       )}
                     </ul>
                   </Box>
@@ -289,7 +289,7 @@ const MealDetails = () => {
                           <li key={index}>
                             <Typography>{tip || "غير متوفر"}</Typography>
                           </li>
-                        )
+                        ),
                       )}
                     </ul>
                   </Box>
