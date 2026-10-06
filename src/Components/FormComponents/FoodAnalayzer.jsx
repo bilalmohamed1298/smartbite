@@ -59,7 +59,7 @@ const FoodAnalyzer = () => {
       {
         contents: [
           {
-            parts: [ 
+            parts: [
               {
                 text: `Calculate Calories and Nutrition Values in This Photo in json
                                     
