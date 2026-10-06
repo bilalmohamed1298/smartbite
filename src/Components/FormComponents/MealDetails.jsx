@@ -40,7 +40,7 @@ const MealDetails = () => {
 
   const mealDetailsAPI = async (MealName) => {
     let response = await axios.post(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${import.meta.env.VITE_Gemini_Key}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=${import.meta.env.VITE_Gemini_Key}`,
       {
         contents: [
           {
